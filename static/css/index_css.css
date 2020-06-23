@@ -1,0 +1,48 @@
+html{
+    background-color:white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:black;
+}    
+h1{
+    text-align:center;
+    font-size:72px;
+    font-family:'Segoe UI Semibold';
+}
+h3{
+    text-align:center;
+    font-size:48px;
+    font-family:'Segoe UI Semibold';
+}
+p{
+    font-size:24px;
+    text-align:center
+}
+div#button{
+    width:20%;
+    background-color:white;
+    text-align:center;
+    height:auto;
+    border-radius:5px;
+    font-size:18px;
+    margin:5px;
+    padding:10px;
+    float:right;
+    overflow: visible;
+
+}
+a.thank:link{
+    color:white;
+    text-decoration:none;
+}
+a.thank:hover{
+    color:white;
+    text-decoration:underline;
+}
+a.thank:active{
+    color:black;
+    text-decoration:underline;
+}
+a.thank:visited{
+    color:white;
+    text-decoration:none;
+}
