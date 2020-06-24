@@ -1,0 +1,61 @@
+html {
+    background-color: #f6f8fa !important;
+    height: 100%;
+    width: 100%;
+    font-size: large !important;
+}
+div .table {
+    display: table;
+}
+div .table-row{
+    display: table-row;
+}
+.focus {
+    font-size: 2.5em;
+}
+div .left-focus {
+    padding: 5%;
+    background-color: #ffffff !important;
+}
+.left-column, .idea{
+    display: table-cell;
+    vertical-align: top;
+}
+.left-column {
+    min-width: 20%;
+    max-width: 25%;
+    height: 85%;
+}
+.main {
+    min-width: 65%;
+    max-width: 70%;
+    vertical-align: top;
+}
+.idea, .main-passage {
+    margin: 5px;
+    padding: 5px;
+}
+.left {
+    float: left;
+    padding-left: 3%;
+}
+.right {
+    float: right;
+}
+.main-passage {
+    position: relative;
+    margin-top: 5px;
+    padding: 10px;
+}
+p .main-passage {
+    font-size: 1.5em;
+    width: 85%;
+}
+.idea {
+    width: 80%;
+    margin-left: 8%;
+}
+footer {
+    float: left;
+    padding-left: 2%;
+}

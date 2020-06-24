@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% block title %}
+Main
+{% endblock %}
+{% block special_css %}
+<link href="/static/css/main.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<div class="table">
+    <div class="table-row">
+        <aside class="left-column left">
+            <h3 class="focus">Necessary Info</h3>
+            <div id="left-focus">
+                <h4 id="focus-title">must-read if you want to upload.</h4>
+                <hr>
+                <ul>
+                    <li>
+                        This page is made in Python + HTML, <b>currently</b> you need to<br>
+                        contact the article operator (andyforever0108<br>@outlook.com) to upload.<br>
+                    </li>
+                    <li>
+                        Due to the difficulty of creating a web app that
+                        supports uploading articles, we cannot give you the
+                        best experience at present.
+                        We'll fix that in the summer vocation.
+                    </li>
+                </ul>
+            </div>
+        </aside>  
+        <div class="main right">
+            <div class="idea">
+                <h2 style="float:right;font-size:48px;text-align:center;">
+                    {{ article_title }}
+                </h2>
+            </div>
+            <br>
+            <div class="main-passage">
+                <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
+                    {{ article_content }}
+                </p>
+            </div>
+            <ul class="pagination">
+                {% for id, article in enumerate_items %}
+                <li><a href="{{ url_for('articles', id=id) }}">
+                {{ id }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

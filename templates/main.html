@@ -2,6 +2,51 @@
 {% block title %}
 Main
 {% endblock %}
+{% block special_css %}
+<link href="/static/css/main.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
-<h1>Hello, this is our new website</h1>
+<div class="table">
+    <div class="table-row">
+        <aside class="left-column left">
+            <h3 class="focus">Focus</h3>
+            <div id="left-focus">
+                <h4 id="focus-title">Breaking news!<br>New Website's On!!<br>Have fun!</h4>
+                <hr>
+                <ul>
+                    <li>
+                        <a target="_blank"
+                            href="https://voice.baidu.com/act/newpneumonia/newpneumonia/?from=osari_coo_weiruan">
+                            CoVid-19</a> has come!
+                    </li>
+                    <li>
+                        Breaking news!<br>New Website's On!!<br>Have fun!</h4>
+                    </li>
+                </ul>
+            </div>
+        </aside>  
+        <div class="main right">
+            <div class="idea">
+                <h2 style="float:left;font-size:48px;margin-left: 50px">
+                    Head Article
+                </h2>
+                <h2 style="float:right;font-size:48px"><br>2020, we are coming!</h2>
+            </div>
+            <br>
+            <div class="main-passage">
+                <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
+                    告别平凡的 2019 年，我们七（1）班全体师生迎来了全新的2020 年, 
+                    全体同学都以饱满的热情迎接新一年的到来。过去的 2019年 给了我们很多回忆，
+                    回忆大家在一起拼搏时的泪水、苦恼， 但更多的则是欢笑和收获、以及大家携手共同进步、
+                    一起成长的经历。 “我们都可以是时代英雄，都可以自己主宰自己的人生”，
+                    对于我们每一个人来说，新年是一个新的开始，是我们忘掉过去的荣誉与失败，
+                    重新挺直腰杆， 大步向前迈的起点。新年第一天的阳光，带来新的希望，我们满怀理想， 
+                    向着新的目标进发。梦想，属于每位勇敢者、拼搏者、追梦者， 
+                    属于我们有新年愿望和追求的全体一班，我们只有付出行动， 迈出坚实的脚步，
+                    才能达到成功的彼岸，才能够实现自己新年的愿望。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

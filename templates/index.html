@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block special_css %}
-         <link href="/static/css/index_fonts.css" rel="stylesheet">
-         <link href="/static/css/index_css.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
 {% endblock %}
 {% block title %}
 Index
@@ -10,18 +9,54 @@ Index
 {% block body %}
 
     <div style="width:99%;height:auto;background-color:coral;position:fixed;top:0;padding-top:5px">
-        <p style="color:white;float:left;text-align:left;font-size:18px;margin-top:5px;margin-left:5%;overflow:hidden;padding-top:5px">Special thanks for <a class="thank" href="https://github.com" target="_blank">Github</a>, <a class="thank" href="https://pythonanywhere.com" target="_blank">PythonAnywhere</a> and <a class="thank" href="https://bilibili.com" target="_blank">Bilibili</a>. They provided us servers and media players.</p>
+        <p style="color: white; float: left; text-align:left; font-size:18px; margin-top:5px;
+                margin-left: 5%; overflow: hidden; padding-top: 5px">
+            Special thanks for
+            <a class="thank" href="https://pythonanywhere.com" target="_blank">
+                PythonAnywhere
+            </a>,
+            <a class="thank" href="https://bilibili.com" target="_blank">
+                Bilibili
+            </a>
+            and <a class="thank" href="https://getbootstrap.com/" target="_blank">
+                Bootstrap
+            </a>
+            They provided us servers and media players.
+        </p>
         <div id="button">
-        <a style="color:black;text-decoration:none;font-family:'Segoe UI'" href="/main">Go to our website &gt&gt</a>
+        <a style="color:black;text-decoration:none;font-family:'Segoe UI'" href="/main">
+            Go to our website &gt&gt
+        </a>
     </div>
     </div>
     <div style="background-color: black;color:white;margin:0;width:auto;padding:10%">
         <h1 style="font-size: 7em; margin-bottom: 100px">Hello.</h1>
         <p>This is a new website for lansheng 202201.</p>
-        <p style="font-family:'Segoe UI light'">Website V1.4.0 Inside × 2.2.0 Stable</p>
+        <p style="font-family:'Segoe UI light'">Website V3.0.0 Alpha</p>
     </div>
-    <noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;"><b>WARNING: your browser don't allow javascript!<br>&nbsp&nbsp&nbsp[(Chrome, MsEdge, ...) setting - site permissions - javascript , then refresh this page!]</b></noscript>
+    <noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;">
+        <b>
+            WARNING: your browser don't allow javascript!<br>&nbsp&nbsp&nbsp[(Chrome, MsEdge, ...)
+            setting - site permissions - javascript , then refresh this page!]
+        </b>
+    </noscript>
     <h3>Latest Changes</h3>
+    <div style="text-align:center">
+        <p style="font-family: 'Segoe UI Light'">V3.0.0 Alpha</p>
+        <img style="width:10%" src="https://tse3-mm.cn.bing.net/th/id/OIP.c4RBIyTHaeRH08T4bp_waAHaGO?w=193&h=180&c=7&o=5&dpr=1.25&pid=1.7"
+            alt="bootstrap">
+        <p>×</p>
+        <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg"
+            alt="PA">
+        <p>
+            IT'S THE BIGGEST CHANGE SINCE THIS WEBSITE IS CREATED<br>
+            We changed our style completely!<br>
+            In Chinese, it is called "返璞归真".
+        </p>
+        <p>The website now fully supports multiple articles! You can contact 
+            <a href="mailto:andyforever0108@outlook.com">me(Andy)</a> to add your
+            own article!<br>We also improved the layout on the phone!<br>
+        </p>
     <div style="text-align:center;">
         <p style="font-family:'Segoe UI Light'">V1.4.0 Inside × 2.2.0 Stable</p>
         <img style="width:5%" src="https://github.githubassets.com/pinned-octocat.svg">
@@ -57,7 +92,4 @@ Index
         <img style="width:20%" src="https://rice0208.github.io/ls202201.github.io/images/computer.png">
         <p>HTML 5 + CSS 3 + JavaScript + Python 3, quadruple code type, better experience.</p>
     </div>
-    <footer style="color:black;text-align:center;">
-        © Copyright 2020 LSFD Class 202201<br>Website V1.4.0 Inside<br>powered by GitHub Pages and PythonAnywhere, media players from Bilibili
-    </footer>
 {% endblock %}
