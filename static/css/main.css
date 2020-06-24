@@ -13,9 +13,13 @@ div .table-row{
 .focus {
     font-size: 2.5em;
 }
+.focus-title {
+    padding: 3%;
+    color: #000050;
+}
 div .left-focus {
     padding: 5%;
-    background-color: #ffffff !important;
+    background-color: #ffffff;
 }
 .left-column, .idea{
     display: table-cell;
@@ -24,14 +28,15 @@ div .left-focus {
 .left-column {
     min-width: 20%;
     max-width: 25%;
-    height: 85%;
+    padding-bottom: 25%;
+    background: #f9f9ff
 }
 .main {
     min-width: 65%;
     max-width: 70%;
     vertical-align: top;
 }
-.idea, .main-passage {
+.idea, #eaffea-passage {
     margin: 5px;
     padding: 5px;
 }
@@ -42,12 +47,12 @@ div .left-focus {
 .right {
     float: right;
 }
-.main-passage {
+#eaffea-passage {
     position: relative;
     margin-top: 5px;
     padding: 10px;
 }
-p .main-passage {
+p #eaffea-passage {
     font-size: 1.5em;
     width: 85%;
 }
