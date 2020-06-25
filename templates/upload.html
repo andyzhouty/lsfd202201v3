@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+Upload Article
+{% endblock %}
+{% block special_css %}
+<link href="/static/css/upload.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<h1 id="upload-article">Upload Article</h1>
+<form method="POST" action="/upload-result" id="upload-form" role="form">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title"
+            placeholder="Enter Title Here">
+    </div>
+    <div class="form-group">
+        <lable for="name">Name</lable>
+        <input type="text" class="form-control" id="name" name="name"
+            placeholder="Enter Your Name Here" value="匿名">
+    </div>
+    <div class="form-group">
+        <lable for="content">Content</lable>
+        <textarea class="form-control" rows="10" name="content"></textarea>
+    </div>
+    <button type="submit">UPLOAD</button>
+</form>
+<p style="font-weight: bold; font-size: 24px; max-width: 30%; min-width:20%">
+WARNING: YOU MUST CHECK YOUR ARTICLE<br>
+BEFORE UPLOADING, IT CANNOT BE CHANGED<br>
+IF YOU DON'T CONTACT THE <a href="mailto:andyforever0108@outlook.com">ADMIN</a>.
+</p>
+{% endblock %}

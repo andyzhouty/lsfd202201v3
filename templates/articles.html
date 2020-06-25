@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block title %}
-Main
+Articles
 {% endblock %}
 {% block special_css %}
 <link href="/static/css/main.css" rel="stylesheet">
@@ -15,14 +15,9 @@ Main
                 <hr>
                 <ul>
                     <li>
-                        This page is made in Python + HTML, <b>currently</b> you need to
-                        contact the article operator (andyforever0108@outlook.com) to upload.<br>
-                    </li>
-                    <li>
-                        Due to the difficulty of creating a web app that
-                        supports uploading articles, we cannot give you the
-                        best experience at present.
-                        We'll fix that in the summer vocation.
+                        This page is made in Python + HTML, you can upload your
+                        own article
+                        <A href="/upload">HERE</a>
                     </li>
                 </ul>
             </div>
@@ -32,6 +27,10 @@ Main
                 <h2 style="float:right;font-size:48px;text-align:center;">
                     {{ article_title }}
                 </h2>
+                <br>
+                <h4 style="float:right;font-size: 24px; vertical-align: right">
+                    ——{{ article_author }}
+                </h4>
             </div>
             <br>
             <div class="main-passage">

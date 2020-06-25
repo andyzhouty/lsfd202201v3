@@ -134,3 +134,4 @@ dmypy.json
 
 # Chat messages
 /templates/chats.html
+static/articles.txt
