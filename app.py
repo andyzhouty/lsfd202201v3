@@ -12,7 +12,7 @@ def set_article_full_dict():
     global article_list
     global article_full_dict
     article_full_dict = dict()
-    article_list = open(file_name).read().strip().split('=')
+    article_list = open(file_name, encoding="utf-8").read().strip().split('=')
     if not article_list[-1]:
         del article_list[-1]
     for article in article_list:
@@ -29,7 +29,7 @@ set_article_full_dict()
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', navbar=True, warning=False)
+    return render_template('index.html', navbar=False, warning=False)
 
 @app.route('/main')
 def main():
