@@ -11,6 +11,7 @@ article_list = []
 def set_article_full_dict():
     global article_list
     global article_full_dict
+    article_full_dict = dict()
     article_list = open(file_name).read().strip().split('=')
     if not article_list[-1]:
         del article_list[-1]
@@ -19,11 +20,8 @@ def set_article_full_dict():
             break
         article_splited = article.split("-")
         for n, i in enumerate(["Title", "Author", "Content"]):
-            article_full_dict.setdefault(i, '')
-            if isinstance(article_full_dict[i], list):
-                article_full_dict[i].append(article_splited[n])
-            else:
-                article_full_dict[i] = [article_splited[n]]
+            article_full_dict.setdefault(i, [])
+            article_full_dict[i].append(article_splited[n])
 
 set_article_full_dict()
 
@@ -64,12 +62,8 @@ def upload():
 def upload_result():
     global article_full_dict
     title = request.form['title']
-    article_full_dict['Title'].append(title)
     name = request.form['name']
-    article_full_dict['Author'].append(name)
     content = request.form['content']
-    article_full_dict['Content'].append(content)
     with open(file_name, "a") as file_obj:
         file_obj.write(f'\n{title}-{name}-{content}=\n')
-    
     return render_template('upload_result.html')
