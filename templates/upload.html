@@ -14,19 +14,24 @@ Upload Article
             placeholder="Enter Title Here">
     </div>
     <div class="form-group">
-        <lable for="name">Name</lable>
+        <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name"
-            placeholder="Enter Your Name Here" value="匿名">
+            placeholder="Enter Your Name Here. You can enter '匿名'">
     </div>
     <div class="form-group">
-        <lable for="content">Content</lable>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password"
+            placeholder="Enter the Password Here">
+    </div>
+    <div class="form-group">
+        <label for="content">Content</label>
         <textarea class="form-control" rows="10" name="content"></textarea>
     </div>
-    <button type="submit">UPLOAD</button>
+    <button type="submit" class="btn btn-default btn-lg">UPLOAD</button>
 </form>
-<p style="font-weight: bold; font-size: 24px; max-width: 30%; min-width:20%">
-WARNING: YOU MUST CHECK YOUR ARTICLE<br>
-BEFORE UPLOADING, IT CANNOT BE CHANGED<br>
-IF YOU DON'T CONTACT THE <a href="mailto:andyforever0108@outlook.com">ADMIN</a>.
+<p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
+WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE UPLOADING.<br>
+IT CANNOT BE CHANGED IF YOU DON'T CONTACT THE
+<a href="mailto:andyforever0108@outlook.com">ADMIN</a>.<br>
 </p>
 {% endblock %}

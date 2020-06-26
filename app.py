@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for, redirect, request
-import os, pprint
+import os, sys
 app = Flask(__name__)
 
-file_name = os.getcwd() + "/static/articles.txt"
+if sys.platform=="win32":
+    file_name = os.getcwd() + "/static/articles.txt"
+else:
+    file_name = "/home/ls202201/mysite/static/articles.txt" # PA
 
 article_full_dict = dict()
 article_list = []
@@ -12,7 +15,7 @@ def set_article_full_dict():
     global article_list
     global article_full_dict
     article_full_dict = dict()
-    article_list = open(file_name, encoding="utf-8").read().strip().split('=')
+    article_list = open(file_name, encoding="gb2312").read().strip().split('=')
     if not article_list[-1]:
         del article_list[-1]
     for article in article_list:
@@ -60,10 +63,20 @@ def upload():
 
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
-    global article_full_dict
     title = request.form['title']
     name = request.form['name']
     content = request.form['content']
+    password = request.form['password']
+    if password!="LSFD202201":
+        return render_template('upload_fail.html', navbar=True)
     with open(file_name, "a") as file_obj:
         file_obj.write(f'\n{title}-{name}-{content}=\n')
     return render_template('upload_result.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('coffin_dance.html', navbar=True, warning=False), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('mickey_aoligei.html', navbar=True, warning=False), 500
