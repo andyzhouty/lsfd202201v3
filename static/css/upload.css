@@ -1,4 +1,6 @@
 html {
-    padding: 5%;
-    font-size: large
+    font-size: large;
+}
+.body {
+    padding:5%;
 }

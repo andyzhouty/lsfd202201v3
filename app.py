@@ -59,7 +59,7 @@ def video():
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html', navbar=False, warning=False)
+    return render_template('upload.html', navbar=True, warning=False)
 
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
@@ -71,7 +71,7 @@ def upload_result():
         return render_template('upload_fail.html', navbar=True)
     with open(file_name, "a") as file_obj:
         file_obj.write(f'\n{title}-{name}-{content}=\n')
-    return render_template('upload_result.html')
+    return render_template('upload_result.html', navbar=True)
 
 @app.errorhandler(404)
 def page_not_found(e):
