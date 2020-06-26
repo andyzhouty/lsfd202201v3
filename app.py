@@ -56,7 +56,7 @@ def articles(id='1'):
 
 @app.route('/video')
 def video():
-    return render_template('video.html')
+    return render_template('video.html', navbar=True, warning=True)
 
 @app.route('/upload')
 def upload():
@@ -74,6 +74,10 @@ def upload_result():
     with open(file_name, "a", encoding="utf-8") as file_obj:
         file_obj.write(f'\n{title}-{name}-{content}=\n')
     return render_template('upload_result.html', navbar=True)
+
+@app.route('/class-in-the-clouds')
+def cloud_class():
+    return render_template('class_in_the_clouds.html', navbar=True, warning=True)
 
 @app.errorhandler(404)
 def page_not_found(e):

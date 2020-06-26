@@ -1,64 +1,113 @@
-html {
-    height: 100%;
-    width: 100%;
-    font-size: large !important;
-}
-div .table {
-    display: table;
-}
-div .table-row{
-    display: table-row;
-}
-.focus {
-    font-size: 2.5em;
-}
-.focus-title {
-    padding: 3%;
-    color: #000050;
-}
-div .left-focus {
-    padding: 5%;
-    background-color: #ffffff;
-}
-.left-column, .idea{
-    display: table-cell;
-    vertical-align: top;
-}
-.left-column {
-    width: 25%;
-    padding-bottom: 25%;
-    background: #f9f9ff
-}
-.main {
-    min-width: 65%;
-    max-width: 70%;
-    vertical-align: top;
-}
-.idea, #eaffea-passage {
-    margin: 5px;
-    padding: 5px;
-}
-.left {
-    float: left;
-    padding-left: 3%;
-}
-.right {
-    float: right;
-}
-#eaffea-passage {
-    position: relative;
-    margin-top: 5px;
-    padding: 10px;
-}
-p #eaffea-passage {
-    font-size: 1.5em;
-    width: 85%;
-}
-.idea {
-    width: 80%;
-    margin-left: 8%;
-}
-footer {
-    float: left;
-    padding-left: 2%;
+@media screen and (min-width: 1080px){
+    html {
+        height: 100%;
+        width: 100%;
+        font-size: large !important;
+    }
+    div .table {
+        display: table;
+    }
+    div .table-row{
+        display: table-row;
+    }
+    .focus {
+        font-size: 2.5em;
+    }
+    .focus-title {
+        padding: 3%;
+        color: #000050;
+    }
+    div .left-focus {
+        padding: 5%;
+        background-color: #ffffff;
+    }
+    .left-column, .idea{
+        display: table-cell;
+        vertical-align: top;
+    }
+    .left-column {
+        width: 22em;
+        padding-bottom: 25em;
+        float: left;
+        background: #f9f9ff;
+        vertical-align: top;
+    }
+    .main {
+        width: 68em;
+        padding: 1em;
+        vertical-align: top;
+        float: right;
+    }
+    .idea, .main-passage {
+        margin: 5px;
+        padding: 5px;
+    }
+    .left {
+        float: left;
+        padding-left: 3%;
+    }
+    .right {
+        float: right;
+    }
+    .head {
+        font-size: 48px;
+    }
+    .main-passage {
+        margin-top: 5px;
+        padding: 10px;
+        font-size: large;
+    }
+    p .main-passage {
+        width: 85%;
+        text-indent: 2em;
+        padding-right: 30px
+    }
+    .idea {
+        width: 50em;
+        margin-left: 8%;
+        right: auto;
+        z-index: 1;
+    }
+    footer {
+        float: left;
+        padding-left: 2%;
+    }}
+@media screen and (max-width: 1080px){
+    .focus {
+        font-size: 2em;
+    }
+    .focus-title {
+        color: #000050;
+    }
+    .left-column {
+        margin-left: 1.5em;
+        border-bottom: thin solid #999999;
+    }
+    .main {
+        padding: 1em;
+    }
+    .idea, .main-passage {
+        margin: 5px;
+        padding: 5px;
+    }
+    .head {
+        font-size: 1.9em;
+    }
+    .main-passage {
+        margin-top: 5px;
+        padding: 10px;
+    }
+    .main-passage {
+        width: 95%;
+        min-width: 250px;
+        max-width: 850px;
+        text-indent: 2em;
+    }
+    .idea {
+        margin-left: 8%;
+    }
+    footer {
+        float: left;
+        padding-left: 2%;
+    }
 }

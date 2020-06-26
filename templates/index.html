@@ -8,9 +8,8 @@ Index
 {% endblock %}
 {% block body %}
 
-    <div style="width:100%;height: auto; min-height:7%;background-color:coral;position:fixed;top:0;padding-top:5px">
-        <p style="color: white; float: left; text-align:left; font-size:18px; margin-top:5px;
-                margin-left: 5%; overflow: hidden; padding-top: 5px">
+    <div id="message">
+        <div id="message-content">
             Special thanks for
             <a class="thank" href="https://pythonanywhere.com" target="_blank">
                 PythonAnywhere
@@ -22,17 +21,17 @@ Index
                 Bootstrap
             </a>
             They provided us servers and media players.
-        </p>
-        <div id="button">
-        <a style="color:black;text-decoration:none;font-family:'Segoe UI'" href="/main">
-            Go to our website &gt&gt
-        </a>
-    </div>
+            <div id="button">
+                <a id="link" href="/main">
+                    Go to our website &gt&gt
+                </a>
+            </div>
+        </div>
     </div>
     <div style="background-color: black;color:white;margin:0;width:auto;padding:10%">
         <h1 style="font-size: 7em; margin-bottom: 100px">Hello.</h1>
         <p>This is a new website for lansheng 202201.</p>
-        <p style="font-family:'Segoe UI light'">Website V3.0.0 Beta5</p>
+        <p style="font-family:'Segoe UI light'">Website V3.0.0 RC1</p>
     </div>
     <noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;">
         <b>
@@ -42,7 +41,7 @@ Index
     </noscript>
     <h3>Latest Changes</h3>
     <div style="text-align:center">
-        <p style="font-family: 'Segoe UI Light'">V3.0.0 Beta5</p>
+        <p style="font-family: 'Segoe UI Light'">V3.0.0 RC1</p>
         <img style="width:10%" src="https://tse3-mm.cn.bing.net/th/id/OIP.c4RBIyTHaeRH08T4bp_waAHaGO?w=193&h=180&c=7&o=5&dpr=1.25&pid=1.7"
             alt="bootstrap">
         <p>×</p>
@@ -50,9 +49,10 @@ Index
             alt="PA">
         <p>
             开天辟地，焕然一新。
-        </p>
-        <p>The website now support uploading your own articles.<br>
-            You can upload them <a href="/upload">HERE</a>
+        </p><br>
+        <p>The website now support uploading<br>
+            your own articles.<br>
+            You can upload them <a href="/upload">HERE</a>.
         </p>
     
     <h3>Previous Versions</h3>
@@ -70,7 +70,7 @@ Index
     </div>
     <div style="text-align:center;">
         <p style="font-family:'Segoe UI Light'">V1.3.7 Inside × 2.1.8 Stable</p>
-        <img style="width:20%" src="/static/images/cssdebug.jpg">
+        <img style="width:20%" src="/static/images/cssdebug.png">
         <p>CSS 3 debugged. Added Articles into the site.</p>
     </div>
     <div style="text-align:center;">

@@ -1,3 +1,4 @@
+@media screen and (min-width: 1080px){
 h3, caption {
     margin-left: 40px;
     width: 95%
@@ -6,7 +7,7 @@ th, td {
     text-align: center;
 }
 th:hover, td:hover {
-    background-color: #9c9c9c;
+    background-color: #a9a9a9;
     color: #ffffff;
 }
 ul.info {
@@ -14,4 +15,35 @@ ul.info {
 }
 ul.info li {
     font-size: 1.7em;
+}}
+@media screen and (max-width: 1080px){
+    div .navbar {
+        width: 100%;
+    }
+    h3, caption {
+        margin-left: 40px;
+        width: 95%
+    }
+    th, td {
+        text-align: center;
+    }
+    th:hover, td:hover {
+        background-color: #a9a9a9;
+        color: #ffffff;
+    }
+    ul.info {
+        list-style: square inside url('/static/images/li.jpg');
+    }
+    ul.info li {
+        font-size: 1.3em;
+    }
+    table #teachers {
+        max-width: 99%;
+    }
+    table #classmates {
+        max-width: 99%;
+    }
+    table #teachers td, table #teachers th{
+        max-width: 22%;
+    }
 }

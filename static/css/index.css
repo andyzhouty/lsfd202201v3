@@ -1,90 +1,199 @@
-html{
-    background-color:white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:black;
-}    
-h1{
-    text-align:center;
-    font-size:72px;
-    font-family:'Segoe UI Semibold';
+html {
+  font-family: "Segoe UI";
 }
-h3{
-    text-align:center;
-    font-size:48px;
-    font-family:'Segoe UI Semibold';
+h1 h2 h3 h4 {
+  font-family: "Segoe UI Semibold";
 }
-p{
-    font-size:24px;
-    text-align:center
+p.light {
+  font-family: "Segoe UI light";
 }
-div#button{
-    width:20%;
-    background-color:white;
-    text-align:center;
-    height:auto;
-    border-radius:5px;
-    font-size:18px;
-    margin:5px;
-    padding:10px;
-    float:right;
-    overflow: visible;
-
+p.bold {
+  font-family: "Segoe UI Semibold";
 }
-a.thank:link{
-    color:white;
-    text-decoration:none;
+a {
+  font-family: "Segoe UI";
+  text-decoration: none;
 }
-a.thank:hover{
-    color:white;
-    text-decoration:underline;
+a:hover {
+  font-family: "Segoe UI Semibold";
+  text-decoration: none;
 }
-a.thank:active{
-    color:black;
-    text-decoration:underline;
+a:active {
+  font-family: "Segoe UI Semibold";
+  text-decoration: underline;
 }
-a.thank:visited{
-    color:white;
-    text-decoration:none;
+a:visited {
+  font-family: "Segoe UI";
+  text-decoration: underline;
+}
+.u {
+  text-decoration: underline;
+}
+.b {
+  font-weight: bold;
+}
+.white {
+  color: white;
+}
+.black {
+  color: black;
 }
 
-
-html{
-    font-family: 'Segoe UI';
-}
-h1 h2 h3 h4{
-    font-family: 'Segoe UI Semibold';
-}
-p.light{
-    font-family: 'Segoe UI light';
-}
-p.bold{
-    font-family: 'Segoe UI Semibold';
-}
-a{
-    font-family: 'Segoe UI';
-    text-decoration: none;
-}
-a:hover{
-    font-family: 'Segoe UI Semibold';
-    text-decoration: none;
-}
-a:active{
-    font-family: 'Segoe UI Semibold';
-    text-decoration: underline;
-}
-a:visited{
-    font-family: 'Segoe UI';
-    text-decoration: underline;
-}
-.u{
-    text-decoration: underline;
-}
-.b{
-    font-weight: bold;
-}
-.white{
-    color: white;
-}
-.black{
+@media screen and (min-width: 1080px) {
+  html {
+    background-color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: black;
+  }
+  h1 {
+    text-align: center;
+    font-size: 72px;
+    font-family: "Segoe UI Semibold";
+  }
+  h3 {
+    text-align: center;
+    font-size: 48px;
+    font-family: "Segoe UI Semibold";
+  }
+  p {
+    font-size: 24px;
+    text-align: center;
+  }
+  div#message-content {
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-left: 5%;
+    overflow: hidden;
+    padding-top: 5px;
+  }
+  a#link {
+    color: black;
+    text-decoration: none;
+    font-family: "Segoe UI";
+  }
+  div#message {
+    width: 100%;
+    height: auto;
+    min-height: 7%;
+    max-height: 18%;
+    background-color: coral;
+    position: fixed;
+    top: 0;
+    padding-top: 5px;
+  }
+  div#button {
+    background-color: white;
+    text-align: center;
+    height: auto;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin: 5px;
+    padding: 5px;
+    float: right;
+    position: fixed;
+    top: 1px;
+    right: 1em;
+    overflow: visible;
+  }
+  a.thank:link {
+    color: white;
+    text-decoration: none;
+  }
+  a.thank:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  a.thank:active {
+    color: black;
+    text-decoration: underline;
+  }
+  a.thank:visited {
+    color: white;
+    text-decoration: none;
+  }
+}
+@media screen and (max-width: 1080px) {
+  html {
+    background-color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+  }
+  h1 {
+    text-align: center;
+    font-size: 48px;
+    font-family: "Segoe UI Semibold";
+  }
+  h3 {
+    text-align: center;
+    font-size: 48px;
+    font-family: "Segoe UI Semibold";
+  }
+  p {
+    font-size: 24px;
+    text-align: center;
+  }
+  a#link {
+    color: black;
+    text-decoration: none;
+    font-family: "Segoe UI";
+  }
+  div#message-content {
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 1em;
+    margin-top: 3px;
+    margin-left: 3px;
+    overflow: hidden;
+    padding-top: 1px;
+    min-height:30%;
+  }
+  div#message {
+    width: 100%;
+    height: auto;
+    min-height: 5%;
+    max-height: 15%;
+    background-color: coral;
+    position: fixed;
+    top: 0;
+    padding-top: 1px;
+  }
+  div#button {
+    max-width: 6em;
+    min-height: 8%;
+    height: auto;
+    background-color: white;
+    text-align: center;
+    height: auto;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #0040aa;
+    font-size: 18px;
+    margin: 1px;
+    padding: 3px;
+    float: right;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    overflow: visible;
+  }
+  a.thank:link {
+    color: white;
+    text-decoration: none;
+  }
+  a.thank:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  a.thank:active {
+    color: black;
+    text-decoration: underline;
+  }
+  a.thank:visited {
+    color: white;
+    text-decoration: none;
+  }
 }
