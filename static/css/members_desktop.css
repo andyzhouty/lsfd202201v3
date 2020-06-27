@@ -1,0 +1,18 @@
+@media screen and (min-width: 1080px){
+    h3, caption {
+        margin-left: 40px;
+        width: 95%
+    }
+    th, td {
+        text-align: center;
+    }
+    th:hover, td:hover {
+        background-color: #a9a9a9;
+        color: #ffffff;
+    }
+    ul.info {
+        list-style: square inside url('/static/images/li.jpg');
+    }
+    ul.info li {
+        font-size: 1.7em;
+    }}

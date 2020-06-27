@@ -1,0 +1,84 @@
+
+@media screen and (max-width: 1080px) {
+    html {
+      background-color: white;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: black;
+    }
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      font-family: "Segoe UI Semibold";
+    }
+    h3 {
+      text-align: center;
+      font-size: 48px;
+      font-family: "Segoe UI Semibold";
+    }
+    p {
+      font-size: 24px;
+      text-align: center;
+    }
+    a#link {
+      color: black;
+      text-decoration: none;
+      font-family: "Segoe UI";
+    }
+    div#message-content {
+      color: white;
+      float: left;
+      text-align: left;
+      font-size: 1em;
+      margin-top: 3px;
+      margin-left: 3px;
+      overflow: hidden;
+      padding-top: 1px;
+      min-height:30%;
+    }
+    div#message {
+      width: 100%;
+      height: auto;
+      min-height: 5%;
+      max-height: 15%;
+      background-color: coral;
+      position: fixed;
+      top: 0;
+      padding-top: 1px;
+    }
+    div#button {
+      max-width: 6em;
+      min-height: 8%;
+      height: auto;
+      background-color: white;
+      text-align: center;
+      height: auto;
+      border-radius: 5px;
+      border-style: solid;
+      border-color: #0040aa;
+      font-size: 18px;
+      margin: 1px;
+      padding: 3px;
+      float: right;
+      position: fixed;
+      bottom: 1em;
+      right: 1em;
+      overflow: visible;
+    }
+    a.thank:link {
+      color: white;
+      text-decoration: none;
+    }
+    a.thank:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    a.thank:active {
+      color: black;
+      text-decoration: underline;
+    }
+    a.thank:visited {
+      color: white;
+      text-decoration: none;
+    }
+  }
+  

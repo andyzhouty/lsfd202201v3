@@ -22,7 +22,7 @@ def set_article_full_dict():
     for article in article_list:
         if not article:
             break
-        article_splited = article.split("-")
+        article_splited = article.split("`", 3)
         for n, i in enumerate(["Title", "Author", "Content"]):
             article_full_dict.setdefault(i, [])
             article_full_dict[i].append(article_splited[n])
@@ -72,17 +72,23 @@ def upload_result():
     if password!="LSFD202201":
         return render_template('upload_fail.html', navbar=True)
     with open(file_name, "a", encoding="utf-8") as file_obj:
-        file_obj.write(f'\n{title}-{name}-{content}=\n')
+        file_obj.write(f'\n{title}`{name}`{content}=\n')
     return render_template('upload_result.html', navbar=True)
 
-@app.route('/class-in-the-clouds')
+@app.route('/kzkt')
 def cloud_class():
-    return render_template('class_in_the_clouds.html', navbar=True, warning=True)
+    return render_template('kzkt.html', navbar=True, warning=True)
+
+@app.route('/jkl')
+def jkl():
+    return render_template('jinkela.html', navbar=True, warning=False)
 
 @app.errorhandler(404)
-def page_not_found(e):
+@app.route('/hrtg')
+def page_not_found(e="hrtg"):
     return render_template('coffin_dance.html', navbar=True, warning=False), 404
 
 @app.errorhandler(500)
-def internal_server_error(e):
+@app.route('/mickey-aoligei')
+def internal_server_error(e="aoligei"):
     return render_template('mickey_aoligei.html', navbar=True, warning=False), 500
