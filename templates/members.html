@@ -2,11 +2,12 @@
 {% block title %}
 Members
 {% endblock %}
-{% block special_css %}
+{% block styles %}
+{{ super() }}
 <link href="/static/css/members_desktop.css" rel="stylesheet">
 <link href="/static/css/members_mobile.css" rel="stylesheet">
 {% endblock %}
-{% block body %}
+{% block page_content %}
         <ul class="info">
             <li> A year ago, hackers broke into GitHub and stole huge amounts
             of data. We don't want the information getting revealed.</li>
@@ -51,12 +52,6 @@ Members
                 
                 <td>Andy Huang</td>
                 <td>20220105</td>
-                <td>M</td>
-            </tr>
-            <tr>
-                
-                <td>Bryan</td>
-                <td>20220106</td>
                 <td>M</td>
             </tr>
             <tr>
@@ -247,8 +242,46 @@ Members
             </tr>
 
         </table>
-        <table id="teachers" class="table table-bordered table-striped">
+        <table id="classmates" class="table table-bordered table-striped">
+            <caption style="font-size: 36px;">
+                Our Former Classmates
+            </caption>
+            <tr>
+                <th>English Name</th>
+                <th>Student#</th>
+                <th>Gender</th>
+            </tr>
+            <tr>
+                <td>Bryan</td>
+                <td>20220106</td>
+                <td>M</td>
+            </tr>
+        </table>
+        <table class="teachers table table-bordered table-striped">
             <caption style="font-size:36px">Our Teachers</caption>
+            <tr>
+                <th>Chinese Name</th>
+                <th>English Name</th>
+                <th>Subject</th>
+            </tr>
+            <tr>
+                <td>Mr.Ben</td>
+                <td>-</td>
+                <td>Physics</td>
+            </tr>
+            <tr>
+                <td>Ms.Yang</td>
+                <td>-</td>
+                <td>Chinese</td>
+            </tr>
+            <tr>
+                <td>Ms.Wu</td>
+                <td>-</td>
+                <td>English</td>
+            </tr>
+        </table>
+        <table class="teachers table table-bordered table-striped">
+            <caption style="font-size:36px">Our Former Teachers</caption>
             <tr>
                 <th>Chinese Name</th>
                 <th>English Name</th>
@@ -271,20 +304,12 @@ Members
                 <td>Chinese</td>
             </tr>
             <tr>
-                <td>Ms.Bao</td>
-                <td>-</td>
-                <td>-</td>
-                <td>F</td>
-                <td>Maths</td>
-            </tr>
-            <tr>
                 <td>Ms.Zhao</td>
                 <td>Crystal</td>
                 <td>-</td>
                 <td>F</td>
                 <td>English</td>
             </tr>
-
         </table>
 
 {% endblock %}
