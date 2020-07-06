@@ -2,11 +2,12 @@
 {% block title %}
 Articles
 {% endblock %}
-{% block special_css %}
+{% block styles %}
+{{ super() }}
 <link href="/static/css/main_desktop.css" rel="stylesheet">
 <link href="/static/css/main_mobile.css" rel="stylesheet">
 {% endblock %}
-{% block body %}
+{% block page_content %}
 <div class="table">
     <div class="table-row">
         <aside class="left-column left">

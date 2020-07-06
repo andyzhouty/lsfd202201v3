@@ -2,10 +2,11 @@
 {% block title %}
 Upload Article
 {% endblock %}
-{% block special_css %}
+{% block styles %}
+{{ super() }}
 <link href="/static/css/upload.css" rel="stylesheet">
 {% endblock %}
-{% block body %}
+{% block page_content %}
 <div class="body">
 <h1 id="upload-article">Upload Article</h1>
 <form method="POST" action="/upload-result" id="upload-form" role="form">
