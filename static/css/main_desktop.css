@@ -1,30 +1,37 @@
-@media screen and (min-width: 1080px){
+@media screen and (min-width: 1080px) {
     html {
         height: 100%;
         width: 100%;
         font-size: large !important;
     }
+
     div .table {
         display: table;
     }
-    div .table-row{
+
+    div .table-row {
         display: table-row;
     }
+
     .focus {
         font-size: 2.5em;
     }
+
     .focus-title {
         padding: 3%;
         color: #000050;
     }
+
     div .left-focus {
         padding: 5%;
         background-color: #ffffff;
     }
-    .left-column, .idea{
+
+    .left-column, .idea {
         display: table-cell;
         vertical-align: top;
     }
+
     .left-column {
         width: 22em;
         padding-bottom: 25em;
@@ -32,43 +39,53 @@
         background: #f9f9ff;
         vertical-align: top;
     }
+
     .main {
         width: 68em;
         padding: 1em;
         vertical-align: top;
         float: right;
     }
+
     .idea, .main-passage {
         margin: 5px;
         padding: 5px;
     }
+
     .left {
         float: left;
         padding-left: 3%;
     }
+
     .right {
         float: right;
     }
+
     .head {
         font-size: 48px;
     }
+
     .main-passage {
         margin-top: 5px;
         padding: 10px;
         font-size: large;
     }
+
     p .main-passage {
         width: 85%;
         text-indent: 2em;
         padding-right: 30px
     }
+
     .idea {
         width: 50em;
         margin-left: 8%;
         right: auto;
         z-index: 1;
     }
+
     footer {
         float: left;
         padding-left: 2%;
-    }}
+    }
+}

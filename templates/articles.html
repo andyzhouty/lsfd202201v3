@@ -1,55 +1,55 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% block title %}
-Articles
+    Articles
 {% endblock %}
 {% block styles %}
-{{ super() }}
-<link href="/static/css/main_desktop.css" rel="stylesheet">
-<link href="/static/css/main_mobile.css" rel="stylesheet">
+    {{ super() }}
+    <link href="/static/css/main_desktop.css" rel="stylesheet">
+    <link href="/static/css/main_mobile.css" rel="stylesheet">
 {% endblock %}
 {% block page_content %}
-<div class="table">
-    <div class="table-row">
-        <aside class="left-column left">
-            <h3 class="focus">Necessary Info</h3>
-            <div id="left-focus">
-                <h4 id="focus-title">must-read if you want to upload.</h4>
-                <hr>
-                <ul>
-                    <li>
-                        This page is made in Python + HTML, you can upload your
-                        own article
-                        <A href="/upload">HERE</a>
-                    </li>
+    <div class="table">
+        <div class="table-row">
+            <aside class="left-column left">
+                <h3 class="focus">Necessary Info</h3>
+                <div id="left-focus">
+                    <h4 id="focus-title">must-read if you want to upload.</h4>
+                    <hr>
+                    <ul>
+                        <li>
+                            This page is made in Python + HTML, you can upload your
+                            own article
+                            <A href="/upload">HERE</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="main right">
+                <div class="idea">
+                    <h2 style="float:left;font-size:48px;">
+                        {{ title }}
+                    </h2>
+                    <br>
+                    <h4 style="float:right">
+                        {{ time }}
+                    </h4><br><br>
+                    <h4 style="position: absolute; right: 100px">
+                        ——{{ author }}
+                    </h4>
+                </div>
+                <br>
+                <div class="main-passage">
+                    <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
+                        {{ content }}
+                    </p>
+                </div>
+                <ul class="pagination">
+                    {% for id, article in enumerate_items %}
+                        <li><a href="{{ url_for('articles', id=id) }}">
+                            {{ id }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
-        </aside>  
-        <div class="main right">
-            <div class="idea">
-                <h2 style="float:left;font-size:48px;">
-                    {{ title }}
-                </h2>
-                <br>
-                <h4 style="float:right">
-                    {{ time }}
-                </h4><br><br>
-                <h4 style="position: absolute; right: 100px">
-                    ——{{ author }}
-                </h4>
-            </div>
-            <br>
-            <div class="main-passage">
-                <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
-                    {{ content }}
-                </p>
-            </div>
-            <ul class="pagination">
-                {% for id, article in enumerate_items %}
-                <li><a href="{{ url_for('articles', id=id) }}">
-                {{ id }}</a></li>
-                {% endfor %}
-            </ul>
         </div>
     </div>
-</div>
 {% endblock %}

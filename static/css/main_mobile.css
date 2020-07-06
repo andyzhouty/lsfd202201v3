@@ -1,38 +1,46 @@
-
-@media screen and (max-width: 1080px){
+@media screen and (max-width: 1080px) {
     .focus {
         font-size: 2em;
     }
+
     .focus-title {
         color: #000050;
     }
+
     .left-column {
         margin-left: 1.5em;
         border-bottom: thin solid #999999;
     }
+
     .main {
         padding: 1em;
     }
+
     .idea, .main-passage {
         margin: 5px;
         padding: 5px;
     }
+
     .head {
         font-size: 1.9em;
     }
+
     .main-passage {
         margin-top: 5px;
         padding: 10px;
     }
+
     .main-passage {
         width: 95%;
         min-width: 250px;
         max-width: 850px;
         text-indent: 2em;
     }
+
     .idea {
         margin-left: 8%;
     }
+
     footer {
         float: left;
         padding-left: 2%;

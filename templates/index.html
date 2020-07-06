@@ -1,109 +1,109 @@
 <html>
-    <head>
-        <title>Index</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/static/css/index_fonts.css" rel="stylesheet">
-        <link href="/static/css/index_desktop.css" rel="stylesheet">
-        <link href="/static/css/index_mobile.css" rel="stylesheet">
-        <link href="/static/favicon/favicon.ico" rel="shortcut icon">
-    </head>
-    <body>
-    <div id="message">
-        <div id="message-content">
-            Special thanks for
-            <a class="thank" href="https://pythonanywhere.com" target="_blank">
-                PythonAnywhere
-            </a>,
-            <a class="thank" href="https://bilibili.com" target="_blank">
-                Bilibili
-            </a>,
-            <a class="thank" href="https://flask.pocoo.org" target="_blank">
-                Flask
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/index_fonts.css" rel="stylesheet">
+    <link href="/static/css/index_desktop.css" rel="stylesheet">
+    <link href="/static/css/index_mobile.css" rel="stylesheet">
+    <link href="/static/favicon/favicon.ico" rel="shortcut icon">
+</head>
+<body>
+<div id="message">
+    <div id="message-content">
+        Special thanks for
+        <a class="thank" href="https://pythonanywhere.com" target="_blank">
+            PythonAnywhere
+        </a>,
+        <a class="thank" href="https://bilibili.com" target="_blank">
+            Bilibili
+        </a>,
+        <a class="thank" href="https://flask.pocoo.org" target="_blank">
+            Flask
+        </a>
+        and <a class="thank" href="https://getbootstrap.com/" target="_blank">
+        Bootstrap
+    </a>
+        They provided us servers and media players.
+        <div id="button">
+            <a id="link" href="{{ url_for("main") }}">
+                Go to our website &gt&gt
             </a>
-            and <a class="thank" href="https://getbootstrap.com/" target="_blank">
-                Bootstrap
-            </a>
-            They provided us servers and media players.
-            <div id="button">
-                <a id="link" href="{{ url_for("main") }}">
-                    Go to our website &gt&gt
-                </a>
-            </div>
         </div>
     </div>
-    <div style="background-color: black; color:white; margin:0; width:auto; padding:10%">
-        <h1 style="font-size: 7em; margin-bottom: 100px">Hello.</h1>
-        <p>This is a new website for lansheng 202201.</p>
-        <p class="version">Website V3.1.0 Alpha 2</p>
-    </div>
-    <noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;">
-        <b>
-            WARNING: your browser don't allow javascript!<br>&nbsp&nbsp&nbsp[(Chrome, MsEdge, ...)
-            setting - site permissions - javascript , then refresh this page!]
-        </b>
-    </noscript>
-    <h3>Latest Changes</h3>
-        <div style="text-align: center;">
-        <p style="font-family: 'Segoe UI Light'">V3.1.0 Alpha 2</p>
-        <img style="width:10%" src="/static/images/bootstrap.jpg"
-            alt="bootstrap">
-        <p>×</p>
-        <img style="width:20%" src="/static/images/flask.jpg"
-            alt="Flask">
-        <p> Add warnings and info while
-            <a href="{{ url_for("upload") }}">uploading</a>.<br>
-        </p>
-    </div>
-    <h3>Previous Versions</h3>
-        <div style="text-align: center;">
-        <p style="font-family: 'Segoe UI Light'">V3.0.0</p>
-        <img style="width:10%" src="/static/images/bootstrap.jpg"
-            alt="bootstrap">
-        <p>×</p>
-        <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg"
-            alt="PA">
-        <p>×</p>
-        <img src="/static/images/all_platform.jpg" alt="all-platform"><br><br>
-        <p id="new">
-            开天辟地，焕然一新。
-        </p><br>
-        <p>The website now support uploading<br>
-            your own articles.<br>
-            You can upload them <a href="{{ url_for("upload") }}">HERE</a>.
-        </p>
-    </div>
-    <div style="text-align: center;">
-        <p style="font-family:'Segoe UI Light'">V1.4.0 Inside × 2.2.0 Stable</p>
-        <img style="width:5%" src="https://github.githubassets.com/pinned-octocat.svg">
-        <p>×</p>
-        <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg">
-        <p>We are linked!<br>GitHub & PythonAnywhere</p>
+</div>
+<div style="background-color: black; color:white; margin:0; width:auto; padding:10%">
+    <h1 style="font-size: 7em; margin-bottom: 100px">Hello.</h1>
+    <p>This is a new website for lansheng 202201.</p>
+    <p class="version">Website V3.1.0 Alpha 2</p>
+</div>
+<noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;">
+    <b>
+        WARNING: your browser don't allow javascript!<br>&nbsp&nbsp&nbsp[(Chrome, MsEdge, ...)
+        setting - site permissions - javascript , then refresh this page!]
+    </b>
+</noscript>
+<h3>Latest Changes</h3>
+<div style="text-align: center;">
+    <p style="font-family: 'Segoe UI Light'">V3.1.0 Alpha 2</p>
+    <img style="width:10%" src="/static/images/bootstrap.jpg"
+         alt="bootstrap">
+    <p>×</p>
+    <img style="width:20%" src="/static/images/flask.jpg"
+         alt="Flask">
+    <p> Add warnings and info while
+        <a href="{{ url_for("upload") }}">uploading</a>.<br>
+    </p>
+</div>
+<h3>Previous Versions</h3>
+<div style="text-align: center;">
+    <p style="font-family: 'Segoe UI Light'">V3.0.0</p>
+    <img style="width:10%" src="/static/images/bootstrap.jpg"
+         alt="bootstrap">
+    <p>×</p>
+    <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg"
+         alt="PA">
+    <p>×</p>
+    <img src="/static/images/all_platform.jpg" alt="all-platform"><br><br>
+    <p id="new">
+        开天辟地，焕然一新。
+    </p><br>
+    <p>The website now support uploading<br>
+        your own articles.<br>
+        You can upload them <a href="{{ url_for("upload") }}">HERE</a>.
+    </p>
+</div>
+<div style="text-align: center;">
+    <p style="font-family:'Segoe UI Light'">V1.4.0 Inside × 2.2.0 Stable</p>
+    <img style="width:5%" src="https://github.githubassets.com/pinned-octocat.svg">
+    <p>×</p>
+    <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg">
+    <p>We are linked!<br>GitHub & PythonAnywhere</p>
     <div class="ver_block">
         <p style="font-family:'Segoe UI Light'">V2.2.0 Stable</p>
         <img style="width:20%" src="/static/images/bilibili.jpg">
         <p>Video is released and played in Bilibili!</p>
     </div>
-    </div>
-    <div style="text-align: center;">
-        <p class="version">V1.3.7 Inside × 2.1.8 Stable</p>
-        <img style="width:20%" src="/static/images/cssdebug.png">
-        <p>CSS 3 debugged. Added Articles into the site.</p>
-    </div>
-    <div style="text-align: center;">
-        <p class="version">V1.3.5 Beta</p>
-        <p>We've tried, and MsEdge is the fastest.
+</div>
+<div style="text-align: center;">
+    <p class="version">V1.3.7 Inside × 2.1.8 Stable</p>
+    <img style="width:20%" src="/static/images/cssdebug.png">
+    <p>CSS 3 debugged. Added Articles into the site.</p>
+</div>
+<div style="text-align: center;">
+    <p class="version">V1.3.5 Beta</p>
+    <p>We've tried, and MsEdge is the fastest.
         <a href="https://www.microsoft.com/en-us/edge?form=MA13DC&OCID=MA13DC" target="_blank">go&gt&gt</a></p>
-    </div>
-    <div style="text-align: center;">
-        <p class="version">V1.3.1 Beta</p>
-        <img style="width:20%" src="/static/images/colorful.png">
-        <p>Think the only color is boring? Try this colorful version!</p>
-    </div>
-    <div style="text-align: center;">
-        <p class="version">V1.2.7 Alpha × V2.1.0 Stable</p>
-        <img style="width:20%" src="/static/images/computer.png">
-        <p>HTML 5 + CSS 3 + JavaScript + Python 3, quadruple code type, better experience.</p>
-    </div>
-    </body>
+</div>
+<div style="text-align: center;">
+    <p class="version">V1.3.1 Beta</p>
+    <img style="width:20%" src="/static/images/colorful.png">
+    <p>Think the only color is boring? Try this colorful version!</p>
+</div>
+<div style="text-align: center;">
+    <p class="version">V1.2.7 Alpha × V2.1.0 Stable</p>
+    <img style="width:20%" src="/static/images/computer.png">
+    <p>HTML 5 + CSS 3 + JavaScript + Python 3, quadruple code type, better experience.</p>
+</div>
+</body>
 </html>

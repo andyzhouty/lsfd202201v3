@@ -1,68 +1,68 @@
 {% extends 'bootstrap/base.html' %}
 <html>
-   <head>
-      <title>{% block title %}LS202201{% endblock %}</title>
-      {% block metas %}
-         {{ super() }}
-         <meta charset="utf-8">
-      {% endblock %}
-      {% block styles %}
-         {{ super() }}
-         <link href="/static/favicon/favicon.ico" rel="shortcut icon">
-      {% endblock %}
-   </head>
-   <body>
-         {% block navbar %}
-             <div class="navbar navbar-inverse" role="navigation"
-                  style="border-radius: 0; border-color: #091145; background-image: linear-gradient(to bottom, #091145, #091145 100%);">
-                <div class="containter">
-                   <div class="navbar-header">
-                         <button type="button" class="navbar-toggle"
-                         data-toggle="collapse" data-target=".navbar-collapse"
-                         style="border-color: #091145 !important">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                         </button>
-                         <a class="navbar-brand" style="font-size: 2.2em; margin-right: 50px">
-                            LS202201
-                         </a>
-                   </div>
-                   <div class="navbar-collapse collapse" style="background-color: #091145">
-                      <ul class="nav navbar-nav" style="font-size: 1.5em">
-                         <li>
-                            <a href="{{ url_for("main") }}" >Main</a>
-                         </li>
-                         <li>
-                            <a href="{{ url_for("members") }}">Members</a>
-                         </li>
-                         <li>
-                            <a href="{{ url_for("articles") }}">Articles</a>
-                         </li>
-                         <li>
-                            <a href="{{ url_for("video") }}">Our Video</a>
-                         </li>
-                      </ul>
-                   </div>
-                </div>
-             </div>
-         {% endblock %}
-         {% block content %}
-             <div class="content" style="font-family: 'Segoe UI', Arial, sans-serif;">
-                 {% block page_content %}
-                 {% endblock %}
-             </div>
-         {% endblock %}
-         <footer>
-            {% if warning %}
-            WARNING: YOU MUST USE Edge 10+, Chrome 26+,<br>
-             Firefox 57+, or IE 11+<br>
-            TO OPEN THIS SITE OR THE <br>
-            SITE MAY NOT WORK AS EXPECTED
-            <br><br>
-            {% endif %}
-            &copy Copyright 2020 LSFD Class 202201<br>Website V3.1.0 Alpha 2<br>
-        </footer>
-   <body>
+<head>
+    <title>{% block title %}LS202201{% endblock %}</title>
+    {% block metas %}
+        {{ super() }}
+        <meta charset="utf-8">
+    {% endblock %}
+    {% block styles %}
+        {{ super() }}
+        <link href="/static/favicon/favicon.ico" rel="shortcut icon">
+    {% endblock %}
+</head>
+<body>
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation"
+         style="border-radius: 0; border-color: #091145; background-image: linear-gradient(to bottom, #091145, #091145 100%);">
+        <div class="containter">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse"
+                        style="border-color: #091145 !important">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="font-size: 2.2em; margin-right: 50px">
+                    LS202201
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" style="background-color: #091145">
+                <ul class="nav navbar-nav" style="font-size: 1.5em">
+                    <li>
+                        <a href="{{ url_for("main") }}">Main</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("members") }}">Members</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("articles") }}">Articles</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("video") }}">Our Video</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="content" style="font-family: 'Segoe UI', Arial, sans-serif;">
+        {% block page_content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+<footer>
+    {% if warning %}
+        WARNING: YOU MUST USE Edge 10+, Chrome 26+,<br>
+        Firefox 57+, or IE 11+<br>
+        TO OPEN THIS SITE OR THE <br>
+        SITE MAY NOT WORK AS EXPECTED
+        <br><br>
+    {% endif %}
+    &copy Copyright 2020 LSFD Class 202201<br>Website V3.1.0 Alpha 2<br>
+</footer>
+<body>
 </html>

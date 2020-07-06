@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
+import os
+import sys
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from upload_form import UploadForm
-import os, sys
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -30,7 +31,7 @@ def set_article_full_dict():
         if not article:
             break
         article_splited = article.split("`", 4)
-        for n, i in enumerate(["Title",  "Author", "Time", "Content"]):
+        for n, i in enumerate(["Title", "Author", "Time", "Content"]):
             article_full_dict.setdefault(i, [])
             article_full_dict[i].append(article_splited[n])
 
@@ -108,6 +109,6 @@ def page_not_found(e="hrtg"):
 
 
 @app.errorhandler(500)
-@app.route('/mickey-aoligei')
+@app.route('/aoligei')
 def internal_server_error(e="aoligei"):
     return render_template('mickey_aoligei.html', warning=False), 500

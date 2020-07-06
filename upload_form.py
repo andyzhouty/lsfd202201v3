@@ -1,7 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.csrf import validate_csrf
-from flask_wtf.recaptcha import validators
-from wtforms import (StringField, TextAreaField, TimeField, 
+from wtforms import (StringField, TextAreaField, TimeField,
                      PasswordField, SubmitField)
 from wtforms.validators import DataRequired
 
