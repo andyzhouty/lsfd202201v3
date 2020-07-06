@@ -133,5 +133,4 @@ dmypy.json
 .vscode/
 
 # Chat messages
-/templates/chats.html
-static/articles.txt
+.idea

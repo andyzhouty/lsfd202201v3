@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf%}
 {% block title %}
 Upload Article
 {% endblock %}
@@ -10,29 +11,28 @@ Upload Article
 <div class="body">
 <h1 id="upload-article">Upload Article</h1>
 <form method="POST" action="/upload-result" id="upload-form" role="form">
+    {{ form.hidden_tag() }}
     <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title"
-            placeholder="Enter Title Here">
+        {{ form.name.label }}<br>
+        {{ form.name(class="form-control") }}
     </div>
     <div class="form-group">
-        <label for="name">
-            Name(You can type '匿名' below if you want. )<br>
-            The name you type must not include '-', '`', '~'， '$'.
-        </label>
-        <input type="text" class="form-control" id="name" name="name"
-            placeholder="Name">
+        {{ form.password.label }}<br>
+        {{ form.password(class="form-control") }}
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password"
-            placeholder="Password">
+        {{ form.time.label }}<br>
+        {{ form.time(class="form-control") }}
     </div>
     <div class="form-group">
-        <label for="content">Content</label>
-        <textarea class="form-control" rows="10" name="content"></textarea>
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}
     </div>
-    <button type="submit" class="btn btn-default btn-lg">UPLOAD</button>
+    <div class="form-group">
+        {{ form.content.label }}<br>
+        {{ form.content(cols=50, rows=15, class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-default btn-lg") }}
 </form>
 <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
 WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE UPLOADING.<br>

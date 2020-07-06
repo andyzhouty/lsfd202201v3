@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from upload_form import UploadForm
 import os, sys
 
 app = Flask(__name__)
+app.config.from_object('config')
 bootstrap = Bootstrap(app)
 
 if sys.platform == "win32":
@@ -27,8 +29,8 @@ def set_article_full_dict():
     for article in article_list:
         if not article:
             break
-        article_splited = article.split("`", 3)
-        for n, i in enumerate(["Title", "Author", "Content"]):
+        article_splited = article.split("`", 4)
+        for n, i in enumerate(["Title",  "Author", "Time", "Content"]):
             article_full_dict.setdefault(i, [])
             article_full_dict[i].append(article_splited[n])
 
@@ -56,11 +58,11 @@ def members():
 @app.route('/articles/<int:id>')
 def articles(id=1):
     set_article_full_dict()
-    return render_template('articles.html',
-                           has_navbar=True, warning=True,
-                           article_title=article_full_dict["Title"][id - 1],
-                           article_author=article_full_dict["Author"][id - 1],
-                           article_content=article_full_dict["Content"][id - 1],
+    return render_template('articles.html', warning=True,
+                           title=article_full_dict["Title"][id - 1],
+                           author=article_full_dict["Author"][id - 1],
+                           time=article_full_dict["Time"][id - 1],
+                           content=article_full_dict["Content"][id - 1],
                            enumerate_items=enumerate(article_list, start=1))
 
 
@@ -71,20 +73,21 @@ def video():
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html', warning=False)
+    form = UploadForm()
+    return render_template('upload.html', warning=False, form=form)
 
 
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
-    title = request.form['title']
-    name = request.form['name'].encode('utf-8').decode()
-    print(name)
-    content = request.form['content']
+    name = request.form['name']
     password = request.form['password']
-    if password != "LSFD202201":
+    time = request.form['time']
+    title = request.form['title']
+    content = request.form['content']
+    if password != app.config['PASSWORD']:
         return render_template('upload_fail.html')
     with open(file_name, "a", encoding="utf-8") as file_obj:
-        file_obj.write(f'\n{title}`{name}`{content}=\n')
+        file_obj.write(f'\n{title}`{name}`{time}`{content}=\n')
     return render_template('upload_result.html')
 
 

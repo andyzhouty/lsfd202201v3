@@ -27,17 +27,20 @@ Articles
         <div class="main right">
             <div class="idea">
                 <h2 style="float:left;font-size:48px;">
-                    {{ article_title }}
+                    {{ title }}
                 </h2>
                 <br>
-                <h4 style="font-size: 24px;float:right">
-                    ——{{ article_author }}
+                <h4 style="float:right">
+                    {{ time }}
+                </h4><br><br>
+                <h4 style="position: absolute; right: 100px">
+                    ——{{ author }}
                 </h4>
             </div>
             <br>
             <div class="main-passage">
                 <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
-                    {{ article_content }}
+                    {{ content }}
                 </p>
             </div>
             <ul class="pagination">
