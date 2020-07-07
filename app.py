@@ -102,6 +102,11 @@ def jkl():
     return render_template('jinkela.html', warning=False)
 
 
+@app.route('/trump')
+def trump():
+    return render_template('trump.html', warning=False)
+
+
 @app.errorhandler(404)
 @app.route('/hrtg')
 def page_not_found(e="hrtg"):

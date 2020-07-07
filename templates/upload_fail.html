@@ -3,5 +3,23 @@
     Upload Failed
 {% endblock %}
 {% block page_content %}
-    <h1>Sorry, your password is not correct.</h1>
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" class="close">
+            <button type="button" class="close" data-dismiss="alert">&times;
+            </button>
+            {{ message }}
+            {# 闪现消息 #}
+        </div>
+        {% endfor %}
+        <script>
+            window.onload = function() {
+                sleep(1500); // 等待1.5s
+                window.location.replace("/upload");
+            }
+            function sleep(d) {
+                for(var t = Date.now(); Date.now() - t <= d;);
+            }
+        </script>
+    </div>
 {% endblock %}
