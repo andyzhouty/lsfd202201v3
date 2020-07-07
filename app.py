@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_bootstrap import Bootstrap
 from upload_form import UploadForm
 
@@ -86,9 +86,11 @@ def upload_result():
     title = request.form['title']
     content = request.form['content']
     if password != app.config['PASSWORD']:
+        flash("Wrong Password")
         return render_template('upload_fail.html')
     with open(file_name, "a", encoding="utf-8") as file_obj:
         file_obj.write(f'\n{title}`{name}`{time}`{content}=\n')
+    flash("Upload Success")
     return render_template('upload_result.html')
 
 
