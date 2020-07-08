@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Share Our Website
+{% endblock %}
+{% block page_content %}
+<img src="/static/images/qrcode.png" alt="QRCode">
+{% endblock %}
+{% block share %}
+<div style="margin-left: 30px">
+    {{ share.create(title="Share with", align="left")}}
+</div>
+{% endblock%}

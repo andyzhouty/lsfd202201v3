@@ -1,13 +1,15 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, escape
 from flask_bootstrap import Bootstrap
+from flask_share import Share
 from upload_form import UploadForm
 
 app = Flask(__name__)
 app.config.from_object('config')
 bootstrap = Bootstrap(app)
+share = Share(app)
 
 if sys.platform == "win32":
     # 本地运行
@@ -80,11 +82,11 @@ def upload():
 
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
-    name = request.form['name']
-    password = request.form['password']
-    time = request.form['time']
-    title = request.form['title']
-    content = request.form['content']
+    name = escape(request.form['name'])
+    password = escape(request.form['password'])
+    time = escape(request.form['time'])
+    title = escape(request.form['title'])
+    content = escape(request.form['content'])
     if password != app.config['PASSWORD']:
         flash("Wrong Password")
         return render_template('upload_fail.html')
@@ -93,6 +95,9 @@ def upload_result():
     flash("Upload Success")
     return render_template('upload_result.html')
 
+@app.route('/share')
+def share():
+    return render_template("share.html", warning=False)
 
 @app.route('/kzkt')
 def cloud_class():
