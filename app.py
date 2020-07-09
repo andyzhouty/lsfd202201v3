@@ -1,45 +1,28 @@
 # -*- coding:utf-8 -*-
 import os
-import sys
 from flask import Flask, render_template, request, flash, escape
 from flask_bootstrap import Bootstrap
 from flask_share import Share
-from upload_form import UploadForm
+from flask_sqlalchemy import SQLAlchemy
 
+# basic configurations
 app = Flask(__name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
 app.config.from_object('config')
+app.config['SQLALCHEMY_DATABASE_URI'] =\
+    'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# use bootstrap and flask-share
 bootstrap = Bootstrap(app)
 share = Share(app)
 
-if sys.platform == "win32":
-    # 本地运行
-    file_name = os.getcwd() + "/static/articles.txt"
-else:
-    # PythonAnywhere 部署
-    file_name = "/home/ls202201/mysite/static/articles.txt"
+# import defined classes
+from upload import UploadForm
+from models import Article
 
-article_full_dict = dict()
-article_list = []
-
-
-def set_article_full_dict():
-    global article_list
-    global article_full_dict
-    article_full_dict = dict()
-    article_list = open(file_name, encoding="utf-8").read().strip().split('=')
-    if not article_list[-1]:
-        del article_list[-1]
-    for article in article_list:
-        if not article:
-            break
-        article_splited = article.split("`", 4)
-        for n, i in enumerate(["Title", "Author", "Time", "Content"]):
-            article_full_dict.setdefault(i, [])
-            article_full_dict[i].append(article_splited[n])
-
-
-set_article_full_dict()
-
+# url routings
 
 @app.route('/')
 @app.route('/index')
@@ -60,13 +43,15 @@ def members():
 @app.route('/articles')
 @app.route('/articles/<int:id>')
 def articles(id=1):
-    set_article_full_dict()
+    # Query data from data.sqlite
+    article = Article().query_one(id)
+    articles = Article().query_all()
     return render_template('articles.html', warning=True,
-                           title=article_full_dict["Title"][id - 1],
-                           author=article_full_dict["Author"][id - 1],
-                           time=article_full_dict["Time"][id - 1],
-                           content=article_full_dict["Content"][id - 1],
-                           enumerate_items=enumerate(article_list, start=1))
+                           title=article["title"],
+                           author=article["author"],
+                           time=article["time"],
+                           content=article["content"],
+                           enumerate_items=enumerate(articles, start=1))
 
 
 @app.route('/video')
@@ -82,22 +67,28 @@ def upload():
 
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
+    # get vars from upload page
     name = escape(request.form['name'])
     password = escape(request.form['password'])
     time = escape(request.form['time'])
     title = escape(request.form['title'])
     content = escape(request.form['content'])
+    # password protection
     if password != app.config['PASSWORD']:
         flash("Wrong Password")
         return render_template('upload_fail.html')
-    with open(file_name, "a", encoding="utf-8") as file_obj:
-        file_obj.write(f'\n{title}`{name}`{time}`{content}=\n')
+    # commit data
+    article = Article(title=title, author=name, content=content, time=time)
+    db.session.add(article)
+    db.session.commit()
     flash("Upload Success")
     return render_template('upload_result.html')
+
 
 @app.route('/share')
 def share():
     return render_template("share.html", warning=False)
+
 
 @app.route('/kzkt')
 def cloud_class():

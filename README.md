@@ -29,6 +29,3 @@ Without these packages and modules, the website cannot be developed.
 
 1. Q: Why don't u make changes to your old project?  
    A: Because the changes between the two versions are too **BIG**, we thought making a new project is better.
-
-2. Q: Why don't u use MySQL or SQLite?  
-   A: We are currently not skilled in SQL Languages, we'll use them in the Version 3.2 of the website.
