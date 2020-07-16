@@ -3,20 +3,20 @@
 <html>
 <head>
 {% block head %}
-    <title>{% block title %}LS202201{% endblock %}</title>
-    {% block metas %}
+    <title>{% block title -%}LS202201{%- endblock %}</title>
+    {% block metas -%}
         {{ super() }}
         <meta charset="utf-8">
-    {% endblock %}
-    {% block styles %}
+    {%- endblock %}
+    {% block styles -%}
         {{ super() }}
         <link href="/static/favicon/favicon.ico" rel="shortcut icon">
         {{ share.load(serve_local=True) }}
-    {% endblock %}
+    {%- endblock %}
 {% endblock %}
 </head>
 <body>
-{% block navbar %}
+{% block navbar -%}
     <div class="navbar navbar-inverse" role="navigation"
          style="border-radius: 0; border-color: #091145; background-image: linear-gradient(to bottom, #091145, #091145 100%);">
         <div class="containter">
@@ -54,13 +54,13 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{%- endblock %}
 {% block content %}
     <div class="content" style="font-family: 'Segoe UI', Arial, sans-serif;">
-        {% block page_content %}
-        {% endblock %}
-        {% block share %}
-        {% endblock%}
+        {% block page_content -%}
+        {%- endblock %}
+        {% block share -%}
+        {%- endblock%}
     </div>
     <footer style="margin-left: 10px">
         &copy Copyright 2020 LSFD Class 202201<br>Website V3.2.0<br>

@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 import os
-from flask import Flask, render_template, request, flash, escape
+from flask import (Flask, render_template, request, flash, 
+                   escape, redirect, url_for, session)
+from flask.helpers import url_for
 from flask_bootstrap import Bootstrap
 from flask_share import Share
 from flask_sqlalchemy import SQLAlchemy
@@ -19,8 +21,9 @@ bootstrap = Bootstrap(app)
 share = Share(app)
 
 # import defined classes
-from upload import UploadForm
+from forms import UploadForm, AdminForm
 from models import Article
+
 
 # url routings
 
@@ -68,17 +71,20 @@ def upload():
 @app.route('/upload-result', methods=['POST'])
 def upload_result():
     # get vars from upload page
+    a = Article()
     name = escape(request.form['name'])
     password = escape(request.form['password'])
     time = escape(request.form['time'])
     title = escape(request.form['title'])
     content = escape(request.form['content'])
+    id = len(a.query_all()) + 1
     # password protection
     if password != app.config['PASSWORD']:
         flash("Wrong Password")
         return render_template('upload_fail.html')
     # commit data
-    article = Article(title=title, author=name, content=content, time=time)
+    article = Article(title=title, author=name, content=content, time=time,
+                      id=id)
     db.session.add(article)
     db.session.commit()
     flash("Upload Success")
@@ -88,6 +94,32 @@ def upload_result():
 @app.route('/share')
 def share():
     return render_template("share.html", warning=False)
+
+
+@app.route('/admin-login')
+def admin_login():
+    session['admin'] = False
+    form = AdminForm()
+    return render_template("admin_login.html", warning=False, form=form)
+
+
+@app.route('/admin', methods=['POST'])
+def admin():
+    session['input_name'] = escape(request.form['admin_name'])
+    session['input_password'] = escape(request.form['password'])
+    if not session['admin']:
+        if (session['input_name'] != 'rice'
+            and session['input_name'] != 'andyzhou'):
+            return redirect(url_for('admin_login'))
+        if session['input_password'] != app.config['ADMIN_PASSWORD']:
+            return redirect(url_for('admin_login'))
+    session['admin'] = True
+    session['admin_name'] = session['input_name']
+    query_article = Article(title="test", author="test",
+                            time="test", content="test")
+    return render_template('admin.html', warning=False,
+                           name=session['admin_name'].capitalize(),
+                           articles=query_article.query_all())
 
 
 @app.route('/kzkt')
@@ -114,4 +146,10 @@ def page_not_found(e="hrtg"):
 @app.errorhandler(500)
 @app.route('/aoligei')
 def internal_server_error(e="aoligei"):
-    return render_template('mickey_aoligei.html', warning=False), 500
+    return render_template('mickey_aoligei.html', warning=False, 
+                           error_message="500 INTERNAL SERVER ERROR"), 500
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+    return render_template('xizhilang.html', warning=False,
+                           error_message="405 METHOD NOT ALLOWED"), 405
