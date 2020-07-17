@@ -25,6 +25,9 @@ from forms import UploadForm, AdminLoginForm, AdminDeleteForm
 from models import Article
 
 
+with app.app_context():
+    app.config['admin'] = False
+
 # url routings
 
 @app.route('/')
@@ -79,7 +82,8 @@ def upload_result():
     content = escape(request.form['content'])
     id = len(a.query_all()) + 1
     # password protection
-    if password != app.config['PASSWORD']:
+    if (hash(password) != app.config['PASSWORD']
+            and hash(password) != app.config['ADMIN_PASSWORD']):
         flash("Wrong Password")
         return render_template('upload_fail.html', url="/upload")
     # commit data
@@ -111,7 +115,7 @@ def admin():
         if (session['input_name'] != 'rice'
                 and session['input_name'] != 'andyzhou'):
             return redirect(url_for('admin_login'))
-        if session['input_password'] != app.config['ADMIN_PASSWORD']:
+        if hash(hash(session['input_password'])) != hash(app.config['ADMIN_PASSWORD']):
             return redirect(url_for('admin_login'))
     session['admin'] = True
     session['admin_name'] = session['input_name']
