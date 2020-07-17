@@ -32,6 +32,9 @@ class Article(db.Model):
     def query_by_title(self, title: str) -> list:
         return self.query.filter_by(title=title).all()
 
+    def query_by_id(self, id: int) -> list:
+        return self.query.filter_by(id=id).all()
+
     def delete_by_title(self, title: str) -> None:
         article_to_delete = self.query.filter_by(title=title).first()
         db.session.delete(article_to_delete)

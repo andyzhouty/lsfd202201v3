@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 {% block title %} ADMIN {% endblock %}
 {% block page_content %}
 <h1>Welcome, Administrator {{ name }}!</h1>
@@ -19,10 +20,11 @@
         <p style="text-indent: 2em">
             {{ article.content[:50] }} ...
         </p>
+        <p>
+            id: {{ article.id }}
+        </p>
     </li>
     {% endfor %}
 </ul>
-{% endblock %}
-{% block scripts %}
-{{ super() }}
+{{ wtf.quick_form(form, action="/admin-delete") }}
 {% endblock %}

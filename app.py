@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
-from flask import (Flask, render_template, request, flash, 
+from flask import (Flask, render_template, request, flash,
                    escape, redirect, url_for, session)
 from flask.helpers import url_for
 from flask_bootstrap import Bootstrap
@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config.from_object('config')
-app.config['SQLALCHEMY_DATABASE_URI'] =\
+app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -21,7 +21,7 @@ bootstrap = Bootstrap(app)
 share = Share(app)
 
 # import defined classes
-from forms import UploadForm, AdminForm
+from forms import UploadForm, AdminLoginForm, AdminDeleteForm
 from models import Article
 
 
@@ -81,14 +81,14 @@ def upload_result():
     # password protection
     if password != app.config['PASSWORD']:
         flash("Wrong Password")
-        return render_template('upload_fail.html')
+        return render_template('upload_fail.html', url="/upload")
     # commit data
     article = Article(title=title, author=name, content=content, time=time,
                       id=id)
     db.session.add(article)
     db.session.commit()
     flash("Upload Success")
-    return render_template('upload_result.html')
+    return render_template('post_result.html', url="/articles")
 
 
 @app.route('/share')
@@ -99,17 +99,17 @@ def share():
 @app.route('/admin-login')
 def admin_login():
     session['admin'] = False
-    form = AdminForm()
+    form = AdminLoginForm()
     return render_template("admin_login.html", warning=False, form=form)
 
 
-@app.route('/admin', methods=['POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    session['input_name'] = escape(request.form['admin_name'])
-    session['input_password'] = escape(request.form['password'])
     if not session['admin']:
+        session['input_name'] = escape(request.form['admin_name'])
+        session['input_password'] = escape(request.form['password'])
         if (session['input_name'] != 'rice'
-            and session['input_name'] != 'andyzhou'):
+                and session['input_name'] != 'andyzhou'):
             return redirect(url_for('admin_login'))
         if session['input_password'] != app.config['ADMIN_PASSWORD']:
             return redirect(url_for('admin_login'))
@@ -117,9 +117,24 @@ def admin():
     session['admin_name'] = session['input_name']
     query_article = Article(title="test", author="test",
                             time="test", content="test")
+    form = AdminDeleteForm()
     return render_template('admin.html', warning=False,
                            name=session['admin_name'].capitalize(),
-                           articles=query_article.query_all())
+                           articles=query_article.query_all(),
+                           form=form)
+
+
+@app.route('/admin-delete', methods=['POST'])
+def admin_delete():
+    article_id_to_del = request.form['id']
+    test_article = Article()
+    exist = test_article.query_by_id(article_id_to_del)
+    if exist:
+        Article().delete_by_id(article_id_to_del)
+        flash(f"Article id {article_id_to_del} deleted")
+    else:
+        flash(f"Article id {article_id_to_del} not found.")
+    return render_template("post_result.html", url="/admin")
 
 
 @app.route('/kzkt')
@@ -146,8 +161,9 @@ def page_not_found(e="hrtg"):
 @app.errorhandler(500)
 @app.route('/aoligei')
 def internal_server_error(e="aoligei"):
-    return render_template('mickey_aoligei.html', warning=False, 
+    return render_template('mickey_aoligei.html', warning=False,
                            error_message="500 INTERNAL SERVER ERROR"), 500
+
 
 @app.errorhandler(405)
 def method_not_allowed(e):

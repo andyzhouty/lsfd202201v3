@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (StringField, TextAreaField, TimeField,
-                     PasswordField, SubmitField)
+                     PasswordField, SubmitField, IntegerField)
 from wtforms.validators import DataRequired
 
 
@@ -15,7 +15,12 @@ class UploadForm(FlaskForm):
     submit = SubmitField("Upload")
 
 
-class AdminForm(FlaskForm):
+class AdminLoginForm(FlaskForm):
     admin_name = StringField("Your name: ", validators=[DataRequired()])
     password = PasswordField("ADMIN PASSWORD", validators=[DataRequired()])
     submit = SubmitField("Login")
+
+
+class AdminDeleteForm(FlaskForm):
+    id = IntegerField("Article id to delete", validators=[DataRequired()])
+    submit = SubmitField("DELETE", validators=[DataRequired()])
