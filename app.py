@@ -6,13 +6,14 @@ from flask_bootstrap import Bootstrap
 from flask_share import Share
 from flask_sqlalchemy import SQLAlchemy
 from flask_pagedown import PageDown
+from werkzeug.security import generate_password_hash, check_password_hash
 from markdown import markdown
 from forms import UploadForm, AdminLoginForm, AdminDeleteForm
 
 # basic configurations
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config.from_object('config')
+app.config.from_object('app_config')
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -23,8 +24,6 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 share = Share(app)
 
-with app.app_context():
-    app.config['admin'] = False
 
 # import db
 from models import Article
@@ -79,16 +78,16 @@ def upload_result():
     # get vars from upload page
     a = Article()
     name = escape(request.form['name'])
-    password = escape(request.form['password'])
+    password = request.form['password']
     time = escape(request.form['time'])
     title = escape(request.form['title'])
     content = request.form['pagedown']
     id = len(a.query_all()) + 1
     # password protection
-    if (hash(password) != app.config['PASSWORD']
-            and hash(password) != app.config['ADMIN_PASSWORD']):
+    if (str(hash(password)) != app.config['PASSWORD'] and
+             str(hash(password)) != app.config['ADMIN_PASSWORD']):
         flash("Wrong Password")
-        return render_template('upload_fail.html', url=url_for("upload"))
+        return render_template('post_fail.html', url=url_for("upload"))
     # commit data
     article = Article(title=title, author=name, content=content, time=time,
                       id=id)
@@ -123,7 +122,9 @@ def admin():
         if (session['input_name'] != 'rice'
                 and session['input_name'] != 'andyzhou'):
             return redirect(url_for('admin_login'))
-        if hash(hash(session['input_password'])) != hash(app.config['ADMIN_PASSWORD']):
+        if (str(hash(session['input_password'])) !=
+                app.config['ADMIN_PASSWORD']):
+            print("Password Incorrect.")
             return redirect(url_for('admin_login'))
     session['admin'] = True
     session['admin_name'] = session['input_name']
@@ -147,6 +148,11 @@ def admin_delete():
     else:
         flash(f"Article id {article_id_to_del} not found.")
     return render_template("post_result.html", url=url_for("admin"))
+
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 
 @app.route('/kzkt')
