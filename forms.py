@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import (StringField, TextAreaField, TimeField,
                      PasswordField, SubmitField, IntegerField)
 from wtforms.validators import DataRequired
+from flask_pagedown.fields import PageDownField
 
 
 class UploadForm(FlaskForm):
@@ -11,7 +12,7 @@ class UploadForm(FlaskForm):
     time = TimeField("Date(yyyy-mm-dd)(2020-01-01)",
                      validators=[DataRequired()])
     title = StringField("Title", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
+    pagedown = PageDownField("Content", validators=[DataRequired()])
     submit = SubmitField("Upload")
 
 

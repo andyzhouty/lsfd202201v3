@@ -41,8 +41,9 @@
     }
 
     .main {
-        width: 68em;
+        width: 63em;
         padding: 1em;
+        margin-right: 10em;
         vertical-align: top;
         float: right;
     }

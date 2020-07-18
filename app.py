@@ -2,10 +2,12 @@
 import os
 from flask import (Flask, render_template, request, flash,
                    escape, redirect, url_for, session)
-from flask.helpers import url_for
 from flask_bootstrap import Bootstrap
 from flask_share import Share
 from flask_sqlalchemy import SQLAlchemy
+from flask_pagedown import PageDown
+from markdown import markdown
+from forms import UploadForm, AdminLoginForm, AdminDeleteForm
 
 # basic configurations
 app = Flask(__name__)
@@ -14,21 +16,22 @@ app.config.from_object('config')
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+pagedown = PageDown(app)
 db = SQLAlchemy(app)
 
 # use bootstrap and flask-share
 bootstrap = Bootstrap(app)
 share = Share(app)
 
-# import defined classes
-from forms import UploadForm, AdminLoginForm, AdminDeleteForm
-from models import Article
-
-
 with app.app_context():
     app.config['admin'] = False
 
+# import db
+from models import Article
+
+
 # url routings
+
 
 @app.route('/')
 @app.route('/index')
@@ -51,13 +54,13 @@ def members():
 def articles(id=1):
     # Query data from data.sqlite
     article = Article().query_one(id)
-    articles = Article().query_all()
+    all_articles = Article().query_all()
     return render_template('articles.html', warning=True,
                            title=article["title"],
                            author=article["author"],
                            time=article["time"],
-                           content=article["content"],
-                           enumerate_items=enumerate(articles, start=1))
+                           content=markdown(article["content"]),
+                           enumerate_items=enumerate(all_articles, start=1))
 
 
 @app.route('/video')
@@ -79,25 +82,30 @@ def upload_result():
     password = escape(request.form['password'])
     time = escape(request.form['time'])
     title = escape(request.form['title'])
-    content = escape(request.form['content'])
+    content = request.form['pagedown']
     id = len(a.query_all()) + 1
     # password protection
     if (hash(password) != app.config['PASSWORD']
             and hash(password) != app.config['ADMIN_PASSWORD']):
         flash("Wrong Password")
-        return render_template('upload_fail.html', url="/upload")
+        return render_template('upload_fail.html', url=url_for("upload"))
     # commit data
     article = Article(title=title, author=name, content=content, time=time,
                       id=id)
     db.session.add(article)
     db.session.commit()
     flash("Upload Success")
-    return render_template('post_result.html', url="/articles")
+    return render_template('post_result.html', url=url_for("articles"))
 
 
 @app.route('/share')
 def share():
     return render_template("share.html", warning=False)
+
+
+@app.route('/markdown-help')
+def markdown_help():
+    return render_template("markdown_help.html", warning=False)
 
 
 @app.route('/admin-login')
@@ -138,7 +146,7 @@ def admin_delete():
         flash(f"Article id {article_id_to_del} deleted")
     else:
         flash(f"Article id {article_id_to_del} not found.")
-    return render_template("post_result.html", url="/admin")
+    return render_template("post_result.html", url=url_for("admin"))
 
 
 @app.route('/kzkt')

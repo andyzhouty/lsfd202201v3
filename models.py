@@ -3,7 +3,8 @@
  A python module for database storing
 """
 from flask import flash
-from app import db # import db
+from app import db
+
 
 class Article(db.Model):
     """
@@ -21,10 +22,10 @@ class Article(db.Model):
         return '<Article %r>' % self.title
 
     def query_one(self, id: int = 1) -> dict:
-        return {'title': self.query.all()[id-1].title,
-                'author': self.query.all()[id-1].author,
-                'time': self.query.all()[id-1].time,
-                'content': self.query.all()[id-1].content}
+        return {'title': self.query.all()[id - 1].title,
+                'author': self.query.all()[id - 1].author,
+                'time': self.query.all()[id - 1].time,
+                'content': self.query.all()[id - 1].content}
 
     def query_all(self) -> list:
         return self.query.all()

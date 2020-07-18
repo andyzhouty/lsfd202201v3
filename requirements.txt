@@ -3,11 +3,15 @@ dominate==2.5.1
 flake8==3.8.3
 Flask==1.1.2
 Flask-Bootstrap==3.3.7.1
+flask-markdown2==0.0.3
+Flask-PageDown==0.3.0
 Flask-Share==0.1.1
 Flask-SQLAlchemy==2.4.3
 Flask-WTF==0.14.3
 itsdangerous==1.1.0
 Jinja2==2.11.2
+jinja2-markdown==0.0.3
+Markdown==3.2.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
 pycodestyle==2.6.0
