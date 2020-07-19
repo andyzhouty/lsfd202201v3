@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_share import Share
 from flask_sqlalchemy import SQLAlchemy
 from flask_pagedown import PageDown
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 from markdown import markdown
 from forms import UploadForm, AdminLoginForm, AdminDeleteForm
 
@@ -23,7 +23,6 @@ db = SQLAlchemy(app)
 # use bootstrap and flask-share
 bootstrap = Bootstrap(app)
 share = Share(app)
-
 
 # import db
 from models import Article
@@ -83,9 +82,11 @@ def upload_result():
     title = escape(request.form['title'])
     content = request.form['pagedown']
     id = len(a.query_all()) + 1
+    PASSWORD = app.config['PASSWORD']
+    ADMIN_PASSWORD = app.config['ADMIN_PASSWORD']
     # password protection
-    if (str(hash(password)) != app.config['PASSWORD'] and
-             str(hash(password)) != app.config['ADMIN_PASSWORD']):
+    if not (check_password_hash(ADMIN_PASSWORD, password)
+            or check_password_hash(PASSWORD, password)):
         flash("Wrong Password")
         return render_template('post_fail.html', url=url_for("upload"))
     # commit data
@@ -122,8 +123,8 @@ def admin():
         if (session['input_name'] != 'rice'
                 and session['input_name'] != 'andyzhou'):
             return redirect(url_for('admin_login'))
-        if (str(hash(session['input_password'])) !=
-                app.config['ADMIN_PASSWORD']):
+        if not check_password_hash(app.config['ADMIN_PASSWORD'],
+                                   session['input_password']):
             print("Password Incorrect.")
             return redirect(url_for('admin_login'))
     session['admin'] = True
