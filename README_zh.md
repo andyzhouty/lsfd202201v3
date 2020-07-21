@@ -1,6 +1,7 @@
 # LSFD202201V3
-兰生复旦中学2022届1班第三版[班级网站](https://ls202201.pythonanywhere.com)
-
+兰生复旦中学2022届1班第三版[班级网站](https://ls202201.pythonanywhere.com)  
+[中文](./README_zh.md)
+[English](./README_en.md)
 ## 目标
 这个项目旨在以我们自己的方式为班级做贡献以及锻炼我们的编程能力
 
