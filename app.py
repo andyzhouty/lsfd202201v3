@@ -165,7 +165,7 @@ def edit(id):
         form = EditForm()
         return render_template("edit.html", id=id, form=form,
                                content=escape_quotes(
-                                   escape(Article().query_by_id(id).content)
+                                    Article().query_by_id(id).content
                                ))
     else:
         flash("Not Admin")
