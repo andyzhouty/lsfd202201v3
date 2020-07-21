@@ -16,6 +16,9 @@
         font-size: 48px;
         font-family: "Segoe UI Semibold", sans-serif;
     }
+    #index {
+        height: 100%;
+    }
 
     p {
         font-size: 24px;

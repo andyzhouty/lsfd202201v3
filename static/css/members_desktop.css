@@ -4,14 +4,11 @@
         margin-left: 40px;
         width: 95%
     }
-
+    caption {
+        caption-side: top;
+    }
     th, td {
         text-align: center;
-    }
-
-    th:hover, td:hover {
-        background-color: #a9a9a9;
-        color: #ffffff;
     }
 
     ul.info {

@@ -1,62 +1,44 @@
-{% extends 'base.html' %}
+{% extends 'main.html' %}
 {% block title %}
     Articles
 {% endblock %}
-{% block styles %}
-    {{ super() }}
-    <link href="/static/css/main_desktop.css" rel="stylesheet">
-    <link href="/static/css/main_mobile.css" rel="stylesheet">
+{% block focus %}Necessary Info{% endblock %}
+{% block news_list %}
+    <ul style="line-height: 1.5em;">
+        <li>
+            This page is made in Python Flask + HTML, you can upload your
+            own article
+            <a href="{{ url_for("upload") }}">HERE</a>.
+        </li>
+        <li>
+            This version support MarkDown Editing. That means you should
+            learn basic markdown syntax to upload.<br>
+        </li>
+        <li>
+            <a href={{ url_for("markdown_help") }}>Simple MarkDown Guide</a>
+        </li>
+    </ul>
 {% endblock %}
-{% block page_content %}
-    <div class="table">
-        <div class="table-row">
-            <aside class="left-column left">
-                <h3 class="focus">Necessary Info</h3>
-                <div id="left-focus">
-                    <h4 id="focus-title">must-read if you want to upload.</h4>
-                    <hr>
-                    <ul style="line-height: 1.5em;">
-                        <li>
-                            This page is made in Python Flask + HTML, you can upload your
-                            own article
-                            <a href="{{ url_for("upload") }}">HERE</a>.
-                        </li>
-                        <li>
-                            This version support MarkDown Editing. That means you should
-                            learn basic markdown syntax to upload.<br>
-                        </li>
-                        <li>
-                            <a href={{ url_for("markdown_help") }}>Simple MarkDown Guide</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <div class="main right">
-                <div class="idea">
-                    <h2 style="float:left;font-size:48px;">
-                        {{ title }}
-                    </h2>
-                    <br>
-                    <h4 style="float:right">
-                        {{ time }}
-                    </h4><br><br>
-                    <h4 style="position: absolute; right: 100px">
-                        ——{{ author }}
-                    </h4>
-                </div>
-                <br>
-                <div class="main-passage">
-                    <p style="text-indent: 2em; font-size: large; padding-right: 30px" class="main-passage">
-                        {{ content | safe }}
-                    </p>
-                </div>
-                <ul class="pagination">
-                    {% for id, article in enumerate_items %}
-                        <li><a href="{{ url_for('articles', id=id) }}">
-                            {{ id }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+{% block idea %}
+    <h2 style="float:left;font-size:48px;">
+        {{ title }}
+    </h2>
+    <br>
+    <h4 style="float:right">
+        {{ time }}
+    </h4><br><br>
+    <h4 style="position: absolute; right: 100px">
+        ——{{ author }}
+    </h4>
+{% endblock %}
+{% block article_content %}
+    {{ content | safe }}
+{% endblock %}
+{% block pagination %}
+    <ul class="pagination">
+        {% for id, article in enumerate_items %}
+            <li class="page-item"><a href="{{ url_for('articles', id=id) }}" class="page-link">
+                {{ id }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

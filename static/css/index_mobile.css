@@ -1,4 +1,4 @@
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 900px) {
     html {
         background-color: white;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -15,6 +15,9 @@
         text-align: center;
         font-size: 48px;
         font-family: "Segoe UI Semibold", sans-serif;
+    }
+    #index {
+        height: 80%;
     }
 
     p {
@@ -57,7 +60,6 @@
         height: auto;
         background-color: white;
         text-align: center;
-        height: auto;
         border-radius: 5px;
         border-style: solid;
         border-color: #0040aa;

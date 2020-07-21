@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}
     Upload Article
 {% endblock %}
 {% block styles %}
     {{ super() }}
     <link href="/static/css/upload.css" rel="stylesheet">
-{% endblock %}
-{% block scripts %}
-    {{ super() }}
-    <script src="/static/js/Converter.min.js"></script>
-    <script src="/static/js/Sanitizer.min.js"></script>
+    <link href="/static/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
 {% endblock %}
 {% block page_content %}
     <div class="body">
@@ -26,8 +21,13 @@
                 {{ form.password(class="form-control") }}
             </div>
             <div class="form-group">
-                {{ form.time.label }}<br>
-                {{ form.time(class="form-control") }}
+                <label>
+                    Date(yyyy-mm-dd)
+                </label>
+                <br>
+                <label for="date">
+                    <input type="text" name="date" id="date" class="form-control">
+                </label>
             </div>
             <div class="form-group">
                 {{ form.title.label }}<br>
@@ -37,9 +37,8 @@
                 {{ form.pagedown.label }}<br>
                 {{ form.pagedown(only_input=True, rows=15, cols=50, class="form-control") }}
                 {{ form.pagedown(only_preview=True) }}
-
             </div>
-            {{ form.submit(class="btn btn-default btn-lg") }}
+            {{ form.submit(class="btn btn-default btn-light") }}
         </form>
         <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
             WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE UPLOADING.<br>
@@ -48,4 +47,20 @@
         </p>
     </div>
 
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/Converter.min.js"></script>
+    <script src="/static/js/Sanitizer.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#date').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'zh-CN',
+                todayHighlight: 1
+            });
+        });
+    </script>
 {% endblock %}

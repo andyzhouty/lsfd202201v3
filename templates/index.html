@@ -7,6 +7,20 @@
     <link href="/static/css/index_desktop.css" rel="stylesheet">
     <link href="/static/css/index_mobile.css" rel="stylesheet">
     <link href="/static/favicon/favicon.ico" rel="shortcut icon">
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <script>
+        $(document).ready(function() {
+            $('div#index p').hide();
+            var j = 0;
+            var len = $('div#index p').length;
+            setInterval(
+                function() {
+                    $('div p').eq(j > len-1 ? j = 0: j++).fadeIn(2000);
+                }, 1000
+            )
+        })
+    </script>
 </head>
 <body>
 <div id="message">
@@ -22,8 +36,8 @@
             Flask
         </a>
         and <a class="thank" href="https://getbootstrap.com/" target="_blank">
-        Bootstrap
-    </a>
+        Bootstrap.
+        </a>
         They provided us servers and media players.
         <div id="button">
             <a id="link" href="{{ url_for("main") }}">
@@ -32,10 +46,10 @@
         </div>
     </div>
 </div>
-<div style="background-color: black; color:white; margin:0; width:auto; padding:10%">
-    <h1 style="font-size: 7em; margin-bottom: 100px">Hello.</h1>
-    <p>This is a new website for lansheng 202201.</p>
-    <p class="version">Website V3.3.2</p>
+<div style="background-color: black;color:white; margin:0; width:auto; padding:10%;" id="index">
+    <p style="font-size: 7em; margin-bottom: 100px;font-weight: 500" id="kf1">Hello.</p>
+    <p id="kf2">This is a new website for lansheng 202201.</p>
+    <p class="version" id="kf3">Website Version 3.4.0</p>
 </div>
 <noscript style="text-align:center;font-size:16px;font-family:'Courier New';color:red;">
     <b>
@@ -45,16 +59,20 @@
 </noscript>
 <h3>Latest Changes</h3>
 <div style="text-align: center;">
-    <p style="font-family: 'Segoe UI Light', sans-serif">V3.3.2</p>
-    <img style="width:20%" src="/static/images/flask.jpg"
-         alt="Flask">
-    <p>Use Hash</p>
+    <p style="font-family: 'Segoe UI Light', sans-serif">V3.4.0</p>
+    <img src="
+    https://tse2-mm.cn.bing.net/th/id/OIP.9RqBEDU9Mbg6XM8O6d7Q9AHaDt?pid=Api&rs=1"
+         alt="bootstrap4">
+    <p>Use Bootstrap 4, Bootstrap-DatePicker and</p>
+    <p>Give admins the right to Edit Articles</p>
 </div>
 <h3>Previous Versions</h3>
 <div style="text-align: center;">
+    <p style="font-family: 'Segoe UI Light', sans-serif">V3.3.2</p>
+    <p>Use Hash</p>
+</div>
+<div style="text-align: center;">
     <p style="font-family: 'Segoe UI Light', sans-serif">V3.3.1</p>
-    <img style="width:20%" src="/static/images/flask.jpg"
-         alt="Flask">
     <p>Add about page</p>
 </div>
 <div style="text-align: center;">
@@ -110,10 +128,10 @@
 <div style="text-align: center;">
     <p style="font-family:'Segoe UI Light', sans-serif">V1.4.0 Inside × 2.2.0 Stable</p>
     <img style="width:5%" src="https://github.githubassets.com/pinned-octocat.svg"
-    alt="Github">
+         alt="Github">
     <p>×</p>
     <img style="width:20%" src="https://www.pythonanywhere.com/static/anywhere/images/PA-logo.svg"
-    alt="PythonAnywhere">
+         alt="PythonAnywhere">
     <p>We are linked!<br>GitHub & PythonAnywhere</p>
     <div class="ver_block">
         <p style="font-family:'Segoe UI Light', sans-serif">V2.2.0 Stable</p>

@@ -1,60 +1,54 @@
-{% extends 'bootstrap/base.html' %}
 <!DOCTYPE html>
 <html>
 <head>
-{% block head %}
-    <title>{% block title -%}LS202201{%- endblock %}</title>
-    {% block metas -%}
-        {{ super() }}
+    {% block head %}
+        <title>{% block title -%}LS202201{%- endblock %}</title>
         <meta charset="utf-8">
-    {%- endblock %}
-    {% block styles -%}
-        {{ super() }}
-        <link href="/static/favicon/favicon.ico" rel="shortcut icon">
-        {{ share.load(serve_local=True) }}
-    {%- endblock %}
-{% endblock %}
+        {% block styles -%}
+            <link href="/static/favicon/favicon.ico" rel="shortcut icon">
+
+            {{ share.load(serve_local=True) }}
+            {{ bootstrap.load_css() }}
+        {%- endblock %}
+        {% block scripts -%}
+
+            {{ bootstrap.load_js() }}
+        {%- endblock %}
+    {% endblock %}
 </head>
 <body>
 {% block navbar -%}
-    <div class="navbar navbar-inverse" role="navigation"
+    <div class="navbar navbar-expand-md bg-dark navbar-dark" role="navigation"
          style="border-radius: 0; border-color: #091145; background-image: linear-gradient(to bottom, #091145, #091145 100%);">
-        <div class="containter">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle"
-                        data-toggle="collapse" data-target=".navbar-collapse"
-                        style="border-color: #091145 !important">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" style="font-size: 2.2em; margin-right: 50px">
-                    LS202201
-                </a>
-            </div>
-            <div class="navbar-collapse collapse" style="background-color: #091145">
-                <ul class="nav navbar-nav" style="font-size: 1.5em">
-                    <li>
-                        <a href="{{ url_for("main") }}">Main</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for("members") }}">Members</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for("articles") }}">Articles</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for("video") }}">Our Video</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for("share") }}">Share</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for("about") }}">About Us</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" style="font-size: 1.4em; margin-right: 50px" href="#">
+                LS202201
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" style="background-color: #091145" id="collapse">
+            <ul class="navbar-nav" style="font-size: 1em">
+                <li>
+                    <a href="{{ url_for("main") }}" class="nav-link">Main</a>
+                </li>
+                <li>
+                    <a href="{{ url_for("members") }}" class="nav-link">Members</a>
+                </li>
+                <li>
+                    <a href="{{ url_for("articles") }}" class="nav-link">Articles</a>
+                </li>
+                <li>
+                    <a href="{{ url_for("video") }}" class="nav-link">Our Video</a>
+                </li>
+                <li>
+                    <a href="{{ url_for("share") }}" class="nav-link">Share</a>
+                </li>
+                <li>
+                    <a href="{{ url_for("readme_en") }}" class="nav-link">About Us</a>
+                </li>
+            </ul>
         </div>
     </div>
 {%- endblock %}
@@ -63,7 +57,7 @@
         {% block page_content -%}
         {%- endblock %}
         {% block share -%}
-        {%- endblock%}
+        {%- endblock %}
     </div>
     <footer style="margin-left: 10px">
         &copy Copyright 2020 LSFD Class 202201<br>Website V3.3.2<br>

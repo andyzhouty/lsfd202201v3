@@ -1,4 +1,4 @@
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 768px) {
     .focus {
         font-size: 2em;
     }
@@ -7,7 +7,7 @@
         color: #000050;
     }
 
-    .left-column {
+    .col-md-3 {
         margin-left: 1.5em;
         border-bottom: thin solid #999999;
     }
@@ -28,16 +28,13 @@
     .main-passage {
         margin-top: 5px;
         padding: 10px;
-    }
-
-    .main-passage {
         width: 95%;
         min-width: 250px;
         max-width: 850px;
         text-indent: 2em;
     }
 
-    .idea {
+    .col-md-9 {
         margin-left: 8%;
     }
 

@@ -1,16 +1,7 @@
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 768px) {
     html {
         height: 100%;
         width: 100%;
-        font-size: large !important;
-    }
-
-    div .table {
-        display: table;
-    }
-
-    div .table-row {
-        display: table-row;
     }
 
     .focus {
@@ -27,25 +18,16 @@
         background-color: #ffffff;
     }
 
-    .left-column, .idea {
-        display: table-cell;
-        vertical-align: top;
-    }
-
-    .left-column {
-        width: 22em;
+    .col-md-3 {
         padding-bottom: 25em;
         float: left;
         background: #f9f9ff;
         vertical-align: top;
     }
 
-    .main {
-        width: 63em;
-        padding: 1em;
-        margin-right: 10em;
-        vertical-align: top;
-        float: right;
+    .col-md-9 {
+        padding-left: 100px;
+        padding-right: 100px;
     }
 
     .idea, .main-passage {
@@ -57,9 +39,12 @@
         float: left;
         padding-left: 3%;
     }
-
     .right {
         float: right;
+    }
+    .right.head{
+        margin-top: 40px;
+        display: block;
     }
 
     .head {
@@ -67,18 +52,20 @@
     }
 
     .main-passage {
-        margin-top: 5px;
+        margin-top: 26px;
         padding: 10px;
+        display:block;
         font-size: large;
     }
 
     p .main-passage {
         width: 85%;
         text-indent: 2em;
-        padding-right: 30px
+        padding-right: 30px;
     }
 
     .idea {
+        margin-top: 100px;
         width: 50em;
         margin-left: 8%;
         right: auto;
@@ -87,6 +74,7 @@
 
     footer {
         float: left;
+        margin-top: 100px;
         padding-left: 2%;
     }
 }
