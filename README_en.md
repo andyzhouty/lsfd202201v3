@@ -1,6 +1,6 @@
 # LSFD202201V3
 
-The 3rd version of [LSFD202201 Class Website](https://ls202201.pythonanywhere.com)  s
+The 3rd version of [LSFD202201 Class Website](https://ls202201.pythonanywhere.com)  
 [中文](./README_zh.md)
 [English](./README_en.md)
 ## Aim
