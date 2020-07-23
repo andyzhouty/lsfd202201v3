@@ -3,7 +3,6 @@ from wtforms import (StringField, TimeField, PasswordField, SubmitField,
                      IntegerField, DateField)
 from wtforms.validators import DataRequired
 from flask_pagedown.fields import PageDownField
-from models import Article
 
 
 class UploadForm(FlaskForm):

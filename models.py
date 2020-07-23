@@ -2,8 +2,9 @@
  models.py
  A python module for database storing
 """
+from datetime import datetime
 from flask import flash
-from app import db
+from . import db
 
 
 class Article(db.Model):
@@ -17,6 +18,7 @@ class Article(db.Model):
     time = db.Column(db.String(64), primary_key=True)
     content = db.Column(db.Text(2048), primary_key=True)
     id = db.Column(db.Integer(), primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.now, index=True)
 
     def __repr__(self) -> str:
         return '<Article %r>' % self.title

@@ -41,14 +41,14 @@
         height: auto;
         min-height: 7%;
         max-height: 18%;
-        background-color: coral;
+        background-color: #ffdb99;
+        color: #555555;
         position: fixed;
         top: 0;
         padding-top: 3px;
     }
 
     div#message-content {
-        color: white;
         float: left;
         text-align: left;
         font-size: 18px;
@@ -72,24 +72,12 @@
         right: 1em;
         overflow: visible;
     }
-
-    a.thank:link {
-        color: white;
+    a.thank {
+        color: darkblue;
         text-decoration: none;
     }
 
-    a.thank:hover {
-        color: white;
+    a.thank:hover, a.thank:active {
         text-decoration: underline;
-    }
-
-    a.thank:active {
-        color: black;
-        text-decoration: underline;
-    }
-
-    a.thank:visited {
-        color: white;
-        text-decoration: none;
     }
 }

@@ -1,37 +1,13 @@
 # -*- coding:utf-8 -*-
 import os
-from datetime import datetime
-from flask import (Flask, render_template, request, flash,
+from flask import (render_template, request, flash,
                    escape, redirect, url_for, session)
-from flask_bootstrap import Bootstrap
-from flask_share import Share
-from flask_sqlalchemy import SQLAlchemy
-from flask_pagedown import PageDown
 from werkzeug.security import check_password_hash
 from markdown import markdown
-
-# basic configurations
-app = Flask(__name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config.from_object('config')
-app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-pagedown = PageDown(app)
-db = SQLAlchemy(app)
-bootstrap = Bootstrap(app)
-share = Share(app)
-
-# import db
-
-from models import Article
-from forms import UploadForm, AdminLoginForm, AdminDeleteForm, EditForm
-
-# url routings
-
-def escape_quotes(string: str) -> str:
-    return string.replace("`", r"\`")
+from . import app, db
+from .functions import escape_quotes
+from .models import Article
+from .forms import UploadForm, AdminLoginForm, AdminDeleteForm, EditForm
 
 
 @app.route('/')
@@ -51,20 +27,22 @@ def members():
 
 
 @app.route('/articles')
-@app.route('/articles/<int:id>')
-def articles(id=1):
+def articles():
     # Query data from data.sqlite
+    if "page" in request.args:
+        page = int(request.args["page"])
+    else:
+        page = 1
     all_articles = Article().query_all()
     if all_articles:
-        article = Article().query_one(id)
+        article = Article().query_one(page)
+        pagination = Article.query.order_by(Article.timestamp.desc()).paginate(page, 1)
         return render_template('articles.html', warning=True,
-                            title=article["title"],
-                            author=article["author"],
-                            time=article["time"],
-                            content=markdown(article["content"]),
-                            enumerate_items=enumerate(all_articles, start=1))
-    flash("No Articles! Please Upload one first!")
-    return render_template("post_fail.html", url=url_for("upload"))
+                               this_article=article,
+                               content=markdown(article["content"]),
+                               pagination=pagination)
+    flash("No Articles! Please Upload one first!", "warning")
+    return render_template("result.html", url=url_for("upload"))
 
 
 @app.route('/video')
@@ -93,15 +71,15 @@ def upload_result():
     # password protection
     if not (check_password_hash(admin_password, password)
             or check_password_hash(config_password, password)):
-        flash("Wrong Password")
-        return render_template('post_fail.html', url=url_for("upload"))
+        flash("Wrong Password", "warning")
+        return render_template('result.html', url=url_for("upload"))
     # commit data
     article = Article(title=title, author=name, content=content, time=date,
                       id=id)
     db.session.add(article)
     db.session.commit()
-    flash("Upload Success")
-    return render_template('post_result.html', url=url_for("articles"))
+    flash("Upload Success", "success")
+    return render_template('result.html', url=url_for("articles"))
 
 
 @app.route('/share')
@@ -152,10 +130,10 @@ def admin_delete():
     exist = test_article.query_by_id(article_id_to_del)
     if exist:
         Article().delete_by_id(article_id_to_del)
-        flash(f"Article id {article_id_to_del} deleted")
+        flash(f"Article id {article_id_to_del} deleted", "info")
     else:
-        flash(f"Article id {article_id_to_del} not found.")
-    return render_template("post_result.html", url=url_for("admin"))
+        flash(f"Article id {article_id_to_del} not found.", "warning")
+    return render_template("result.html", url=url_for("admin"))
 
 
 @app.route('/edit/<int:id>')
@@ -165,11 +143,11 @@ def edit(id):
         form = EditForm()
         return render_template("edit.html", id=id, form=form,
                                content=escape_quotes(
-                                    Article().query_by_id(id).content
+                                   Article().query_by_id(id).content
                                ))
     else:
-        flash("Not Admin")
-        return render_template('post_fail.html', url=url_for("admin_login"))
+        flash("Not Admin", "waring")
+        return render_template('result.html', url=url_for("admin_login"))
 
 
 @app.route('/edit-result/<int:id>', methods=['POST'])
@@ -183,11 +161,11 @@ def edit_result(id):
         cursor.add(article)
         cursor.commit()
     except:
-        flash("Edit Failed!")
-        return render_template('post_fail.html', url=url_for('admin_login'))
+        flash("Edit Failed!", "warning")
+        return render_template('result.html', url=url_for('admin_login'))
     else:
-        flash("Edit Succeeded")
-        return render_template("post_result.html", url=url_for("admin"))
+        flash("Edit Succeeded", "success")
+        return render_template("result.html", url=url_for("admin"))
 
 
 @app.route('/about-zh')
@@ -213,12 +191,12 @@ def page_not_found(e="hrtg"):
 
 
 @app.errorhandler(500)
-def internal_server_error():
+def internal_server_error(e):
     return render_template('error.html', warning=False,
                            error_message="500 INTERNAL SERVER ERROR"), 500
 
 
 @app.errorhandler(405)
-def method_not_allowed():
+def method_not_allowed(e):
     return render_template('error.html', warning=False,
                            error_message="405 METHOD NOT ALLOWED"), 405

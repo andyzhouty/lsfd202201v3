@@ -2,7 +2,7 @@
 
 The 3rd version of [LSFD202201 Class Website](https://ls202201.pythonanywhere.com)  
 [中文](./README_zh.md)
-[English](./README_en.md)
+[English](./README.md)
 ## Aim
 
 The aim of this website is to contribute to our class in our own way and to challenge our programming skills.
@@ -23,13 +23,21 @@ but finishing the 2nd version of the website. [doge]
 
 ## Special Thanks To
 
+#### Projects
 - [Flask](https://github.com/pallets/flask)
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Bootstrap-Flask](https://github.com/greyli/bootstrap-flask)
 - [Flask-WTF](https://github.com/lepture/flask-wtf)
 - [Flask-Share](https://github.com/greyli/flask-share)
 - [MyQR](https://pypi.org/project/MyQR/)
-Without these projects, the website cannot be developed.
+#### Books
+- [Flask Web Development](https://helloflask.com)
+#### People
+- [GreyLi](https://greyli.com)
+
+Without these projects, the website cannot be developed.  
+At the same time, thanks to [GreyLi](https://greyli.com), it was his <i>Flask Web Development</i>
+that took me into the wonderful world of Flask.
 
 ## How to run the website on your local machine
 1. Fork and Clone the project from Github or Gitee and name the folder as you like
@@ -41,7 +49,7 @@ pip3 install -r requirements.txt
    Also, you should create a data.sqlite file in project root.
 4. Open flask shell and run  
 ```python
->>> from app import db
+>>> from . import db
 >>> db.create_all()
 ```
 5. Run `flask run` in project root.
@@ -52,8 +60,18 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
-### V3.4.0 (Current Version) 7/20/2020
+### V3.5.0 (Current) 7/23/2020
+1. Change default index theme to light
+2. Add better pagination support
+3. Refactor the project
+
+### V3.4.0 7/20/2020
 1. Give administrators the power to edit articles
 2. Refactor the project with [Bootstrap-Flask](https://github.com/greyli/bootstrap-flask) and [Bootstrap4](https://github.com/twbs/bootstrap)
 3. Add fade-in effect on index page
 4. Add a datepicker on upload page
+
+### P.S.
+I'm going to stop developing this website for some months
+because I'll have to learn more advanced Flask skills to
+keep on developing. I'll let Rice Zong manage this website.
