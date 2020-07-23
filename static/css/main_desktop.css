@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
     html {
         height: 100%;
         width: 100%;
@@ -18,14 +18,14 @@
         background-color: #ffffff;
     }
 
-    .col-md-3 {
+    .col-lg-3 {
         padding-bottom: 25em;
         float: left;
         background: #f9f9ff;
         vertical-align: top;
     }
 
-    .col-md-9 {
+    .col-lg-9 {
         padding-left: 100px;
         padding-right: 100px;
     }

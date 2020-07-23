@@ -1,4 +1,7 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
+    html {
+        max-width: 95%;
+    }
     .focus {
         font-size: 2em;
     }
@@ -7,9 +10,13 @@
         color: #000050;
     }
 
-    .col-md-3 {
+    .col-lg-3 {
         margin-left: 1.5em;
         border-bottom: thin solid #999999;
+        letter-spacing: 0.1em;
+        line-height: 1.5em;
+        font-size: 1.2em;
+        width: 97%;
     }
 
     .main {
@@ -34,8 +41,12 @@
         text-indent: 2em;
     }
 
-    .col-md-9 {
-        margin-left: 8%;
+    .col-lg-9 {
+        letter-spacing: 0.1em;
+        line-height: 1.9em;
+        font-size: 1.8em;
+        margin-left: 8px;
+        max-width: 87%;
     }
 
     footer {
