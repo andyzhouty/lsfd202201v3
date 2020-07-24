@@ -60,9 +60,9 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
-### V3.6.0 7/24/2020
+### V3.6.1 7/24/2020
 1. Refactor Project
-2. Change navbar theme
+2. Use CKEditor
 
 ### V3.5.2 7/23/2020
 1. Change default index theme to light

@@ -1,0 +1,51 @@
+html {
+    font-family: "Segoe UI", sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: "Segoe UI Semibold", sans-serif;
+}
+
+p.light {
+    font-family: "Segoe UI light", sans-serif;
+}
+
+p.bold {
+    font-family: "Segoe UI Semibold", sans-serif;
+}
+
+a {
+    font-family: "Segoe UI", sans-serif;
+    text-decoration: none;
+}
+
+a:hover {
+    font-family: "Segoe UI Semibold", sans-serif;
+    text-decoration: none;
+}
+
+a:active {
+    font-family: "Segoe UI Semibold", sans-serif;
+    text-decoration: underline;
+}
+
+a:visited {
+    font-family: "Segoe UI", sans-serif;
+    text-decoration: underline;
+}
+
+.u {
+    text-decoration: underline;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.white {
+    color: white;
+}
+
+.black {
+    color: black;
+}
