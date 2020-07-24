@@ -36,7 +36,7 @@ but finishing the 2nd version of the website. [doge]
 - [GreyLi](https://greyli.com)
 
 Without these projects, the website cannot be developed.  
-At the same time, thanks to [GreyLi](https://greyli.com), it was his <i>Flask Web Development</i>
+At the same time, thanks to [GreyLi](https://greyli.com), it was his *Python Web Development with Flask*
 that took me into the wonderful world of Flask.
 
 ## How to run the website on your local machine
@@ -49,7 +49,7 @@ pip3 install -r requirements.txt
    Also, you should create a data.sqlite file in project root.
 4. Open flask shell and run  
 ```python
->>> from . import db
+>>> from .extensions import db
 >>> db.create_all()
 ```
 5. Run `flask run` in project root.
