@@ -49,7 +49,7 @@ pip3 install -r requirements.txt
    Also, you should create a data.sqlite file in project root.
 4. Open flask shell and run  
 ```python
->>> from . import db
+>>> from .extensions import db
 >>> db.create_all()
 ```
 5. Run `flask run` in project root.
