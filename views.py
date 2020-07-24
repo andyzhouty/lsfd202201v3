@@ -1,13 +1,16 @@
 # -*- coding:utf-8 -*-
 import os
 from flask import (render_template, request, flash,
-                   escape, redirect, url_for, session)
+                   escape, redirect, url_for, session, current_app)
 from werkzeug.security import check_password_hash
-from markdown import markdown
-from . import app, db
+from . import create_app
 from .functions import escape_quotes
 from .models import Article
-from .forms import UploadForm, AdminLoginForm, AdminDeleteForm, EditForm
+from .forms import UploadForm, AdminLoginForm, EditForm
+from .extensions import db
+
+
+app = create_app()
 
 
 @app.route('/')
@@ -18,12 +21,12 @@ def index():
 
 @app.route('/main')
 def main():
-    return render_template('main.html', warning=True)
+    return render_template('main.html')
 
 
 @app.route('/members')
 def members():
-    return render_template('members.html', warning=True)
+    return render_template('members.html')
 
 
 @app.route('/articles')
@@ -36,10 +39,11 @@ def articles():
     all_articles = Article().query_all()
     if all_articles:
         article = Article().query_one(page)
-        pagination = Article.query.order_by(Article.timestamp.desc()).paginate(page, 1)
-        return render_template('articles.html', warning=True,
+        pagination = Article.query.order_by(
+            Article.timestamp.desc()).paginate(page, 1)
+        return render_template('articles.html',
                                this_article=article,
-                               content=markdown(article["content"]),
+                               content=article["content"],
                                pagination=pagination)
     flash("No Articles! Please Upload one first!", "warning")
     return render_template("result.html", url=url_for("upload"))
@@ -47,13 +51,13 @@ def articles():
 
 @app.route('/video')
 def video():
-    return render_template('video.html', warning=True)
+    return render_template('video.html')
 
 
 @app.route('/upload')
 def upload():
     form = UploadForm()
-    return render_template('upload.html', warning=False, form=form)
+    return render_template('upload.html', form=form)
 
 
 @app.route('/upload-result', methods=['POST'])
@@ -64,7 +68,7 @@ def upload_result():
     password = request.form['password']
     date = escape(request.form['date'])
     title = escape(request.form['title'])
-    content = request.form['pagedown']
+    content = request.form['content']
     id = len(a.query_all()) + 1
     config_password = app.config['PASSWORD']
     admin_password = app.config['ADMIN_PASSWORD']
@@ -82,21 +86,11 @@ def upload_result():
     return render_template('result.html', url=url_for("articles"))
 
 
-@app.route('/share')
-def share():
-    return render_template("share.html", warning=False)
-
-
-@app.route('/markdown-help')
-def markdown_help():
-    return render_template("markdown_help.html", warning=False)
-
-
 @app.route('/admin-login')
 def admin_login():
     session['admin'] = False
     form = AdminLoginForm()
-    return render_template("admin_login.html", warning=False, form=form)
+    return render_template("admin_login.html", form=form)
 
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -116,23 +110,16 @@ def admin():
     elif not session['admin'] and 'admin_name' not in request.form:
         return redirect(url_for('admin_login'))
     session['admin'] = True
-    form = AdminDeleteForm()
-    return render_template('admin.html', warning=False,
+    return render_template('admin.html',
                            name=session['admin_name'].capitalize(),
                            articles=Article().query_all(),
-                           form=form)
+                           )
 
 
-@app.route('/admin-delete', methods=['POST'])
-def admin_delete():
-    article_id_to_del = request.form['id']
-    test_article = Article()
-    exist = test_article.query_by_id(article_id_to_del)
-    if exist:
-        Article().delete_by_id(article_id_to_del)
-        flash(f"Article id {article_id_to_del} deleted", "info")
-    else:
-        flash(f"Article id {article_id_to_del} not found.", "warning")
+@app.route('/admin-delete/<id>', methods=['POST'])
+def admin_delete(id):
+    Article().delete_by_id(id)
+    flash(f"Article id {id} deleted", "success")
     return render_template("result.html", url=url_for("admin"))
 
 
@@ -142,9 +129,9 @@ def edit(id):
     if session['admin']:
         form = EditForm()
         return render_template("edit.html", id=id, form=form,
-                               content=escape_quotes(
-                                   Article().query_by_id(id).content
-                               ))
+                               old_content=escape_quotes(
+                                   Article().query_by_id(id).content)
+                               )
     else:
         flash("Not Admin", "waring")
         return render_template('result.html', url=url_for("admin_login"))
@@ -153,15 +140,16 @@ def edit(id):
 @app.route('/edit-result/<int:id>', methods=['POST'])
 def edit_result(id):
     try:
-        article_content = request.form['pagedown']
+        article_content = request.form['content']
         id = id
         article = Article().query_by_id(id)
         article.content = article_content
         cursor = db.session()
         cursor.add(article)
         cursor.commit()
-    except:
+    except Exception as e:
         flash("Edit Failed!", "warning")
+        print(e)
         return render_template('result.html', url=url_for('admin_login'))
     else:
         flash("Edit Succeeded", "success")
@@ -169,34 +157,34 @@ def edit_result(id):
 
 
 @app.route('/about-zh')
-def readme_zh():
-    return render_template("readme_zh.html")
+def about_zh():
+    return render_template("about_zh.html")
 
 
 @app.route('/about')
 @app.route('/about-en')
-def readme_en():
-    return render_template("readme_en.html")
+def about_en():
+    return render_template("about_en.html")
 
 
 @app.route('/kzkt')
 def kzkt():
-    return render_template('kzkt.html', warning=True)
+    return render_template('kzkt.html')
 
 
 @app.errorhandler(404)
 @app.route('/hrtg')
 def page_not_found(e="hrtg"):
-    return render_template('coffin_dance.html', warning=False), 404
+    return render_template('coffin_dance.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('error.html', warning=False,
+    return render_template('error.html',
                            error_message="500 INTERNAL SERVER ERROR"), 500
 
 
 @app.errorhandler(405)
 def method_not_allowed(e):
-    return render_template('error.html', warning=False,
+    return render_template('error.html',
                            error_message="405 METHOD NOT ALLOWED"), 405

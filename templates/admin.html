@@ -7,14 +7,20 @@
         {% for article in articles %}
             <li class="list-group-item">
                 <h4>{{ article.title }}</h4>
-                <p style="float:right">
+                    ——{{ article.author }}
                     <a href={{ url_for("edit", id=article.id) }}>
-                        <button class="btn btn-light">
+                        <button class="btn btn-primary" style="float: right">
                             EDIT
                         </button>
                     </a>
-                    {{ article.author }}
-                </p>
+                    <form class="inline" method="POST"
+                        action="{{ url_for("admin_delete", id=article.id)}}"
+                        style="float: right">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                            DELETE
+                        </button>
+                    </form>
                 <p style="text-indent: 2em">
                     {{ article.content[:50] }} ...
                 </p>
@@ -24,5 +30,4 @@
             </li>
         {% endfor %}
     </ul>
-    {{ render_form(form, action="/admin-delete") }}
 {% endblock %}

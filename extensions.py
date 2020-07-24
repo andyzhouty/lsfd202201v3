@@ -1,9 +1,11 @@
 from flask_bootstrap import Bootstrap
 from flask_share import Share
+from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
-from flask_pagedown import PageDown
+from flask_ckeditor import CKEditor
 
 bootstrap = Bootstrap()
 share = Share()
 db = SQLAlchemy()
-pagedown = PageDown()
+csrf = CSRFProtect()
+ckeditor = CKEditor()

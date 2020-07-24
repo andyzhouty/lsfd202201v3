@@ -12,6 +12,7 @@
         <h1 id="upload-article">Upload Article</h1>
         <form method="POST" action="{{ url_for('upload_result') }}" id="upload-form" role="form">
             {{ form.hidden_tag() }}
+            {{ form.csrf_token() }}
             <div class="form-group">
                 {{ form.name.label }}<br>
                 {{ form.name(class="form-control") }}
@@ -34,15 +35,14 @@
                 {{ form.title(class="form-control") }}
             </div>
             <div class="form-group">
-                {{ form.pagedown.label }}<br>
-                {{ form.pagedown(only_input=True, rows=15, cols=50, class="form-control") }}
-                {{ form.pagedown(only_preview=True) }}
+                {{ form.content.label }}<br>
+                {{ form.content(class="form-control") }}
             </div>
             {{ form.submit(class="btn btn-default btn-light") }}
         </form>
         <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
             WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE UPLOADING.<br>
-            IT CANNOT BE CHANGED IF YOU DON'T CONTACT THE
+            IT CURRENTLY CANNOT BE CHANGED IF YOU DON'T CONTACT THE
             <a href="mailto:andyforever0108@outlook.com">ADMIN</a>.<br>
         </p>
     </div>
@@ -50,8 +50,7 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
-    <script src="/static/js/Converter.min.js"></script>
-    <script src="/static/js/Sanitizer.min.js"></script>
+    {{ ckeditor.load() }}
     <script src="/static/js/bootstrap-datepicker.min.js"></script>
     <script src="/static/js/bootstrap-datepicker.min.js"></script>
     <script>

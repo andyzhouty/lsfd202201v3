@@ -1,8 +1,8 @@
 {% extends 'readme_en.html' %}
 {% block page_content %}
     <div style="margin-left: 100px">
-        <h1>LSFD202201V3</h1>
-        <p>兰生复旦中学2022届1班第三版<a href="https://ls202201.pythonanywhere.com">班级网站</a></p>
+        <h1>LSFD202201</h1>
+        <p>兰生复旦中学2022届1班<a href="https://ls202201.pythonanywhere.com">班级网站</a></p>
         <h2>目标</h2>
         <p>这个项目旨在以我们自己的方式为班级做贡献以及锻炼我们的编程能力</p>
         <h2>关于我们班</h2>
@@ -22,21 +22,12 @@
         </ul>
         <p>没有这些非常好的开源项目，这个项目是不可能开发得了的。</p>
         <p>同时，感谢<a href="https://greyli.com">GreyLi</a>，是他的《Flask Web开发实战》带我走进了Flask的世界</p>
-        <h2>发行说明</h2>
-        <h4>版本3.5.0 2020-07-23</h4>
-        <ol>
-            <li>把首页的黑底换成浅灰色底</li>
-            <li>增强分页效果</li>
-            <li>重构项目</li>
-        </ol>
-        <h4>版本3.4.0 2020-07-20</h4>
-        <ol>
-            <li>给予管理员更改文章的权限</li>
-            <li>用<a href="https://github.com/greyli/bootstrap-flask">Bootstrap-Flask</a>以及<a
-                    href="https://github.com/twbs/bootstrap">Bootstrap4</a>重构代码
-            </li>
-            <li>在首页上添加淡进效果</li>
-            <li>在上传文章页面添加日期选择器</li>
-        </ol>
+    </div>
+    <div class="col">
+        <h2>分享我们的网站</h2>
+        <img src="/static/images/qrcode.png" alt="QRCode" class="img-fluid">
+        <div style="margin-left: 30px">
+            {{ share.create(title="Share with", align="left")}}
+        </div>
     </div>
 {% endblock %}

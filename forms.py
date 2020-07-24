@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import (StringField, TimeField, PasswordField, SubmitField,
                      IntegerField, DateField)
 from wtforms.validators import DataRequired
-from flask_pagedown.fields import PageDownField
+from flask_ckeditor import CKEditorField
 
 
 class UploadForm(FlaskForm):
@@ -12,7 +12,7 @@ class UploadForm(FlaskForm):
     date = DateField("Date(yyyy-mm-dd)(2020-01-01)",
                      validators=[DataRequired()])
     title = StringField("Title", validators=[DataRequired()])
-    pagedown = PageDownField("Content", validators=[DataRequired()])
+    content = CKEditorField("Content", validators=[DataRequired()])
     submit = SubmitField("Upload")
 
 
@@ -22,11 +22,6 @@ class AdminLoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-class AdminDeleteForm(FlaskForm):
-    id = IntegerField("Article id to delete", validators=[DataRequired()])
-    submit = SubmitField("DELETE", validators=[DataRequired()])
-
-
 class EditForm(FlaskForm):
-    pagedown = PageDownField("Content", validators=[DataRequired()])
+    content = CKEditorField("Content", validators=[DataRequired()])
     submit = SubmitField("Publish", validators=[DataRequired()])

@@ -60,7 +60,11 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
-### V3.5.0 (Current) 7/23/2020
+### V3.6.0 7/24/2020
+1. Refactor Project
+2. Change navbar theme
+
+### V3.5.2 7/23/2020
 1. Change default index theme to light
 2. Add better pagination support
 3. Refactor the project

@@ -42,7 +42,7 @@ pip3 install -r requirements.txt
 4. 在项目根目录中创建.env文件以及data.sqlite文件，参考config.py在.env中设置你的密码和secret_key
 5. 打开flask shell并运行
 ```python
-from . import db
+from .extensions import db
 db.create_all()
 ```
 6. 退出flask shell，在bash, zsh或powershell中运行`flask run`
@@ -51,6 +51,10 @@ db.create_all()
 
 
 ## 发行说明
+### V3.6.0版本 2020-07-24
+1. 重构代码
+2. 把导航栏变为浅色
+
 ### V3.5.0版本 2020-07-23
 1. 把首页的黑底换成浅灰色底
 2. 增强分页效果
