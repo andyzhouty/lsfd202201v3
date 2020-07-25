@@ -31,11 +31,7 @@ def members():
 
 @app.route('/articles')
 def articles():
-    # Query data from data.sqlite
-    if "page" in request.args:
-        page = int(request.args["page"])
-    else:
-        page = 1
+    page = request.args.get('page', 1, int)  # get(key, default=None, type=None)
     all_articles = Article().query_all()
     if all_articles:
         article = Article().query_one(page)
@@ -128,10 +124,9 @@ def edit(id):
     session.setdefault("admin", False)
     if session['admin']:
         form = EditForm()
+        content = Article().query_by_id(id).content
         return render_template("edit.html", id=id, form=form,
-                               old_content=escape_quotes(
-                                   Article().query_by_id(id).content)
-                               )
+                               old_content=content)
     else:
         flash("Not Admin", "waring")
         return render_template('result.html', url=url_for("admin_login"))
@@ -140,7 +135,7 @@ def edit(id):
 @app.route('/edit-result/<int:id>', methods=['POST'])
 def edit_result(id):
     try:
-        article_content = request.form['content']
+        article_content = request.form['ckeditor']
         id = id
         article = Article().query_by_id(id)
         article.content = article_content

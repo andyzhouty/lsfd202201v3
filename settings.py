@@ -6,6 +6,10 @@ class Base:
     PASSWORD = generate_password_hash(os.getenv('PASSWORD'))
     ADMIN_PASSWORD = generate_password_hash(os.getenv('ADMIN_PASSWORD'))
     BOOTSTRAP_SERVE_LOCAL = True
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = ('sqlite:///' + 
+                               os.path.join(basedir, 'data.sqlite'))
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class Production(Base):
     DEBUG=False

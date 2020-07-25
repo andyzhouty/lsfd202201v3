@@ -12,7 +12,6 @@
         <h1 id="upload-article">Upload Article</h1>
         <form method="POST" action="{{ url_for('upload_result') }}" id="upload-form" role="form">
             {{ form.hidden_tag() }}
-            {{ form.csrf_token() }}
             <div class="form-group">
                 {{ form.name.label }}<br>
                 {{ form.name(class="form-control") }}
