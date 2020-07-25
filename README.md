@@ -31,7 +31,7 @@ but finishing the 2nd version of the website. [doge]
 - [Flask-Share](https://github.com/greyli/flask-share)
 - [MyQR](https://pypi.org/project/MyQR/)
 #### Books
-- [Flask Web Development](https://helloflask.com)
+- [Python Web Development with Flask](https://helloflask.com)
 #### People
 - [GreyLi](https://greyli.com)
 
