@@ -3,6 +3,7 @@
  A python module for database storing
 """
 from datetime import datetime
+from enum import unique
 from flask import flash
 from . import db
 
@@ -13,12 +14,13 @@ class Article(db.Model):
     """
     __tablename__ = 'articles'
     # initialize columns
-    title = db.Column(db.String(64), primary_key=True, index=True)
-    author = db.Column(db.String(64), primary_key=True)
-    time = db.Column(db.String(64), primary_key=True)
-    content = db.Column(db.Text(2048), primary_key=True)
-    id = db.Column(db.Integer(), primary_key=True)
-    timestamp = db.Column(db.DateTime, default=datetime.now, index=True)
+    title = db.Column(db.String(64), index=True)
+    author = db.Column(db.String(64))
+    time = db.Column(db.String(64))
+    content = db.Column(db.Text(2048))
+    id = db.Column(db.Integer(), primary_key=True, unique=True)
+    timestamp = db.Column(db.DateTime, default=datetime.now, index=True,
+                          unique=True)
 
     def __repr__(self) -> str:
         return '<Article %r>' % self.title
