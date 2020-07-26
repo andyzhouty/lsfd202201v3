@@ -1,14 +1,15 @@
 # -*- coding:utf-8 -*-
 import os
 from flask import (render_template, request, flash,
-                   escape, redirect, url_for, session, Blueprint, current_app)
+                   escape, url_for, Blueprint, current_app)
 from werkzeug.security import check_password_hash
-from lsfd202201.utils import escape_quotes
 from lsfd202201.models import Article
-from lsfd202201.forms import UploadForm, AdminLoginForm, EditForm
+from lsfd202201.forms import UploadForm
 from lsfd202201.extensions import db
+from lsfd202201.emails import send_async_email
 
 articles_bp = Blueprint("articles", __name__)
+
 
 @articles_bp.route('')
 def articles():
@@ -24,7 +25,6 @@ def articles():
                                pagination=pagination)
     flash("No Articles! Please Upload one first!", "warning")
     return render_template("result.html", url=url_for("upload"))
-
 
 
 @articles_bp.route('/upload')
@@ -43,13 +43,21 @@ def upload_result():
     title = escape(request.form['title'])
     content = request.form['content']
     id = len(a.query_all()) + 1
-    config_password = current_app.config['PASSWORD']
+    uploader_password = current_app.config['PASSWORD']
     admin_password = current_app.config['ADMIN_PASSWORD']
     # password protection
     if not (check_password_hash(admin_password, password)
-            or check_password_hash(config_password, password)):
+            or check_password_hash(uploader_password, password)):
         flash("Wrong Password", "warning")
         return render_template('result.html', url=url_for("upload"))
+    # send email to 2 admins
+    email_data = {
+        'title': title,
+        'author': name,
+        'content': content
+    }
+    send_async_email(*current_app.config['ADMIN_ONE'], **email_data)
+    send_async_email(*current_app.config['ADMIN_TWO'], **email_data)
     # commit data
     article = Article(title=title, author=name, content=content, time=date,
                       id=id)
@@ -57,4 +65,3 @@ def upload_result():
     db.session.commit()
     flash("Upload Success", "success")
     return render_template('result.html', url=url_for("articles"))
-

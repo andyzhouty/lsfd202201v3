@@ -1,12 +1,5 @@
 # -*- coding:utf-8 -*-
-import os
-from flask import (render_template, request, flash,
-                   escape, redirect, url_for, session, Blueprint, current_app)
-from werkzeug.security import check_password_hash
-from lsfd202201.utils import escape_quotes
-from lsfd202201.models import Article
-from lsfd202201.forms import UploadForm, AdminLoginForm, EditForm
-from lsfd202201.extensions import db
+from flask import render_template, Blueprint
 
 
 main_bp = Blueprint('main', __name__)
