@@ -14,7 +14,7 @@
                         </button>
                     </a>
                     <form class="inline" method="POST"
-                        action="{{ url_for("admin_delete", id=article.id)}}"
+                        action="{{ url_for("admin.admin_delete", id=article.id)}}"
                         style="float: right">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <button class="btn btn-danger" onclick="return confirm('Are you sure?');">

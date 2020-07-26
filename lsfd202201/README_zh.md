@@ -65,6 +65,3 @@ db.create_all()
 2. 用[Bootstrap-Flask](https://github.com/greyli/bootstrap-flask)以及[Bootstrap4](https://github.com/twbs/bootstrap)重构代码
 3. 在首页上添加淡进效果
 4. 在上传文章页面添加日期选择器
-
-## 附注
-我会有几个月的时间停止更新这个网站来学习更高级的Flask技巧。在这期间我会将网站暂时交给Rice Zong来维护

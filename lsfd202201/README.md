@@ -74,8 +74,3 @@ pip3 install -r requirements.txt
 2. Refactor the project with [Bootstrap-Flask](https://github.com/greyli/bootstrap-flask) and [Bootstrap4](https://github.com/twbs/bootstrap)
 3. Add fade-in effect on index page
 4. Add a datepicker on upload page
-
-### P.S.
-I'm going to stop developing this website for some months
-because I'll have to learn more advanced Flask skills to
-keep on developing. I'll let Rice Zong manage this website.

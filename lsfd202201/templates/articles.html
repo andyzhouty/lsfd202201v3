@@ -9,22 +9,26 @@
         <li>
             This page is made in Python Flask + HTML, you can upload your
             own article
-            <a href="{{ url_for("upload") }}">HERE</a>.
+            <a href="{{ url_for("articles.upload") }}">HERE</a>.
         </li>
     </ul>
 {% endblock %}
-{% block idea %}
     <h2 style="float:left;font-size:48px;">
+        {% block article_title %}
         {{ this_article.title }}
+        {% endblock %}
     </h2>
     <br>
     <h4 style="float:right">
+        {% block date%}
         {{ this_article.time }}
+        {% endblock %}
     </h4><br><br>
     <h4 style="position: absolute; right: 100px">
-        ——{{ this_article.author }}
+        {% block author %}
+        by {{ this_article.author }}
+        {% endblock %}
     </h4>
-{% endblock %}
 {% block article_content %}
     {{ content | safe }}
 {% endblock %}

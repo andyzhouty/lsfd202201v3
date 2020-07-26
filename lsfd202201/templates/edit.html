@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
-    <form method="POST" action="{{ url_for('edit_result', id=id) }}" id="upload-form" role="form">
+    <form method="POST" action="{{ url_for('admin.edit_result', id=id) }}" id="upload-form" role="form">
         {{ form.hidden_tag() }}
         {{ form.csrf_token() }}
         <div class="form-group">

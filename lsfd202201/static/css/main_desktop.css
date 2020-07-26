@@ -10,7 +10,6 @@
 
     .focus-title {
         padding: 3%;
-        color: #000050;
     }
 
     div .left-focus {
@@ -22,14 +21,12 @@
         padding-bottom: 25em;
         float: left;
         vertical-align: top;
-        background-color: #fbfbff;
         border-right: dotted thin #eee;
     }
 
     .col-lg-9 {
         padding-left: 100px;
         padding-right: 100px;
-        background-color: #fafdff;
     }
 
     .idea, .main-passage {

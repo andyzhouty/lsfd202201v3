@@ -4,8 +4,8 @@
 {% endblock %}
 {% block styles %}
     {{ super() }}
-    <link href="/static/css/main_mobile.css" rel="stylesheet">
-    <link href="/static/css/main_desktop.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main_mobile.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main_desktop.css') }}" rel="stylesheet">
 {% endblock %}
 {% block page_content %}
     <div class="container-fluid">
@@ -30,17 +30,21 @@
             </div>
             <div class="col-lg-9">
                 <div class="idea">
-                    {% block idea %}
                         <h2 style="float:left;font-size:48px;">
+                            {% block article_title %}
                             2020，我们来了
+                            {% endblock %}
                         </h2><br>
                         <h4 style="float:right">
+                            {% block date%}
                             2020-01-16
+                            {% endblock %}
                         </h4><br><br>
                         <h4 style="position: absolute; right: 100px">
-                            ——HCR
+                            {% block author%}
+                            by John
+                            {% endblock %}
                         </h4>
-                    {% endblock %}
                 </div>
                 <br>
                 <div class="main-passage">

@@ -16,9 +16,7 @@
 </head>
 <body>
 {% block navbar -%}
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark" role="navigation"
-    style="border-radius: 0; border-color: #091145;
-    background-image: linear-gradient(to bottom, #091145, #091145 100%);">
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark" role="navigation">
         <a class="navbar-brand" href="/">
             LS202201
         </a>
@@ -27,14 +25,13 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="collapse"
-        style="background-color: #091145">
-            <div class="navbar-nav">
-                <a href="{{ url_for("main") }}" class="nav-link nav-item">Main</a>
-                <a href="{{ url_for("members") }}" class="nav-link nav-item">Members</a>
-                <a href="{{ url_for("articles") }}" class="nav-link nav-item">Articles</a>
-                <a href="{{ url_for("video") }}" class="nav-link nav-item">Our Video</a>
-                <a href="{{ url_for("about_en") }}" class="nav-link nav-item">About Us</a>
+        <div class="navbar-collapse collapse bg-primary" id="collapse">
+            <div class="navbar-nav text-white">
+                <a href="{{ url_for("main.main") }}" class="nav-link nav-item">Main</a>
+                <a href="{{ url_for("main.members") }}" class="nav-link nav-item">Members</a>
+                <a href="{{ url_for("articles.articles") }}" class="nav-link nav-item">Articles</a>
+                <a href="{{ url_for("main.video") }}" class="nav-link nav-item">Our Video</a>
+                <a href="{{ url_for("main.about_en") }}" class="nav-link nav-item">About Us</a>
             </div>
         </div>
     </nav>

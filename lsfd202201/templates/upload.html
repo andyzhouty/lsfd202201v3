@@ -10,7 +10,7 @@
 {% block page_content %}
     <div class="body">
         <h1 id="upload-article">Upload Article</h1>
-        <form method="POST" action="{{ url_for('upload_result') }}" id="upload-form" role="form">
+        <form method="POST" action="{{ url_for('articles.upload_result') }}" id="upload-form" role="form">
             {{ form.hidden_tag() }}
             {{ form.csrf_token() }}
             <div class="form-group">
