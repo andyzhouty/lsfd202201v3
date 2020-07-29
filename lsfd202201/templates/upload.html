@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+    Upload Article
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link href="/static/css/upload.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+    <div class="body">
+        <h1 id="upload-article">Upload Article</h1>
+        <form method="POST" action="{{ url_for('articles.upload_result') }}" id="upload-form" role="form">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br>
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}<br>
+                {{ form.password(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <label>
+                    Date(yyyy-mm-dd)
+                </label>
+                <br>
+                <label for="date">
+                    <input type="text" name="date" id="date" class="form-control">
+                </label>
+            </div>
+            <div class="form-group">
+                {{ form.title.label }}<br>
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.content.label }}<br>
+                {{ form.content(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-default btn-light") }}
+        </form>
+        <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
+            WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE UPLOADING.<br>
+            IT CURRENTLY CANNOT BE CHANGED IF YOU DON'T CONTACT THE
+            <a href="mailto:andyforever0108@outlook.com">ADMIN</a>.<br>
+        </p>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {{ ckeditor.load() }}
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#date').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'zh-CN',
+                todayHighlight: 1
+            });
+        });
+    </script>
+{% endblock %}

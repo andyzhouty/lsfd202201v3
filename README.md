@@ -45,13 +45,9 @@ that took me into the wonderful world of Flask.
 ```bash
 pip3 install -r requirements.txt
 ```
-3. Create .env file, take a look at my config.py and set the passwords as you like.  
-   Also, you should create a data.sqlite file in project root.
-4. Open flask shell and run  
-```python
->>> from .extensions import db
->>> db.create_all()
-```
+3. Create .env file, take a look at my config.py and set the emails and passwords as you like.  
+   Also, you should define the database url in .env.
+4. Run `flask db init; flask db upgrade`
 5. Run `flask run` in project root.
 6. Go to localhost:5000/articles, you will be redirected to the upload page.
 7. Fill out the form.
@@ -60,6 +56,14 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
+### V3.7.0 7/29/2020
+1. Use blueprints to refactor code
+2. Send emails to admins after uploading
+3. Use Flask Migrate
+4. Use MySQL instead of SQLite
+5. Write unittests
+
+
 ### V3.6.1 7/24/2020
 1. Refactor Project
 2. Use CKEditor
@@ -74,8 +78,3 @@ pip3 install -r requirements.txt
 2. Refactor the project with [Bootstrap-Flask](https://github.com/greyli/bootstrap-flask) and [Bootstrap4](https://github.com/twbs/bootstrap)
 3. Add fade-in effect on index page
 4. Add a datepicker on upload page
-
-### P.S.
-I'm going to stop developing this website for some months
-because I'll have to learn more advanced Flask skills to
-keep on developing. I'll let Rice Zong manage this website.
