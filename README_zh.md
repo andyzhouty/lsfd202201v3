@@ -39,12 +39,8 @@
 ```bash
 pip3 install -r requirements.txt
 ```
-4. 在项目根目录中创建.env文件以及data.sqlite文件，参考config.py在.env中设置你的密码和secret_key
-5. 打开flask shell并运行
-```python
-from .extensions import db
-db.create_all()
-```
+4. 在项目根目录中创建.env文件，参考config.py在.env中设置你的密码和secret_key，并定义数据库URL
+5. 打开shell激活虚拟环境后运行`flask db init; flask db upgrade`
 6. 退出flask shell，在bash, zsh或powershell中运行`flask run`
 7. 访问localhost:5000/articles，上传你自己的文章
 8. 完成！现在，你可以随意修改这个项目，别忘了要把它开源哦（这个项目使用GPL3作为License）！
@@ -53,10 +49,10 @@ db.create_all()
 ## 发行说明
 ### V3.7.0版本 2020-07-28
 1. 使用蓝本重构代码
-2. 添加事务邮件MailJet支持
+2. 在上传文章时向管理员发送邮件
 3. 使用Flask-Migrate迁移数据库
 4. 使用MySQL替换掉SQLite
-5. 使用pytest编写基本单元测试
+5. 使用unittest编写基本单元测试
 
 ### V3.6.1版本 2020-07-24
 1. 重构代码
