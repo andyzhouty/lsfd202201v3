@@ -16,16 +16,16 @@
 </head>
 <body>
 {% block navbar -%}
-    <nav class="navbar navbar-expand-lg bg-primary navbar-dark" role="navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">
             LS202201
         </a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-            data-target="#collapse" aria-controls="navbarColor01" aria-expanded="false"
+            data-target="#collapse" aria-controls="collapse" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse bg-primary" id="collapse">
+        <div class="collapse navbar-collapse" id="collapse">
             <div class="navbar-nav text-white">
                 <a href="{{ url_for("main.main") }}" class="nav-link nav-item">Main</a>
                 <a href="{{ url_for("main.members") }}" class="nav-link nav-item">Members</a>
