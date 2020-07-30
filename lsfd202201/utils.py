@@ -11,4 +11,5 @@ def admin_reqired(func):
     def wrapper(*args, **kwargs):
         if 'admin' not in session:
             return redirect(url_for('admin.login'))
+        return func(*args, **kwargs)
     return wrapper

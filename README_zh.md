@@ -39,15 +39,18 @@
 ```bash
 pip3 install -r requirements.txt
 ```
-4. 在项目根目录中创建.env文件，参考config.py在.env中设置你的密码和secret_key，并定义数据库URL
-5. 打开shell激活虚拟环境后运行`flask db init; flask db upgrade`
+4. 在项目根目录中创建.env文件，参考lsfd202201/settings.py在.env中设置你的密码和secret_key，并定义数据库URL
+5. 打开shell激活虚拟环境后运行`flask initdb`
 6. 退出flask shell，在bash, zsh或powershell中运行`flask run`
 7. 访问localhost:5000/articles，上传你自己的文章
 8. 完成！现在，你可以随意修改这个项目，别忘了要把它开源哦（这个项目使用GPL3作为License）！
 
 
 ## 发行说明
-### V3.7.0版本 2020-07-28
+### V3.7.1版本 2020-07-30
+1. 修复管理员不能删除文章的Bug
+2. 更新README.md文档
+### V3.7.0版本 2020-07-29
 1. 使用蓝本重构代码
 2. 在上传文章时向管理员发送邮件
 3. 使用Flask-Migrate迁移数据库

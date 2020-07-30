@@ -23,7 +23,7 @@ def create_app(config_name=None) -> Flask:
     register_logger(app)
     register_extensions(app, db)
     register_blueprints(app)
-    register_commands(app)
+    register_commands(app, db)
     return app
 
 
@@ -62,9 +62,14 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(articles_bp, url_prefix="/articles")
 
 
-def register_commands(app: Flask):
+def register_commands(app: Flask, db):
     @app.cli.command()
     def test():
         """Run the unit tests."""
         tests = unittest.TestLoader().discover('tests')
         unittest.TextTestRunner(verbosity=2).run(tests)
+
+    @app.cli.command()
+    def initdb():
+        """Init database on a new machine."""
+        db.create_all()
