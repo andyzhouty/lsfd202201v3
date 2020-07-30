@@ -45,9 +45,9 @@ that took me into the wonderful world of Flask.
 ```bash
 pip3 install -r requirements.txt
 ```
-3. Create .env file, take a look at my config.py and set the emails and passwords as you like.  
+3. Create the .env file, take a look at my lsfd202201/settings.py and set the emails and passwords as you like.  
    Also, you should define the database url in .env.
-4. Run `flask db init; flask db upgrade`
+4. Run `flask initdb` to initialize database.
 5. Run `flask run` in project root.
 6. Go to localhost:5000/articles, you will be redirected to the upload page.
 7. Fill out the form.
@@ -56,6 +56,10 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
+### V3.7.1 7/30/2020
+1. Fix the bug that admins could not delete articles.
+2. Update this README.md
+
 ### V3.7.0 7/29/2020
 1. Use blueprints to refactor code
 2. Send emails to admins after uploading
