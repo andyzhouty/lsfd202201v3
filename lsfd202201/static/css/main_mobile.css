@@ -3,12 +3,6 @@
     nav {
         padding: 15px !important;
     }
-    .navbar-brand, .navbar-toggler {
-        font-size: 3em !important;
-    }
-    .nav-item {
-        font-size: 1.8em !important;
-    }
     .focus {
         font-size: 2em;
     }
@@ -41,16 +35,10 @@
 
     .main-passage {
         margin-top: 5px;
-        padding: 10px;
-        text-indent: 2em;
-    }
-
-    .col-lg-9 {
+        padding: 3px;
         letter-spacing: 0.1em;
-        line-height: 1.9em;
-        font-size: 1.8em;
-        margin-left: 8px;
-        max-width: 95%;
+        line-height: 1.5em;
+        font-size: 1.2em;
     }
 
     footer {
