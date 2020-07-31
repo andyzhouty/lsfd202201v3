@@ -14,12 +14,6 @@ Transportation: Shanghai Metro Line 8, Shanghai Metro Line 10, 90, 966, 55, å¤§æ
 ## Contributors
 
 [Andy Zhou](https://github.com/z-t-y "ZTY")  
-[Rice Zong](https://github.com/rice0208 "ZYT")
-
-*(whisper*  
-[Rice Zong](https://github.com/rice0208 "ZYT")
-actually did nothing for THIS VERSION
-but finishing the 2nd version of the website. [doge]
 
 ## Special Thanks To
 

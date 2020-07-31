@@ -11,9 +11,6 @@
 
 ## 项目参与者
 [Andy Zhou](https://github.com/z-t-y)  
-[Rice Zong](https://github.com/rice0208)  
-*(小声bb:*  
-*[Rice Zong](https://github.com/rice0208)实际并没有参与这个项目，他只是完成了功能贫乏的第二版\[狗头\]*
 
 ## 致谢
 
