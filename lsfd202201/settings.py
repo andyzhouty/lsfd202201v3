@@ -24,14 +24,8 @@ class Base:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.getenv("MAIL_USERNAME")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-    MAIL_DEFAULT_SENDER = (
-        os.getenv("DEFAULT_SENDER_NAME"),
-        os.getenv("MAIL_USERNAME")
-    )
-
     ADMIN_ONE_EMAIL = os.getenv('ADMIN_ONE_EMAIL')
     ADMIN_TWO_EMAIL = os.getenv('ADMIN_TWO_EMAIL')
-    APP_MAIL_SUBJECT_PREFIX = "[LSFD202201]"
     DEFAULT_EMAIL_SENDER = os.getenv("DEFAULT_EMAIL_SENDER")
     BOOTSTRAP_SERVE_LOCAL = True
 

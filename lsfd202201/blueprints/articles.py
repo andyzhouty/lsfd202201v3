@@ -2,10 +2,10 @@
 from flask import (render_template, request, flash,
                    url_for, Blueprint, current_app)
 from werkzeug.security import check_password_hash
-from lsfd202201.models import Article
-from lsfd202201.forms import UploadForm
-from lsfd202201.extensions import db
-from lsfd202201.emails import send_email
+from ..models import Article
+from ..forms import UploadForm
+from ..extensions import db
+from ..emails import send_email
 
 articles_bp = Blueprint("articles", __name__)
 

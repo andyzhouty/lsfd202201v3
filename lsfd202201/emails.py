@@ -1,7 +1,7 @@
 from threading import Thread
 from flask_mail import Message
 from flask import render_template, Flask, current_app
-from lsfd202201.extensions import mail
+from .extensions import mail
 
 
 def _send_async_email(app: Flask, msg) -> int:

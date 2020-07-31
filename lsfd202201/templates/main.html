@@ -35,18 +35,19 @@
                             2020，我们来了
                             {% endblock %}
                         </h2><br>
-                        <h4 style="float:right">
-                            {% block date%}
-                            2020-01-16
-                            {% endblock %}
-                        </h4><br><br><br><br>
-                        <h4 style="position: absolute; right: 50px">
-                            {% block author%}
-                            by John
-                            {% endblock %}
-                        </h4>
+                        <div style="float:right">
+                            <h4>
+                                {% block date%}
+                                2020-01-16
+                                {% endblock %}
+                            </h4>
+                            <h4>
+                                {% block author%}
+                                by John
+                                {% endblock %}
+                            </h4>
+                        </div>
                 </div>
-                <br>
                 <div class="main-passage">
                     <p class="main-passage">
                         {% block article_content %}

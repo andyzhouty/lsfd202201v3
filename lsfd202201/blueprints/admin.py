@@ -2,10 +2,10 @@
 from flask import (render_template, request, flash,
                    redirect, url_for, session, Blueprint, current_app)
 from werkzeug.security import check_password_hash
-from lsfd202201.models import Article
-from lsfd202201.forms import AdminLoginForm, EditForm
-from lsfd202201.extensions import db
-from lsfd202201.utils import admin_reqired
+from ..models import Article
+from ..forms import AdminLoginForm, EditForm
+from ..extensions import db
+from ..utils import admin_reqired
 
 admin_bp = Blueprint('admin', __name__)
 
