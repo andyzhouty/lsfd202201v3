@@ -7,7 +7,7 @@
         <div class="col">
             <h1>LSFD202201V3</h1>
             <div style="float:right">
-                <a href="{{ url_for("main.about_zh") }}">
+                <a href="{{ url_for('main.about_zh') }}">
                     Chinese Version
                 </a>
             </div>
@@ -48,7 +48,7 @@
             <h2>Share Our Website</h2>
             <img src="/static/images/qrcode.png" alt="QRCode" class="img-fliud">
             <div style="margin-left: 30px">
-                {{ share.create(title="Share with", align="left")}}
+                {{ share.create(title='Share with', align='left')}}
             </div>
         </div>
     </div>
