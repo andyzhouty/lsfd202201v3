@@ -1,5 +1,5 @@
 # LSFD202201V3
-
+[![Coverage Status](https://coveralls.io/repos/github/z-t-y/LSFD202201/badge.svg)](https://coveralls.io/github/z-t-y/LSFD202201)  
 The 3rd version of [LSFD202201 Class Website](https://ls202201.pythonanywhere.com)  
 [中文](./README_zh.md)
 [English](./README.md)
@@ -44,12 +44,17 @@ pip3 install -r requirements.txt
 4. Run `flask initdb` to initialize database.
 5. Run `flask run` in project root.
 6. Go to localhost:5000/articles, you will be redirected to the upload page.
-7. Fill out the form.
+7. Fill out the form (with your either your upload password or admin password).
 8. All done! You can change the project as whatever you want it to be!  
 (Remember to make it open-source because this is a GPL3 licensed project.)
 
 
 ## Release Notes
+### V3.8.0 8/4/2020
+1. Write more unittests
+2. Add comments page
+3. Add test coverage
+
 ### V3.7.1 7/30/2020
 1. Fix the bug that admins could not delete articles.
 2. Update this README.md
@@ -60,7 +65,6 @@ pip3 install -r requirements.txt
 3. Use Flask Migrate
 4. Use MySQL instead of SQLite
 5. Write unittests
-
 
 ### V3.6.1 7/24/2020
 1. Refactor Project

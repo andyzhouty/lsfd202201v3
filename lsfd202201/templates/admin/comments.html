@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Manage Comments{% endblock %}
+{% block page_content %}
+    <h1>Welcome, Administrator {{ name }}</h1>
+    <nav class="nav nav-tabs">
+        <a href="{{ url_for("admin.admin") }}" class="nav-link">Articles</a>
+        <a href="#" class="nav-link active">Comments</a>
+    </nav>
+    <ul class="list-group">
+        {% for comment in comments %}
+            <li class="list-group-item">
+                <h4>{{ comment.title }}</h4>
+                    ——{{ comment.author }}
+                    <form class="inline" method="POST"
+                        action="{{ url_for('admin.delete_comment', id=comment.id)}}"
+                        style="float: right">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                            DELETE
+                        </button>
+                    </form>
+                <p style="text-indent: 2em">
+                    {{ comment.body[:50] }} ...
+                </p>
+                <p>
+                    id: {{ comment.id }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

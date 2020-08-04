@@ -5,13 +5,14 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask.logging import default_handler
 import pymysql
-from lsfd202201.extensions import (
-    bootstrap, ckeditor, share, db, csrf, migrate, mail
+from .extensions import (
+    bootstrap, ckeditor, share, db, csrf, migrate, mail, moment
 )
-from lsfd202201.settings import config
-from lsfd202201.blueprints.admin import admin_bp
-from lsfd202201.blueprints.articles import articles_bp
-from lsfd202201.blueprints.main import main_bp
+from .settings import config
+from .blueprints.admin import admin_bp
+from .blueprints.articles import articles_bp
+from .blueprints.main import main_bp
+from .blueprints.comments import comment_bp
 
 
 def create_app(config_name=None) -> Flask:
@@ -54,12 +55,14 @@ def register_extensions(app: Flask, db) -> None:
     ckeditor.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
+    moment.init_app(app)
 
 
 def register_blueprints(app: Flask) -> None:
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(articles_bp, url_prefix="/articles")
+    app.register_blueprint(comment_bp, url_prefix="/comments")
 
 
 def register_commands(app: Flask, db):
@@ -67,7 +70,7 @@ def register_commands(app: Flask, db):
     def test():
         """Run the unit tests."""
         tests = unittest.TestLoader().discover('tests')
-        unittest.TextTestRunner(verbosity=2).run(tests)
+        unittest.TextTestRunner(verbosity=1).run(tests)
 
     @app.cli.command()
     def initdb():

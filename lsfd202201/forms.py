@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DateField
-from wtforms.validators import DataRequired
+from wtforms import (StringField, PasswordField, SubmitField,
+                     DateField, TextAreaField)
+from wtforms.validators import DataRequired, Length
 from flask_ckeditor import CKEditorField
 
 
@@ -24,3 +25,9 @@ class AdminLoginForm(FlaskForm):
 class EditForm(FlaskForm):
     content = CKEditorField("Content", validators=[DataRequired()])
     submit = SubmitField("Publish", validators=[DataRequired()])
+
+
+class CommentForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
+    body = TextAreaField('Comment', validators=[DataRequired(), Length(1, 200)]) # noqa
+    submit = SubmitField()

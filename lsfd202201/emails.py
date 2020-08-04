@@ -14,13 +14,16 @@ def _send_async_email(app: Flask, msg) -> int:
             current_app.logger.info("Email Success")
 
 
-def send_email(recipents: list, **kwargs) -> Thread:
+def send_email(recipents: list,
+               subject=None,
+               template=None,
+               **kwargs) -> Thread:
     msg = Message(
-        subject="A new article was added just now",
+        subject=subject,
         recipients=recipents
     )
-    msg.body = render_template("admin_notifactions.txt", **kwargs)
-    msg.html = render_template("admin_notifactions.html", **kwargs)
+    msg.body = render_template(template + ".txt", **kwargs)
+    msg.html = render_template(template + ".html", **kwargs)
     app = current_app._get_current_object()
     thr = Thread(target=_send_async_email, args=[app, msg])
     thr.start()
