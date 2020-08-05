@@ -15,10 +15,10 @@
             $('button#more').hide();
         }
 
-        $(document).ready(function () {
-            var selector = $('div#index p')
-            selector.hide();
-            window.scrollTo(0, 0)
+        $(function () {
+            var selector = $('div#index p');
+            selector.hide()
+            window.scrollTo(0, 0);
             var j = 0;
             var len = selector.length;
             var interval = setInterval(function () {
@@ -67,25 +67,29 @@
             </div>
         </div>
     </div>
-    <div style="margin:0; width:auto; padding:10%;border-bottom: solid #ccc" id="index">
+    <div style="margin:0; width:auto; padding:10%;border-bottom: solid #ccc;" id="index">
         <p class="display-1" style="font-weight: 600">
             Hello.
         </p>
         <p id="kf2">This is a new website for lansheng 202201.</p>
-        <p class="version" id="kf3">Website Version 3.8.0</p>
+        <p class="version" id="kf3">Website Version 3.8.1</p>
     </div>
     <br><br>
     <div id="latest">
         <h3>Latest Changes</h3>
-        <p class="version">V3.8.0</p>
-        <p>Share your ideas about this website with us!</p>
-        <p>To load this page faster, we removed all images on this page.</p>
+        <p class="version">V3.8.1</p>
+        <p>Email Admin while uploading and commenting(bug fix)</p>
     </div>
     <button id="more" onclick="showAll()" class="btn btn-outline-primary btn-block">
         More
     </button>
     <div style="text-align: center;display: none" id="previous">
         <h3>Previous Versions</h3>
+        <div>
+            <p class="version">V3.8.0</p>
+            <p>Share your ideas about this website with us!</p>
+            <p>To load this page faster, we removed all images on this page.</p>
+        </div>
         <div>
             <p class="version">V3.7.2</p>
             <p>We fixed a bug./p>
@@ -141,7 +145,6 @@
             <p>We are linked!<br>GitHub & PythonAnywhere</p>
             <div class="ver_block">
                 <p class="version">V2.2.0 Stable</p>
-
                 <p>Video is released and played in Bilibili!</p>
             </div>
         </div>
@@ -152,8 +155,9 @@
         </div>
         <div>
             <p class="version">V1.3.5 Beta</p>
-            <p>We've tried, and MsEdge is the fastest.
-                <a href="https://www.microsoft.com/en-us/edge?form=MA13DC&OCID=MA13DC" target="_blank">go&gt&gt</a></p>
+            <p>We've tried, and MsEdge loads the fastest.
+                <a href="https://www.microsoft.com/en-us/edge?form=MA13DC&OCID=MA13DC" target="_blank">go&gt&gt</a>
+            </p>
         </div>
         <div>
             <p class="version">V1.3.1 Beta</p>
@@ -162,7 +166,6 @@
         </div>
         <div>
             <p class="version">V1.2.7 Alpha × V2.1.0 Stable</p>
-
             <p>HTML 5 + CSS 3 + JavaScript + Python 3, quadruple code type, better experience.</p>
         </div>
     </div>

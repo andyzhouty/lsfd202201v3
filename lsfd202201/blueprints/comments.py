@@ -16,15 +16,13 @@ def comment():
         message = Comment(body=body, author=author)
         db.session.add(message)
         db.session.commit()
-        if current_app.config['EMAIL_ADMIN']:
-            recipents = current_app.config['ADMIN_EMAIL_LIST']
-            send_email(
-                recipents=recipents,
-                subject="A new comment was added!",
-                template="comments/comment_notifaction",
-                **dict(author=author, content=body)
-            )
-            flash('Your idea has been sent to the admins!')
-            return redirect(url_for('comments.comment'))
+        recipients = current_app.config['ADMIN_EMAIL_LIST']
+        send_email(
+            recipients=recipients,
+            subject="A new comment was added!",
+            template="comments/comment_notification",
+            **dict(author=author, content=body)
+        )
+        flash('Your idea has been sent to the admins!')
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
     return render_template('comments/comments.html', form=form, comments=comments)  # noqa

@@ -1,3 +1,7 @@
+"""
+@author: andy zhou
+Copyright(c) all rights reserved 2020
+"""
 # -*- coding:utf-8 -*-
 from flask import (render_template, request, flash,
                    url_for, Blueprint, current_app)
@@ -55,18 +59,17 @@ def upload_result():
     db.session.add(article)
     db.session.commit()
     # send email to 2 admins
-    if current_app.config['EMAIL_ADMIN']:
-        email_data = {
-            'title': title,
-            'author': name,
-            'content': content
-        }
-        recipents = current_app.config['ADMIN_EMAIL_LIST']
-        send_email(
-            recipents=recipents,
-            subject="A new article was added just now!",
-            template="articles/article_notifaction",
-            **email_data
-        )
+    email_data = {
+        'title': title,
+        'author': name,
+        'content': content
+    }
+    recipients = current_app.config['ADMIN_EMAIL_LIST']
+    send_email(
+        recipients=recipients,
+        subject="A new article was added just now!",
+        template="articles/article_notification",
+        **email_data
+    )
     flash("Upload Success", "success")
     return render_template('result.html', url=url_for("articles.articles"))

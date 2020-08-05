@@ -50,6 +50,9 @@ pip3 install -r requirements.txt
 
 
 ## Release Notes
+### V3.8.1 8/5/2020
+1. Remove threading (due to sth weird, the threading did not work).
+
 ### V3.8.0 8/4/2020
 1. Write more unittests
 2. Add comments page
