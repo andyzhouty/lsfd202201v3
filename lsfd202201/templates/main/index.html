@@ -29,41 +29,34 @@
         })
     </script>
     <style>
-        p.version {
-            font-family: 'Segoe UI Light', sans-serif;
-        }
 
-        div#latest {
-            text-align: center;
-        }
-        p.display-1 {
-            font-weight: 500;
-            margin-bottom: 100px;
-        }
     </style>
 </head>
 <body>
 <div class="container-fliud" style="background-color: #fafafa;color: #333333; ">
-    <div id="message">
-        <div id="message-content">
-            Special thanks for
-            <a class="thank" href="https://pythonanywhere.com" target="_blank">
-                PythonAnywhere
-            </a>,
-            <a class="thank" href="https://bilibili.com" target="_blank">
-                Bilibili
-            </a>,
-            <a class="thank" href="https://flask.pocoo.org" target="_blank">
-                Flask
-            </a>
-            and <a class="thank" href="https://getbootstrap.com/" target="_blank">
-            Bootstrap.
-        </a>
-            They provided us servers and media players.
-            <div id="button">
-                <a id="link" href="{{ url_for('main.main') }}">
-                    Go to our website &gt&gt
+    <div id="mob-full-screen">
+        <div id="message">
+            <div id="message-content">
+                Special thanks for
+                <a class="thank" href="https://pythonanywhere.com" target="_blank">
+                    PythonAnywhere
+                </a>,
+                <a class="thank" href="https://bilibili.com" target="_blank">
+                    Bilibili
+                </a>,
+                <a class="thank" href="https://flask.pocoo.org" target="_blank">
+                    Flask
                 </a>
+                and
+                <a class="thank" href="https://getbootstrap.com/" target="_blank">
+                    Bootstrap.
+                </a>
+                They provided us servers and media players.
+                <div id="button">
+                    <a id="link" href="{{ url_for('main.main') }}">
+                        Go to our website &gt&gt
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -72,13 +65,13 @@
             Hello.
         </p>
         <p id="kf2">This is a new website for lansheng 202201.</p>
-        <p class="version" id="kf3">Website Version 3.8.1</p>
+        <p class="version" id="kf3">Website Version 3.8.2</p>
     </div>
     <br><br>
     <div id="latest">
         <h3>Latest Changes</h3>
-        <p class="version">V3.8.1</p>
-        <p>Email Admin while uploading and commenting(bug fix)</p>
+        <p class="version">V3.8.2</p>
+        <p>Bug fix version, nothing special.</p>
     </div>
     <button id="more" onclick="showAll()" class="btn btn-outline-primary btn-block">
         More

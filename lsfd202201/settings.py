@@ -45,15 +45,16 @@ class Base:
 
 
 class Production(Base):
-    DEBUG = False
     FLASK_CONFIG = 'production'
-    EMAIL_ADMIN = True
+    DEBUG = False
+    TESTING = False
+    MAIL_SUPPRESS_SEND = False
 
 
 class Development(Base):
-    DEBUG = True
     FLASK_CONFIG = 'development'
-    EMAIL_ADMIN = False
+    DEBUG = True
+    MAIL_SUPPRESS_SEND = True
     ADMIN_EMAIL_LIST = [os.getenv("ADMIN_TWO_EMAIL")]
 
 
@@ -66,7 +67,6 @@ class Test(Base):
         'comments': sqlite_file_comments
     }
     MAIL_DEFAULT_SENDER = os.getenv("DEFAULT_EMAIL_SENDER")
-    EMAIL_ADMIN = False
     ADMIN_EMAIL_LIST = [os.getenv("ADMIN_TWO_EMAIL")]
 
 

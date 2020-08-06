@@ -16,13 +16,31 @@
         font-size: 48px;
         font-family: "Segoe UI Semibold", sans-serif;
     }
-    #index {
-        height: 100%;
-    }
+
 
     p {
         font-size: 24px;
         text-align: center;
+    }
+
+    a:hover {
+        font-family: "Segoe UI Semibold", sans-serif;
+        text-decoration: none;
+    }
+
+    a:active {
+        font-family: "Segoe UI Semibold", sans-serif;
+        text-decoration: underline;
+    }
+
+    a:visited {
+        font-family: "Segoe UI", sans-serif;
+        text-decoration: underline;
+    }
+
+
+    #index {
+        height: 100%;
     }
 
     p#new {
@@ -72,6 +90,7 @@
         right: 1em;
         overflow: visible;
     }
+
     a.thank {
         color: darkblue;
         text-decoration: none;
@@ -80,7 +99,12 @@
     a.thank:hover, a.thank:active {
         text-decoration: underline;
     }
+
     p.version {
         font-family: 'Segoe UI Light', sans-serif;
+    }
+
+    p.display-1 {
+        margin-bottom: 150px;
     }
 }
