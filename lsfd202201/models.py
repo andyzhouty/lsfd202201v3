@@ -11,7 +11,7 @@ class Article(db.Model):
     A model for articles
     """
     __bind_key__ = 'articles'
-    __tablename__ = 'articles'
+    __table_name__ = 'articles'
     # initialize columns
     title = db.Column(db.String(64), index=True)
     author = db.Column(db.String(64))
@@ -21,7 +21,7 @@ class Article(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.now, index=True)
 
     def __repr__(self) -> str:
-        return '<Article %r>' % self.title
+        return f'<Article {self.title}>'
 
     def query_all(self) -> list:
         return self.query.all()
@@ -42,6 +42,9 @@ class Comment(db.Model):
     body = db.Column(db.String(200))
     author = db.Column(db.String(20))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    def __repr__(self):
+        return f'<Comment {self.body[:10]}...>'
 
     def query_all(self) -> list:
         return self.query.all()

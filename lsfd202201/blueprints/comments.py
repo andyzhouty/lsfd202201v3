@@ -1,8 +1,8 @@
 from ..emails import send_email
 from ..models import Comment, db
 from ..forms import CommentForm
-from flask import (Blueprint, flash, redirect, render_template,
-                   url_for, current_app)
+from flask import (Blueprint, flash, render_template,
+                   current_app)
 
 comment_bp = Blueprint('comments', __name__)
 
@@ -23,6 +23,6 @@ def comment():
             template="comments/comment_notification",
             **dict(author=author, content=body)
         )
-        flash('Your idea has been sent to the admins!')
+        flash('Your idea has been sent to the admins!', "success")
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
     return render_template('comments/comments.html', form=form, comments=comments)  # noqa

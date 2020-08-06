@@ -11,6 +11,7 @@ admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/login/')
 def login():
+    session.setdefault('admin', False)
     if session['admin']:
         return redirect(url_for('admin.admin'))
 
@@ -66,9 +67,10 @@ def delete_article(id):
     """
     A view function for administrators to delete an articles.
     """
+    article = Article().query_by_id(id)
     Article().delete_by_id(id)
     flash(f"Article id {id} deleted", "success")
-    current_app.logger.info(f"Article id {id} deleted.")
+    current_app.logger.info(f"{str(article)} deleted.")
     return render_template("result.html", url=url_for("admin.admin"))
 
 
@@ -110,7 +112,8 @@ def manage_comments():
 @admin_bp.route('/comments/delete/<int:id>', methods=['POST'])
 @admin_reqired
 def delete_comment(id):
+    comment = Comment().query_by_id(id)
     Comment().delete_by_id(id)
-    flash(f"Comment id {id} deleted.", "success")
+    flash(f"{str(comment)} deleted.", "success")
     current_app.logger.info(f"Comment id {id} deleted.")
     return render_template("result.html", url=url_for("admin.manage_comments"))
