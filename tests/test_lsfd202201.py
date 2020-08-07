@@ -118,7 +118,7 @@ class TestApp(unittest.TestCase):
             date="Test",
             content="Test"
         )
-        self.assertEqual(str(article), "<Article 'Test'>")
+        self.assertEqual(str(article), "<Article Test>")
         db.session.add(article)
         db.session.commit()
         self.assertIsNotNone(Article().query_by_id(1))

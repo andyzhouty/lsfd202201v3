@@ -1,3 +1,4 @@
+{% from 'bootstrap/nav.html' import render_nav_item %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +23,18 @@
             LS202201
         </a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-            data-target="#collapse" aria-controls="collapse" aria-expanded="false"
-            aria-label="Toggle navigation">
+                data-target="#collapse" aria-controls="collapse" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapse">
             <div class="navbar-nav text-white">
-                <a href="{{ url_for('main.main') }}" class="nav-link nav-item">Main</a>
-                <a href="{{ url_for('main.members') }}" class="nav-link nav-item">Members</a>
-                <a href="{{ url_for('articles.articles') }}" class="nav-link nav-item">Articles</a>
-                <a href="{{ url_for('main.video') }}" class="nav-link nav-item">Our Video</a>
-                <a href="{{ url_for('main.about_en') }}" class="nav-link nav-item">About Us</a>
-                <a href="{{ url_for('comments.comment')}}" class="nav-link nav-item">Your Ideas</a>
+                {{ render_nav_item('main.main', 'Main') }}
+                {{ render_nav_item('main.members', 'Members') }}
+                {{ render_nav_item('articles.articles', 'Articles') }}
+                {{ render_nav_item('main.video', 'Our Video') }}
+                {{ render_nav_item('main.about_en', 'About Us') }}
+                {{ render_nav_item('comments.comment', 'Your Ideas') }}
             </div>
         </div>
     </nav>

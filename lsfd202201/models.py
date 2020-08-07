@@ -11,7 +11,7 @@ class Article(db.Model):
     A model for articles
     """
     __bind_key__ = 'articles'
-    __table_name__ = 'articles'
+    __tablename__ = 'articles'
     # initialize columns
     title = db.Column(db.String(64), index=True)
     author = db.Column(db.String(64))
@@ -37,7 +37,7 @@ class Article(db.Model):
 
 class Comment(db.Model):
     __bind_key__ = 'comments'
-    __table_name__ = 'comments'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer(), primary_key=True)
     body = db.Column(db.String(200))
     author = db.Column(db.String(20))
