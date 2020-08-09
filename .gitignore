@@ -126,5 +126,6 @@ dmypy.json
 *.sqlite
 *.sqlite3
 
-# Pipenv.lock
+# Pipenv
+Pipfile
 Pipfile.lock
