@@ -4,11 +4,13 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask.logging import default_handler
-import pymysql
 from .extensions import (
     bootstrap, ckeditor, share, db, csrf, migrate, mail, moment
 )
+from .models import Article, Comment
 from .settings import config
+from .errors import register_error_handlers
+from .commands import register_commands
 from .blueprints.admin import admin_bp
 from .blueprints.articles import articles_bp
 from .blueprints.main import main_bp
@@ -18,13 +20,14 @@ from .blueprints.comments import comment_bp
 def create_app(config_name=None) -> Flask:
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
-    pymysql.install_as_MySQLdb()
     app = Flask('lsfd202201')
     app.config.from_object(config[config_name])
     register_logger(app)
-    register_extensions(app, db)
+    register_extensions(app)
     register_blueprints(app)
-    register_commands(app, db)
+    register_commands(app)
+    register_error_handlers(app)
+    register_shell_context(app)
     return app
 
 
@@ -47,7 +50,7 @@ def register_logger(app: Flask):
         app.logger.addHandler(default_handler)
 
 
-def register_extensions(app: Flask, db) -> None:
+def register_extensions(app: Flask) -> None:
     bootstrap.init_app(app)
     share.init_app(app)
     db.init_app(app)
@@ -65,14 +68,11 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(comment_bp, url_prefix="/comments")
 
 
-def register_commands(app: Flask, db):
-    @app.cli.command()
-    def test():
-        """Run the unit tests."""
-        tests = unittest.TestLoader().discover('tests')
-        unittest.TextTestRunner(verbosity=1).run(tests)
-
-    @app.cli.command()
-    def initdb():
-        """Init database on a new machine."""
-        db.create_all()
+def register_shell_context(app: Flask) -> None:
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(
+            db=db,
+            Article=Article,
+            Comment=Comment
+        )

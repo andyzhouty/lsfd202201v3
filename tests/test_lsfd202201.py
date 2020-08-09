@@ -1,13 +1,13 @@
 # flake8: noqa
 import unittest
 import os
-from datetime import datetime
 from flask_mail import Message, Mail
 from flask import abort
-import tests.init_dotenv  # initialize env vars here
+from faker import Faker
 from lsfd202201.models import db, Article, Comment
 from lsfd202201 import create_app
 
+fake = Faker()
 
 class TestApp(unittest.TestCase):
     def setUp(self) -> None:
@@ -16,7 +16,6 @@ class TestApp(unittest.TestCase):
         self.context = self.app.app_context()
         self.context.push()
         self.client = self.app.test_client()
-        self.dt = datetime.now()
         db.drop_all()
         db.create_all()
 
@@ -27,28 +26,27 @@ class TestApp(unittest.TestCase):
 
     def login_as_admin(self):
         data = {
-            'admin_name': os.getenv("ADMIN_TWO_NAME"),
+            'name': os.getenv("ADMIN_TWO_NAME"),
             'password': os.getenv("ADMIN_PASSWORD")
         }
         response = self.client.post("/admin/", data=data)
         return response
 
-    def create_article(self, body):
-        dt = self.dt
+    def create_article(self):
         data = {
-            'name': 'test_bot',
+            'name': fake.name(),
             'password': os.getenv("ADMIN_PASSWORD"),
-            'date': f"{dt.year}-{dt.month}-{dt.day}",
-            'title': 'unittest',
-            'content': body
+            'date': fake.date_time_this_year(),
+            'title': fake.sentence(),
+            'content': fake.text(200)
         }
         response = self.client.post("/articles/upload-result/", data=data)
         return response
 
     def create_comment(self, body):
         data = {
-            'name': 'test_bot',
-            'body': body
+            'name': fake.name(),
+            'body': fake.text(100)
         }
         response = self.client.post("/comments/", data=data)
         return response
@@ -123,36 +121,37 @@ class TestApp(unittest.TestCase):
         db.session.commit()
         self.assertIsNotNone(Article().query_by_id(1))
         self.assertEqual(self.client.get('/articles/').status_code, 200)
-        Article().delete_by_id(1)
+        article.delete()
         self.assertIsNone(Article().query_by_id(1))
 
     def test_upload(self):
-        dt = self.dt
         data = {
-            'name': 'test_bot',
-            'password': "WrongPassword",
-            'date': f"{dt.year}-{dt.month}-{dt.day}",
-            'title': 'unittest',
-            'content': 'TESTING'
+            'name': fake.name(),
+            'password': fake.sentence(),
+            'date': fake.date_time_this_year(),
+            'title': fake.sentence(),
+            'content': fake.text(200)
         }
         response = self.client.post("/articles/upload-result/", data=data)
         received_data = response.get_data(as_text=True)
         self.assertIn("Wrong Password", received_data)
-        self.assertEqual(len(Article().query_all()), 0)
-        response = self.create_article('TESTING')
+        self.assertEqual(len(Article.query.all()), 0)
+        response = self.create_article()
         received_data = response.get_data(as_text=True)
         self.assertIn("Upload Success", received_data)
-        self.assertNotEqual(len(Article().query_all()), 0)
+        self.assertNotEqual(len(Article.query.all()), 0)
 
     def test_comments(self):
+        fake_name = fake.name()
+        fake_body = fake.text(100)
         data = {
-            'name': 'test_bot',
-            'body': 'Unittest'
+            'name': fake_name,
+            'body': fake_body
         }
         response = self.client.post("/comments/", data=data)
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
-        self.assertIn("Unittest", received_data)
+        self.assertIn(fake_body, received_data)
 
     def test_emails(self):
         with self.mail.record_messages() as outbox:
@@ -185,7 +184,7 @@ class TestApp(unittest.TestCase):
 
     def test_admin_login(self):
         data = {
-            'admin_name': os.getenv("ADMIN_TWO_NAME"),
+            'name': os.getenv("ADMIN_TWO_NAME"),
             'password': 'WrongPassword'
         }
         response = self.client.post("/admin/articles/", data=data)
@@ -196,30 +195,31 @@ class TestApp(unittest.TestCase):
         received_data = response.get_data(as_text=True)
         self.assertIn("Welcome, Administrator", received_data)
 
-    def test_admin_delete(self):
+    def test_admin_delete_article(self):
         self.login_as_admin()
-        self.create_article("Hello, World!")
+        self.create_article()
         response = self.client.post("/admin/articles/delete/1/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(Article().query_all()), 0)
+        self.assertEqual(len(Article.query.all()), 0)
 
-    def test_admin_edit_post(self):
+    def test_admin_edit_article(self):
         self.login_as_admin()
-        self.create_article("Goodbye, World!")
+        self.create_article()
+        fake_text = fake.text(200)
         data = {
-            'ckeditor': "Hello, World!"
+            'ckeditor': fake_text
         }
         response = self.client.post("/admin/articles/edit_result/1", data=data)
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
         self.assertIn("Edit Succeeded!", received_data)
         article = Article().query_by_id(1)
-        self.assertEqual(article.content, "Hello, World!")
+        self.assertEqual(article.content, fake_text)
 
     def test_admin_delete_comment(self):
         self.login_as_admin()
         self.create_comment("Hello, World!")
-        self.assertGreater(len(Comment().query_all()), 0)
+        self.assertGreater(len(Comment.query.all()), 0)
         response = self.client.post("/admin/comments/delete/1")
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)

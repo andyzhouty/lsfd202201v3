@@ -25,4 +25,4 @@ def comment():
         )
         flash('Your idea has been sent to the admins!', "success")
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
-    return render_template('comments/comments.html', form=form, comments=comments)  # noqa
+    return render_template('comments/comments.html', form=form, comments=comments)

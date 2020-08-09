@@ -1,31 +1,22 @@
 # flake8: noqa
 import os
-import sys
 from werkzeug.security import generate_password_hash
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-WINDOWS = sys.platform.startswith('win')
-if WINDOWS:
-    sqlite_file = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-    sqlite_file_articles = 'sqlite:///' + os.path.join(basedir, 'articles.sqlite')
-    sqlite_file_comments = 'sqlite:///' + os.path.join(basedir, 'comments.sqlite')
-else:
-    sqlite_file = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-    sqlite_file_articles = 'sqlite:///' + os.path.join(basedir, 'articles.sqlite')
-    sqlite_file_comments = 'sqlite:///' + os.path.join(basedir, 'comments.sqlite')
+
+def generate_sqlite_file(str: str):
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    return 'sqlite:///' + os.path.join(basedir, f'{str}.sqlite3')
 
 
 class Base:
+    DEBUG = False
+    TESTING = False
+
     SECRET_KEY = os.getenv('SECRET_KEY')
 
-    PASSWORD = generate_password_hash(os.getenv('PASSWORD'))
-    ADMIN_PASSWORD = generate_password_hash(os.getenv('ADMIN_PASSWORD'))
+    UPLOAD_PASSWORD_HASH = generate_password_hash(os.getenv('PASSWORD'))
+    ADMIN_PASSWORD_HASH = generate_password_hash(os.getenv('ADMIN_PASSWORD'))
 
-    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI", sqlite_file)
-    SQLALCHEMY_BINDS = {
-        'articles': os.getenv("DATABASE_ARTICLES"),
-        'comments': os.getenv("DATABASE_COMMENTS")
-    }
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
@@ -46,13 +37,13 @@ class Base:
 
 class Production(Base):
     FLASK_CONFIG = 'production'
-    DEBUG = False
-    TESTING = False
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", generate_sqlite_file('data'))
     MAIL_SUPPRESS_SEND = False
 
 
 class Development(Base):
     FLASK_CONFIG = 'development'
+    SQLALCHEMY_DATABASE_URI = generate_sqlite_file('data-dev')
     DEBUG = True
     MAIL_SUPPRESS_SEND = True
     ADMIN_EMAIL_LIST = [os.getenv("ADMIN_TWO_EMAIL")]
@@ -62,10 +53,6 @@ class Test(Base):
     TESTING = True
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
-    SQLALCHEMY_BINDS = {
-        'articles': sqlite_file_articles,
-        'comments': sqlite_file_comments
-    }
     MAIL_DEFAULT_SENDER = os.getenv("DEFAULT_EMAIL_SENDER")
     ADMIN_EMAIL_LIST = [os.getenv("ADMIN_TWO_EMAIL")]
 

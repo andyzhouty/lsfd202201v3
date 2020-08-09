@@ -10,6 +10,7 @@ from ..models import Article
 from ..forms import UploadForm
 from ..extensions import db
 from ..emails import send_email
+from ..utils import check_upload_password
 
 articles_bp = Blueprint("articles", __name__)
 
@@ -17,7 +18,7 @@ articles_bp = Blueprint("articles", __name__)
 @articles_bp.route('/')
 def articles():
     page = request.args.get('page', 1, int)
-    all_articles = Article().query_all()
+    all_articles = Article().query.all()
     if all_articles:
         article = Article().query_by_id(page)
         pagination = Article.query.order_by(
@@ -44,11 +45,8 @@ def upload_result():
     date = request.form['date']
     title = request.form['title']
     content = request.form['content']
-    uploader_password = current_app.config['PASSWORD']
-    admin_password = current_app.config['ADMIN_PASSWORD']
     # password protection
-    if not (check_password_hash(admin_password, password)
-            or check_password_hash(uploader_password, password)):
+    if not (check_upload_password(password)):
         flash("Wrong Password", "warning")
         return render_template('result.html', url=url_for("articles.upload"))
     # commit data

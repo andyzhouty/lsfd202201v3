@@ -39,9 +39,13 @@ that took me into the wonderful world of Flask.
 ```bash
 pip3 install -r requirements.txt
 ```
+or, if you use pipenv, you can also
+```bash
+pipenv install
+```
 3. Create the .env file, take a look at my lsfd202201/settings.py and set the emails and passwords as you like.  
    Also, you should define the database url in .env.
-4. Run `flask initdb` to initialize database.
+4. Run `flask init-db` to initialize database.
 5. Run `flask run` in project root.
 6. Go to localhost:5000/articles, you will be redirected to the upload page.
 7. Fill out the form (with your either your upload password or admin password).

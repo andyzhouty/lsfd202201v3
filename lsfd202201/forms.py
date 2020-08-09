@@ -17,7 +17,7 @@ class UploadForm(FlaskForm):
 
 
 class AdminLoginForm(FlaskForm):
-    admin_name = StringField("Your name: ", validators=[DataRequired()])
+    name = StringField("Your name: ", validators=[DataRequired()])
     password = PasswordField("ADMIN PASSWORD", validators=[DataRequired()])
     submit = SubmitField("Login")
 
