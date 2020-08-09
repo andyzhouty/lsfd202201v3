@@ -36,17 +36,17 @@ def register_logger(app: Flask):
 
     formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s "
                                   "%(message)s")
-    file_handler = RotatingFileHandler(
-        filename="logs/lsfd202201.log",
-        maxBytes=10 * 1024 * 1024,
-        backupCount=10
-    )
-    file_handler.setFormatter(formatter)
-    file_handler.setLevel(logging.INFO)
-    default_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    if not app.debug:
+    if app.debug:
+        file_handler = RotatingFileHandler(
+            filename="logs/lsfd202201.log",
+            maxBytes=10 * 1024 * 1024,
+            backupCount=10
+        )
+        file_handler.setFormatter(formatter)
+        file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
+    if not app.debug:
+        default_handler.setLevel(logging.INFO)
         app.logger.addHandler(default_handler)
 
 
