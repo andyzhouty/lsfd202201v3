@@ -30,26 +30,8 @@
 没有这些非常好的开源项目以及书籍，这个项目是不可能开发得了的。
 同时，感谢GreyLi，是他的《Flask Web开发实战》带我走进了Flask世界
 
-## 如何在本地运行这个Flask网站
-1. 从Github或Gitee把项目fork到自己账户并clone下来
-2. 在项目根目录中创建Python3 虚拟环境
-3. 在项目根目录中运行
-```shell script
-pip3 install -r requirements.txt
-```
-如果你使用pipenv，你也可以运行
-```shell script
-pipenv install
-```
-4. 在项目根目录中创建.env文件，参考lsfd202201/settings.py在.env中设置你的密码和secret_key，并定义数据库URL
-5. 打开shell激活虚拟环境后运行`flask initdb`
-6. 退出flask shell，在bash, zsh或powershell中运行`flask run`
-7. 访问localhost:5000/articles/upload，上传你自己的文章
-8. 完成！现在，你可以随意修改这个项目，别忘了要把它开源哦（这个项目使用GPL3作为License）！
-
-
 ## 发行说明
-### V3.8.2 2020-08-06
+### V3.8.3 2020-08-06
 修复一些BUG
 
 ### V3.8.1 2020-08-05

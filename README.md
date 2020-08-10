@@ -33,26 +33,6 @@ Without these projects, the website cannot be developed.
 At the same time, thanks to [GreyLi](https://greyli.com), it was his *Python Web Development with Flask*
 that took me into the wonderful world of Flask.
 
-## How to run the website on your local machine
-1. Fork and Clone the project from Github or Gitee and name the folder as you like
-2. Create a virtual environment and run
-```bash
-pip3 install -r requirements.txt
-```
-or, if you use pipenv, you can also
-```bash
-pipenv install
-```
-3. Create the .env file, take a look at my lsfd202201/settings.py and set the emails and passwords as you like.  
-   Also, you should define the database url in .env.
-4. Run `flask init-db` to initialize database.
-5. Run `flask run` in project root.
-6. Go to localhost:5000/articles, you will be redirected to the upload page.
-7. Fill out the form (with your either your upload password or admin password).
-8. All done! You can change the project as whatever you want it to be!  
-(Remember to make it open-source because this is a GPL3 licensed project.)
-
-
 ## Release Notes
 ### V3.8.2 8/6/2020
 Fix bugs.
