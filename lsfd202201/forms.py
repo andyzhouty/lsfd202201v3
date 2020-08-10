@@ -29,5 +29,5 @@ class EditForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
-    body = TextAreaField('Comment', validators=[DataRequired(), Length(1, 200)]) # noqa
+    body = TextAreaField('Comment', validators=[DataRequired(), Length(1, 200)])  # noqa
     submit = SubmitField()

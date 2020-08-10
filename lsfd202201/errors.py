@@ -1,6 +1,7 @@
 from flask import render_template
 from flask_wtf.csrf import CSRFError
 
+
 def register_error_handlers(app):
     @app.errorhandler(400)
     @app.errorhandler(CSRFError)

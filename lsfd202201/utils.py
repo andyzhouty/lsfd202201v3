@@ -1,3 +1,4 @@
+# flake8: noqa
 from functools import wraps
 from flask import redirect, session, url_for, current_app
 from werkzeug.security import check_password_hash
@@ -14,7 +15,7 @@ def admin_required(func):
 
 
 def check_upload_password(password: str) -> bool:
-    if (check_password_hash(current_app.config['UPLOAD_PASSWORD_HASH'], password) or  # noqa
+    if (check_password_hash(current_app.config['UPLOAD_PASSWORD_HASH'], password) or
             check_password_hash(current_app.config['ADMIN_PASSWORD_HASH'], password)):
         return True
     return False

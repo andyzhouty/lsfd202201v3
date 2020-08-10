@@ -36,7 +36,8 @@ class Base:
 
 class Production(Base):
     FLASK_CONFIG = 'production'
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", generate_sqlite_file('data'))
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL", generate_sqlite_file('data'))
     MAIL_SUPPRESS_SEND = False
 
 

@@ -6,6 +6,7 @@ from .models import db, Article, Comment
 
 fake = Faker('zh-CN')
 
+
 def generate_fake_articles(count: int) -> None:
     """Generates fake articles."""
     for i in range(count):

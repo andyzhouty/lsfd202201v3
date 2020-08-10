@@ -4,16 +4,17 @@ import logging
 from flask import Flask
 from .extensions import db
 
+
 def register_commands(app: Flask):
     @app.cli.command()
     def test() -> None:
         """Run the unit tests."""
-        logging.disable(logging.CRITICAL) # disable log
+        logging.disable(logging.CRITICAL)  # disable log
         tests = unittest.TestLoader().discover('tests')
         unittest.TextTestRunner(verbosity=1).run(tests)
 
     @app.cli.command()
-    @click.option('-d', '--drop', default=False, help='Delete data in databases')
+    @click.option('-d', '--drop', default=False, help='Delete data.')
     def init_db(drop: bool) -> None:
         """Init database on a new development machine."""
         if drop:
