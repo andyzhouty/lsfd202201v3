@@ -11,10 +11,10 @@
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
     <script>
-        function showAll() {
+        $('#more').click(function () {
             $('div#previous').show();
             $('button#more').hide();
-        }
+        })
 
         $(function () {
             var selector = $('div#index p');
@@ -29,9 +29,6 @@
             );
         })
     </script>
-    <style>
-
-    </style>
 </head>
 <body>
 <div class="container-fliud" style="background-color: #fafafa;color: #333333; ">

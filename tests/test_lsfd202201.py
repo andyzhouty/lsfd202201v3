@@ -124,7 +124,7 @@ class TestApp(unittest.TestCase):
         article.delete()
         self.assertIsNone(Article().query_by_id(1))
 
-    def test_upload(self):
+    def test_post_article(self):
         data = {
             'name': fake.name(),
             'password': fake.sentence(),
