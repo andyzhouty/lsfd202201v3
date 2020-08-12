@@ -3,7 +3,7 @@
 <head>
     <title>Index</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <link href="/static/css/index_fonts.css" rel="stylesheet">
     <link href="/static/css/index_desktop.css" rel="stylesheet">
     <link href="/static/css/index_mobile.css" rel="stylesheet">
@@ -31,7 +31,7 @@
     </script>
 </head>
 <body>
-<div class="container-fliud" style="background-color: #fafafa;color: #333333; ">
+<div class="container-fluid" style="background-color: #fafafa;color: #333333;">
     <div id="mob-full-screen">
         <div id="message">
             <div id="message-content">
@@ -58,107 +58,12 @@
             </div>
         </div>
     </div>
-    <div style="margin:0; width:auto; padding:10%;border-bottom: solid #ccc;" id="index">
+    <div style="margin:0; width:auto; padding:10%;border-bottom: solid #ccc;max-height: 100%;padding: 15%;" id="index">
         <p class="display-1" style="font-weight: 600">
             Hello.
         </p>
         <p id="kf2">This is a new website for lansheng 202201.</p>
-        <p class="version" id="kf3">Website Version 3.8.3</p>
-    </div>
-    <br><br>
-    <div id="latest">
-        <h3>Latest Changes</h3>
-        <p class="version">V3.8.3</p>
-        <p>Bug Fix Version</p>
-    </div>
-    <button id="more" onclick="showAll()" class="btn btn-outline-primary btn-block">
-        Previous Versions
-    </button>
-    <div style="text-align: center;display: none" id="previous">
-        <h3>Previous Versions</h3>
-        <div>
-            <p class="version">V3.8.0</p>
-            <p>Share your ideas about this website with us!</p>
-            <p>To load this page faster, we removed all images on this page.</p>
-        </div>
-        <div>
-            <p class="version">V3.7.2</p>
-            <p>We fixed a bug.</p>
-        </div>
-        <div>
-            <p class="version">V3.7.0</p>
-            <p>We refactored the WHOLE project COMPLETELY.</p>
-            <p>And we use MySQL now, so... Goodbye, SQLite!</p>
-        </div>
-        <div>
-            <p class="version">V3.6.1</p>
-            <p>Add CKEditor Support</p>
-        </div>
-        <div>
-            <p class="version">V3.5.1</p>
-            <p>Fix support for mobile phones</p>
-        </div>
-        <div>
-            <p class="version">V3.4.0</p>
-            <p>Use Bootstrap 4, Bootstrap-DatePicker and</p>
-            <p>Give admins the right to Edit Articles</p>
-        </div>
-        <div>
-            <p class="version">V3.3.2</p>
-            <p>What you type is what you see.</p>
-            <p>We add MarkDown support and an admin page.</p>
-        </div>
-        <div>
-            <p class="version">V3.2.0</p>
-            <p> We used a new secure technology -- <b>SQL</b> to store articles<br>
-                instead of the shabby, unsafe TEXT.<br>
-                However, the look of the website is not changed.
-            </p>
-        </div>
-        <div>
-            <p class="version">V3.1.0 RC 1</p>
-            <p> Improve experience while uploading.<br>
-                And share this site in <a href="{{ url_for('main.about') }}">the share page</a>!
-            </p>
-        </div>
-        <div>
-            <p class="version">V3.0.0</p>
-            <p id="new">
-                开天辟地，焕然一新。
-            </p><br>
-            <p>The website now support uploading<br>
-                your own articles.<br>
-                You can upload them <a href="{{ url_for('articles.new') }}">HERE</a>.
-            </p>
-        </div>
-        <div>
-            <p class="version">V1.4.0 Inside × 2.2.0 Stable</p>
-            <p>We are linked!<br>GitHub & PythonAnywhere</p>
-            <div class="ver_block">
-                <p class="version">V2.2.0 Stable</p>
-                <p>Video is released and played in Bilibili!</p>
-            </div>
-        </div>
-        <div>
-            <p class="version">V1.3.7 Inside × 2.1.8 Stable</p>
-
-            <p>CSS 3 debugged. Added Articles into the site.</p>
-        </div>
-        <div>
-            <p class="version">V1.3.5 Beta</p>
-            <p>We've tried, and MsEdge loads the fastest.
-                <a href="https://www.microsoft.com/en-us/edge?form=MA13DC&OCID=MA13DC" target="_blank">go&gt&gt</a>
-            </p>
-        </div>
-        <div>
-            <p class="version">V1.3.1 Beta</p>
-
-            <p>Think the only color is boring? Try this colorful version!</p>
-        </div>
-        <div>
-            <p class="version">V1.2.7 Alpha × V2.1.0 Stable</p>
-            <p>HTML 5 + CSS 3 + JavaScript + Python 3, quadruple code type, better experience.</p>
-        </div>
+        <p class="version" id="kf3">Website Version 3.8.4</p>
     </div>
 </div>
 </body>

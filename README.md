@@ -42,9 +42,13 @@ that took me into the wonderful world of Flask.
 
 ## Release Notes
 
-### V3.8.2 8/6/2020
+### V3.8.4 8/12/2020
 
-Fix bugs.
+Remove index page versions
+
+### V3.8.3 & V3.8.2  8/6/2020 - 8/11/2020
+
+Fix bugs
 
 ### V3.8.1 8/5/2020
 

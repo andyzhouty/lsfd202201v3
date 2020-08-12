@@ -1,13 +1,14 @@
 @media screen and (min-width: 1080px) {
     html {
-        background-color: white;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         color: black;
+        height: 100%;
+        background: #fafafa;
     }
 
     h1 {
         text-align: center;
-        font-size: 72px;
+        font-size: 80px;
         font-family: "Segoe UI Semibold", sans-serif;
     }
 
@@ -19,7 +20,7 @@
 
 
     p {
-        font-size: 24px;
+        font-size: 32px;
         text-align: center;
     }
 
@@ -37,7 +38,6 @@
         font-family: "Segoe UI", sans-serif;
         text-decoration: underline;
     }
-
 
     #index {
         height: 100%;
