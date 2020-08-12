@@ -11,7 +11,7 @@ def register_commands(app: Flask):
         """Run the unit tests."""
         logging.disable(logging.CRITICAL)  # disable log
         tests = unittest.TestLoader().discover('tests')
-        unittest.TextTestRunner(verbosity=1).run(tests)
+        unittest.TextTestRunner(verbosity=2).run(tests)
 
     @app.cli.command()
     @click.option('-d', '--drop', default=False, help='Delete data.')

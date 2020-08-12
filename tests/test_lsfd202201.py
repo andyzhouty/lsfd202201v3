@@ -2,7 +2,7 @@
 import unittest
 import os
 from flask_mail import Message, Mail
-from flask import abort
+from flask import abort, session
 from faker import Faker
 from lsfd202201.models import db, Article, Comment
 from lsfd202201 import create_app
@@ -13,7 +13,7 @@ class TestApp(unittest.TestCase):
     def setUp(self) -> None:
         self.app = create_app('testing')
         self.mail = Mail(self.app)
-        self.context = self.app.app_context()
+        self.context = self.app.test_request_context()
         self.context.push()
         self.client = self.app.test_client()
         db.drop_all()
@@ -40,7 +40,7 @@ class TestApp(unittest.TestCase):
             'title': fake.sentence(),
             'content': fake.text(200)
         }
-        response = self.client.post("/articles/upload-result/", data=data)
+        response = self.client.post("/articles/result/", data=data)
         return response
 
     def create_comment(self, body):
@@ -62,14 +62,14 @@ class TestApp(unittest.TestCase):
             self.client.get('/').status_code == 200 and
             self.client.get('/index/').status_code == 200 and
             self.client.get('/articles/').status_code == 200 and
-            self.client.get('/articles/upload/').status_code == 200 and
+            self.client.get('/articles/new/').status_code == 200 and
             self.client.get('/main/').status_code == 200 and
             self.client.get('/members/').status_code == 200 and
             self.client.get('/articles/').status_code == 200 and
             self.client.get('/video/').status_code == 200 and
             self.client.get('/kzkt/').status_code == 200 and
             self.client.get('/about/').status_code == 200 and
-            self.client.get('/about-zh/').status_code == 200 and
+            self.client.get('/about/zh/').status_code == 200 and
             self.client.get('/comments/').status_code == 200
         )
 
@@ -81,7 +81,7 @@ class TestApp(unittest.TestCase):
 
     def test_405(self):
         self.assertEqual(
-            self.client.get('/articles/upload-result/').status_code, 405
+            self.client.get('/articles/result/').status_code, 405
         )
         self.assertEqual(
             self.client.get('/admin/articles/edit_result/1').status_code, 405
@@ -132,13 +132,13 @@ class TestApp(unittest.TestCase):
             'title': fake.sentence(),
             'content': fake.text(200)
         }
-        response = self.client.post("/articles/upload-result/", data=data)
+        response = self.client.post("/articles/result/", data=data)
         received_data = response.get_data(as_text=True)
         self.assertIn("Wrong Password", received_data)
         self.assertEqual(len(Article.query.all()), 0)
         response = self.create_article()
         received_data = response.get_data(as_text=True)
-        self.assertIn("Upload Success", received_data)
+        self.assertIn("Success", received_data)
         self.assertNotEqual(len(Article.query.all()), 0)
 
     def test_comments(self):
@@ -177,6 +177,11 @@ class TestApp(unittest.TestCase):
         self.login_as_admin()
         response = self.client.get("/admin/login/")
         self.assertEqual(response.status_code, 302)
+        response = self.client.get("/admin/")
+        self.assertEqual(response.status_code, 200)
+        self.create_article()
+        response = self.client.get("/admin/articles/edit/1")
+        self.assertEqual(response.status_code, 200)
         response = self.client.get("/admin/comments/")
         self.assertEqual(response.status_code, 200)
         response = self.client.get("/admin/logout/")

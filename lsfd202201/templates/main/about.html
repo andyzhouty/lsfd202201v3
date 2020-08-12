@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    About Us
+{% endblock %}
+{% block page_content %}
+    <div class="row container">
+        <div class="col">
+            {{ content | safe }}
+        </div>
+        <div class="col">
+            <h2>Share Our Website</h2>
+            <img src="/static/images/qrcode.png" alt="QRCode" class="img-fliud">
+            <div style="margin-left: 30px">
+                {{ share.create(title='Share with', align='left')}}
+            </div>
+            <div>
+                {% if not zh %}
+                    <a href="{{ url_for('main.about', language='zh') }}">
+                    Switch to Chinese Mode
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('main.about', language='en') }}">
+                        Switch to English Mode
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

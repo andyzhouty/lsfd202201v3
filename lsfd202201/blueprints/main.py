@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import render_template, Blueprint
-from flask_wtf.csrf import CSRFError
-
+from ..utils import get_html_from
 
 main_bp = Blueprint('main', __name__)
 
@@ -27,15 +26,16 @@ def video():
     return render_template('main/video.html')
 
 
-@main_bp.route('/about-zh/')
-def about_zh():
-    return render_template('main/about_zh.html')
-
-
-@main_bp.route('/about/')
-@main_bp.route('/about-en/')
-def about_en():
-    return render_template('main/about_en.html')
+@main_bp.route("/about/")
+@main_bp.route("/about/<language>/")
+def about(language="en"):
+    if language == "en":
+        zh = False
+        html = get_html_from("https://raw.githubusercontent.com/z-t-y/LSFD202201/master/README.md")
+    else:
+        zh = True
+        html = get_html_from("https://raw.githubusercontent.com/z-t-y/LSFD202201/master/README_zh.md")
+    return render_template('main/about.html', content=html, zh=zh)
 
 
 @main_bp.route('/kzkt/')

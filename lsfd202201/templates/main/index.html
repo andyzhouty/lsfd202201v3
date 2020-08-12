@@ -75,7 +75,7 @@
         <p>Bug Fix Version</p>
     </div>
     <button id="more" onclick="showAll()" class="btn btn-outline-primary btn-block">
-        More
+        Previous Versions
     </button>
     <div style="text-align: center;display: none" id="previous">
         <h3>Previous Versions</h3>
@@ -121,7 +121,7 @@
         <div>
             <p class="version">V3.1.0 RC 1</p>
             <p> Improve experience while uploading.<br>
-                And share this site in <a href="{{ url_for('main.about_en') }}">the share page</a>!
+                And share this site in <a href="{{ url_for('main.about') }}">the share page</a>!
             </p>
         </div>
         <div>
@@ -131,7 +131,7 @@
             </p><br>
             <p>The website now support uploading<br>
                 your own articles.<br>
-                You can upload them <a href="{{ url_for('articles.upload') }}">HERE</a>.
+                You can upload them <a href="{{ url_for('articles.new') }}">HERE</a>.
             </p>
         </div>
         <div>

@@ -8,16 +8,10 @@ from ..utils import admin_required, check_admin_login
 admin_bp = Blueprint('admin', __name__)
 
 
-@admin_bp.before_app_first_request
-def before_app_first_request():
-    session.setdefault('admin', False)
-
-
 @admin_bp.before_request
 def before_request():
-    if ('Mozilla' not in request.user_agent.string and
-            not current_app.config['TESTING']):
-        print(request.user_agent.string)
+    session.setdefault('admin', False)
+    if 'Mozilla' not in request.user_agent.string and not current_app.config['TESTING']:
         return redirect(url_for('main.main'))
 
 
@@ -84,18 +78,13 @@ def edit_article(id):
 @admin_bp.route('/articles/edit_result/<int:id>', methods=['POST'])
 @admin_required
 def article_edit_result(id):
-    try:
-        article_content = request.form['ckeditor']
-        id = id
-        article = Article().query_by_id(id)
-        article.content = article_content
-        db.session.add(article)
-        db.session.commit()
-    except Exception as e:
-        flash("Edit Failed!", "warning")
-        print(e)
-    else:
-        flash("Edit Succeeded!", "success")
+    article_content = request.form['ckeditor']
+    id = id
+    article = Article().query_by_id(id)
+    article.content = article_content
+    db.session.add(article)
+    db.session.commit()
+    flash("Edit Succeeded!")
     return render_template("result.html", url=url_for("admin.admin"))
 
 

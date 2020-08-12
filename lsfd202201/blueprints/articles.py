@@ -5,12 +5,11 @@ Copyright(c) all rights reserved 2020
 # -*- coding:utf-8 -*-
 from flask import (render_template, request, flash,
                    url_for, Blueprint, current_app)
-from werkzeug.security import check_password_hash
 from ..models import Article
-from ..forms import UploadForm
+from ..forms import ArticleForm
 from ..extensions import db
 from ..emails import send_email
-from ..utils import check_upload_password
+from ..utils import check_article_password
 
 articles_bp = Blueprint("articles", __name__)
 
@@ -27,28 +26,28 @@ def articles():
                                this_article=article,
                                content=article.content,
                                pagination=pagination)
-    flash("No Articles! Please Upload one first!", "warning")
-    return render_template("result.html", url=url_for("articles.upload"))
+    flash("No Articles! Please Create one first!", "warning")
+    return render_template("result.html", url=url_for("articles.new"))
 
 
-@articles_bp.route('/upload/')
-def upload():
-    form = UploadForm()
-    return render_template('articles/upload.html', form=form)
+@articles_bp.route('/new/', endpoint='new')
+def create_article():
+    form = ArticleForm()
+    return render_template('articles/new.html', form=form)
 
 
-@articles_bp.route('/upload-result/', methods=['POST'])
-def upload_result():
-    # get values from upload page
+@articles_bp.route('/result/', methods=['POST'], endpoint='result')
+def create_article_result():
+    # get values from article page
     name = request.form['name']
     password = request.form['password']
     date = request.form['date']
     title = request.form['title']
     content = request.form['content']
     # password protection
-    if not (check_upload_password(password)):
+    if not (check_article_password(password)):
         flash("Wrong Password", "warning")
-        return render_template('result.html', url=url_for("articles.upload"))
+        return render_template('result.html', url=url_for("articles.new"))
     # commit data
     current_app.logger.info("The article was ready to commit.")
     article = Article(
@@ -69,5 +68,5 @@ def upload_result():
         template="articles/article_notification",
         **email_data
     )
-    flash("Upload Success", "success")
+    flash("Success", "success")
     return render_template('result.html', url=url_for("articles.articles"))

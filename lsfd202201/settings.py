@@ -14,7 +14,7 @@ class Base:
 
     SECRET_KEY = os.getenv('SECRET_KEY')
 
-    UPLOAD_PASSWORD_HASH = generate_password_hash(os.getenv('PASSWORD'))
+    ARTICLE_PASSWORD_HASH = generate_password_hash(os.getenv('PASSWORD'))
     ADMIN_PASSWORD_HASH = generate_password_hash(os.getenv('ADMIN_PASSWORD'))
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
