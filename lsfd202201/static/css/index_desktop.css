@@ -1,8 +1,8 @@
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 992px) {
     html {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         color: black;
-        height: 100%;
+        height: 150%;
         background: #fafafa;
     }
 
@@ -40,71 +40,48 @@
     }
 
     #index {
+        margin-top: 100px;
+        margin-bottom: 15%;
         height: 100%;
     }
 
-    p#new {
-        font-size: 2.2em;
-        font-weight: bold;
-    }
-
-    a#link {
-        color: black;
-        text-decoration: none;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
-
-    div#message {
+    #message {
+        text-align: center;
+        font-size: large;
         width: 100%;
         height: auto;
         min-height: 7%;
         max-height: 18%;
         background-color: #ffdb99;
         color: #555555;
+        top: 0px;
+        padding: 7px;
+    }
+
+    #go2main {
+        text-decoration: none;
+        font-size: large;
+        width: 15%;
         position: fixed;
-        top: 0;
-        padding-top: 3px;
+        top: 41px;
+        left: 89%;
+        width: 100%;
     }
 
-    div#message-content {
-        float: left;
-        text-align: left;
-        font-size: 18px;
-        margin-top: 2px;
-        margin-left: 5%;
-        overflow: hidden;
-        padding-top: 2px;
-    }
-
-    div#button {
-        background-color: white;
-        text-align: center;
-        height: auto;
-        border-radius: 5px;
-        font-size: 1.2em;
-        margin: 5px;
-        padding: 5px;
-        float: right;
-        position: fixed;
-        top: 1px;
-        right: 1em;
-        overflow: visible;
-    }
-
-    a.thank {
+    .thank {
         color: darkblue;
         text-decoration: none;
     }
 
-    a.thank:hover, a.thank:active {
+    .thank:hover, .thank:active {
         text-decoration: underline;
     }
 
-    p.version {
+    .version {
         font-family: 'Segoe UI Light', sans-serif;
     }
 
-    p.display-1 {
+    .display-1 {
         margin-bottom: 150px;
     }
 }

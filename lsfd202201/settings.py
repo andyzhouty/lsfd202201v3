@@ -32,6 +32,7 @@ class Base:
         ADMIN_ONE_EMAIL,
         ADMIN_TWO_EMAIL
     ]
+    BOOTSTRAP_SERVE_LOCAL = True
 
 
 class Production(Base):

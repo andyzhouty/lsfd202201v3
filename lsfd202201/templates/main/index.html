@@ -10,61 +10,41 @@
     <link href="/static/favicon/favicon.ico" rel="shortcut icon">
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
-    <script>
-        $('#more').click(function () {
-            $('div#previous').show();
-            $('button#more').hide();
-        })
-
-        $(function () {
-            var selector = $('div#index p');
-            selector.hide()
-            window.scrollTo(0, 0);
-            var j = 0;
-            var len = selector.length;
-            var interval = setInterval(function () {
-                    selector.eq(j > len - 1 ? j = 0 : j++).fadeIn(1500);
-                }
-                , 750
-            );
-        })
+    <script src="{{ url_for('static', filename='js/index.js') }}">
     </script>
 </head>
-<body>
-<div class="container-fluid" style="background-color: #fafafa;color: #333333;">
-    <div id="mob-full-screen">
-        <div id="message">
-            <div id="message-content">
-                Special thanks for
-                <a class="thank" href="https://pythonanywhere.com" target="_blank">
-                    PythonAnywhere
-                </a>,
-                <a class="thank" href="https://bilibili.com" target="_blank">
-                    Bilibili
-                </a>,
-                <a class="thank" href="https://flask.pocoo.org" target="_blank">
-                    Flask
-                </a>
-                and
-                <a class="thank" href="https://getbootstrap.com/" target="_blank">
-                    Bootstrap.
-                </a>
-                They provided us servers and media players.
-                <div id="button">
-                    <a id="link" href="{{ url_for('main.main') }}">
-                        Go to main page &gt;&gt;
-                    </a>
-                </div>
-            </div>
-        </div>
+<body class="bg-light">
+<div>
+    <div id="message">
+        Special thanks for
+        <a class="thank" href="https://pythonanywhere.com" target="_blank">
+            PythonAnywhere
+        </a>,
+        <a class="thank" href="https://bilibili.com" target="_blank">
+            Bilibili
+        </a>,
+        <a class="thank" href="https://flask.pocoo.org" target="_blank">
+            Flask
+        </a>
+        and
+        <a class="thank" href="https://getbootstrap.com/" target="_blank">
+            Bootstrap.
+        </a>
+        They provided us servers and media players.<br>
     </div>
-    <div style="margin:0; width:auto; padding:10%;border-bottom: solid #ccc;max-height: 100%;padding: 15%;" id="index">
+    <a id="go2main" href="{{ url_for('main.main') }}">
+        <button class="btn btn-primary">
+            Go to main page &gt;&gt;
+        </button>
+    </a>
+    <div id="index" class="bg-light">
         <p class="display-1" style="font-weight: 600">
             Hello.
         </p>
-        <p id="kf2">This is a new website for lansheng 202201.</p>
-        <p class="version" id="kf3">Website Version 3.8.4</p>
+        <p>This is our new website for lansheng 202201.</p>
+        <p class="version">Website Version 3.8.4</p>
     </div>
+
 </div>
 </body>
 </html>
