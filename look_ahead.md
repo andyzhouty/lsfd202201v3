@@ -1,4 +1,0 @@
-# This md file is to list what we plan to do in the future
-1. Add Comments / 添加评论功能 [Planned]
-2. Sending EMails for Admin on important occasions /
-在必要时给管理员发邮件 [In Progress]

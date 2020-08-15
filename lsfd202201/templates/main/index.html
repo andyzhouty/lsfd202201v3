@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link href="/static/css/index_fonts.css" rel="stylesheet">
+    <link href="/static/css/index_desktop.css" rel="stylesheet">
+    <link href="/static/css/index_mobile.css" rel="stylesheet">
+    <link href="/static/favicon/favicon.ico" rel="shortcut icon">
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <script src="{{ url_for('static', filename='js/index.js') }}">
+    </script>
+</head>
+<body class="bg-light">
+<div>
+    <div id="message">
+        Special thanks for
+        <a class="thank" href="https://pythonanywhere.com" target="_blank">
+            PythonAnywhere
+        </a>,
+        <a class="thank" href="https://bilibili.com" target="_blank">
+            Bilibili
+        </a>,
+        <a class="thank" href="https://flask.pocoo.org" target="_blank">
+            Flask
+        </a>
+        and
+        <a class="thank" href="https://getbootstrap.com/" target="_blank">
+            Bootstrap.
+        </a>
+        They provided us servers and media players.<br>
+    </div>
+    <a id="go2main" href="{{ url_for('main.main') }}">
+        <button class="btn btn-primary">
+            Go to main page &gt;&gt;
+        </button>
+    </a>
+    <div id="index" class="bg-light">
+        <p class="display-1" style="font-weight: 600">
+            Hello.
+        </p>
+        <p>This is our new website for lansheng 202201.</p>
+        <p class="version">Website Version 3.8.4</p>
+    </div>
+
+</div>
+</body>
+</html>

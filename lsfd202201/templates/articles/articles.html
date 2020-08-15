@@ -1,0 +1,42 @@
+{% extends 'main/main.html' %}
+{% from 'bootstrap/pagination.html' import render_pagination %}
+{% block title %}
+    Articles
+{% endblock title %}
+{% block focus %}Necessary Info{% endblock focus%}
+{% block news_list %}
+    <ul>
+        <li>
+            This page is made in Python Flask + HTML, you can create your
+            own article <a href="{{ url_for('articles.new') }}">HERE</a>.
+        </li>
+        <li>
+            You will need to get the upload password from
+            <a href="mailto:andyforever0108@outlook.com">Andy Zhou</a> or
+            <a href="mailto:riceforever0208@outlook.com">Rice Zong</a>.
+        </li>
+        <li>
+            If you uploaded a junk article,
+            it might be deleted by the two admins(mentioned above).
+        </li>
+    </ul>
+{% endblock %}
+{% block article_title %}
+    {{ this_article.title }}
+{% endblock article_title %}
+
+{% block date %}
+    {{ this_article.date }}
+{% endblock date %}
+
+{% block author %}
+    by {{ this_article.author }}
+{% endblock author %}
+
+{% block article_content %}
+    {{ content | safe }}
+{% endblock article_content %}
+
+{% block pagination %}
+    {{ render_pagination(pagination) }}
+{% endblock pagination %}

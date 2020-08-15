@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    About Us
+{% endblock title %}
+{% block page_content %}
+    <div class="row container">
+        <div class="col-lg-8">
+            {{ content | safe }}
+        </div>
+        <div class="col-lg-4">
+            {% if not zh %}
+                <h2>Share Our Website</h2>
+            {% else %}
+                <h2>分享我们的网站</h2>
+            {% endif %}
+            <img src="/static/images/qrcode.png" alt="QRCode" class="img-fliud">
+            <div>
+                {% if not zh %}
+                    <div style="margin-left: 30px">
+                        {{ share.create(title='Share with', align='left')}}
+                    </div>
+                    <a href="{{ url_for('main.about', language='zh') }}">
+                    Switch to Chinese Mode
+                    </a>
+                {% else %}
+                    <div style="margin-left: 30px">
+                        {{ share.create(title='分享', align='left')}}
+                    </div>
+                    <a href="{{ url_for('main.about', language='en') }}">
+                        切换为英语模式
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
+{% block script %}
+    {{ super() }}
+    {{ share.load(serve_local=True) }}
+{% endblock script %}

@@ -12,10 +12,10 @@
     }
 
     ul.info {
-        list-style: square inside url('/static/images/li.jpg');
+        list-style-type: none;
     }
 
     ul.info li {
-        font-size: 1.7em;
+        font-size: 1.5em;
     }
 }
