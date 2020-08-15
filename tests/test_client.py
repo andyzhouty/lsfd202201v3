@@ -2,9 +2,9 @@
 import unittest
 import os
 from flask_mail import Message, Mail
-from flask import abort, session
+from flask import abort
 from faker import Faker
-from lsfd202201.models import db, Article, Comment
+from lsfd202201.models import db, Article, Feedback
 from lsfd202201 import create_app
 
 fake = Faker()
@@ -43,12 +43,12 @@ class TestApp(unittest.TestCase):
         response = self.client.post("/articles/result/", data=data)
         return response
 
-    def create_comment(self, body):
+    def create_feedback(self, body):
         data = {
             'name': fake.name(),
             'body': fake.text(100)
         }
-        response = self.client.post("/comments/", data=data)
+        response = self.client.post("/feedback/", data=data)
         return response
 
     def test_app_exists(self):
@@ -58,6 +58,7 @@ class TestApp(unittest.TestCase):
         self.assertTrue(self.app.config['TESTING'])
 
     def test_200(self):
+        
         self.assertTrue(
             self.client.get('/').status_code == 200 and
             self.client.get('/index/').status_code == 200 and
@@ -70,7 +71,7 @@ class TestApp(unittest.TestCase):
             self.client.get('/kzkt/').status_code == 200 and
             self.client.get('/about/').status_code == 200 and
             self.client.get('/about/zh/').status_code == 200 and
-            self.client.get('/comments/').status_code == 200
+            self.client.get('/feedback/').status_code == 200
         )
 
     def test_302(self):
@@ -141,14 +142,14 @@ class TestApp(unittest.TestCase):
         self.assertIn("Success", received_data)
         self.assertNotEqual(len(Article.query.all()), 0)
 
-    def test_comments(self):
+    def test_feedback(self):
         fake_name = fake.name()
         fake_body = fake.text(100)
         data = {
             'name': fake_name,
             'body': fake_body
         }
-        response = self.client.post("/comments/", data=data)
+        response = self.client.post("/feedback/", data=data)
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
         self.assertIn(fake_body, received_data)
@@ -170,7 +171,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         response = self.client.get("/admin/")
         self.assertEqual(response.status_code, 302)
-        response = self.client.get("/admin/comments/")
+        response = self.client.get("/admin/feedbacks/")
         self.assertEqual(response.status_code, 302)
         response = self.client.get("/admin/login/")
         self.assertEqual(response.status_code, 200)
@@ -182,7 +183,7 @@ class TestApp(unittest.TestCase):
         self.create_article()
         response = self.client.get("/admin/articles/edit/1")
         self.assertEqual(response.status_code, 200)
-        response = self.client.get("/admin/comments/")
+        response = self.client.get("/admin/feedbacks/")
         self.assertEqual(response.status_code, 200)
         response = self.client.get("/admin/logout/")
         self.assertEqual(response.status_code, 302)
@@ -221,11 +222,11 @@ class TestApp(unittest.TestCase):
         article = Article().query_by_id(1)
         self.assertEqual(article.content, fake_text)
 
-    def test_admin_delete_comment(self):
+    def test_admin_delete_feedback(self):
         self.login_as_admin()
-        self.create_comment("Hello, World!")
-        self.assertGreater(len(Comment.query.all()), 0)
-        response = self.client.post("/admin/comments/delete/1")
+        self.create_feedback("Hello, World!")
+        self.assertGreater(len(Feedback.query.all()), 0)
+        response = self.client.post("/admin/feedback/delete/1")
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
         self.assertIn("deleted", received_data)

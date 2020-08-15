@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}
-    Members
-{% endblock %}
+{% block title %} Members {% endblock title %}
 {% block styles %}
     {{ super() }}
-    <link href="/static/css/members_desktop.css" rel="stylesheet">
-    <link href="/static/css/members_mobile.css" rel="stylesheet">
-{% endblock %}
+    {{ static_file('css', 'css/members_desktop.css') }}
+    {{ static_file('css', 'css/member_mobile.css') }}
+{% endblock styles %}
 {% block page_content %}
     <ul class="info">
-        <li> A year ago, hackers broke into GitHub and stole huge amounts
+        <li>
+            &#8284; A year ago, hackers broke into GitHub and stole huge amounts
             of data. We don't want the information getting revealed.
         </li>
         <li>
-            To protect your privacy, we hide the real name.
+            &#8284; To protect your privacy, we hide the real name.
             So that hackers and visitors won't see your information.
         </li>
     </ul>
@@ -212,36 +211,30 @@
             <td>F</td>
         </tr>
         <tr>
-
             <td>Yolanda</td>
             <td>20220133</td>
             <td>F</td>
         </tr>
         <tr>
-
             <td>Cindy</td>
             <td>20220134</td>
             <td>F</td>
         </tr>
         <tr>
-
             <td>Jimmy</td>
             <td>20220135</td>
             <td>M</td>
         </tr>
         <tr>
-
             <td>Alberta</td>
             <td>20220136</td>
             <td>F</td>
         </tr>
         <tr>
-
             <td>Kevin Zhuang</td>
             <td>20220137</td>
             <td>M</td>
         </tr>
-
     </table>
     <table id="classmates" class="table table-bordered table-striped">
         <caption style="font-size: 36px;">
@@ -317,5 +310,4 @@
             <td>English</td>
         </tr>
     </table>
-
 {% endblock %}

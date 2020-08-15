@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} ADMIN {% endblock %}
+{% block title %} ADMIN {% endblock title %}
 {% block page_content %}
     <h1>Welcome, Administrator {{ name }}!</h1>
     <nav class="nav nav-tabs">
         <a href="#" class="nav-link active">Articles</a>
-        <a href="{{ url_for("admin.manage_comments") }}" class="nav-link">Comments</a>
+        <a href="{{ url_for("admin.manage_feedback") }}" class="nav-link">Feedback</a>
     </nav>
     <ul class="list-group">
         {% for article in articles %}
@@ -30,4 +30,4 @@
             </li>
         {% endfor %}
     </ul>
-{% endblock %}
+{% endblock page_content %}

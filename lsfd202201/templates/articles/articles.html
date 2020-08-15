@@ -2,8 +2,8 @@
 {% from 'bootstrap/pagination.html' import render_pagination %}
 {% block title %}
     Articles
-{% endblock %}
-{% block focus %}Necessary Info{% endblock %}
+{% endblock title %}
+{% block focus %}Necessary Info{% endblock focus%}
 {% block news_list %}
     <ul>
         <li>
@@ -22,17 +22,21 @@
     </ul>
 {% endblock %}
 {% block article_title %}
-{{ this_article.title }}
-{% endblock %}
-{% block date%}
-{{ this_article.date }}
-{% endblock %}
+    {{ this_article.title }}
+{% endblock article_title %}
+
+{% block date %}
+    {{ this_article.date }}
+{% endblock date %}
+
 {% block author %}
-by {{ this_article.author }}
-{% endblock %}
+    by {{ this_article.author }}
+{% endblock author %}
+
 {% block article_content %}
     {{ content | safe }}
-{% endblock %}
+{% endblock article_content %}
+
 {% block pagination %}
     {{ render_pagination(pagination) }}
-{% endblock %}
+{% endblock pagination %}

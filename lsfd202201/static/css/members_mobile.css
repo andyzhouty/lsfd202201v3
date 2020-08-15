@@ -20,7 +20,7 @@
     }
 
     ul.info {
-        list-style: square inside url('/static/images/li.jpg');
+        list-style-type: none;
     }
 
     ul.info li {

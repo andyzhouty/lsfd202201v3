@@ -4,30 +4,36 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask.logging import default_handler
 from .extensions import (
-    bootstrap, ckeditor, share, db, csrf, migrate, mail, moment
+    bootstrap, ckeditor, share, db, csrf, migrate, mail, moment, login_manager
 )
-from .models import Article, Comment
+from .models import Article, Feedback
 from .settings import config
 from .errors import register_error_handlers
 from .commands import register_commands
 from .blueprints.admin import admin_bp
 from .blueprints.articles import articles_bp
 from .blueprints.main import main_bp
-from .blueprints.comments import comment_bp
+from .blueprints.feedback import feedback_bp
 
 
 def create_app(config_name=None) -> Flask:
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
     app = Flask('lsfd202201')
-    app.config.from_object(config[config_name])
+    register_config(app, config_name)
     register_logger(app)
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)
     register_error_handlers(app)
-    register_shell_context(app)
+    register_context(app)
     return app
+
+
+def register_config(app: Flask, config_name: str):
+    app.config.from_object(config[config_name])
+    app.jinja_env.trim_blocks = True
+    app.jinja_env.lstrip_blocks = True
 
 
 def register_logger(app: Flask):
@@ -58,20 +64,30 @@ def register_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
     mail.init_app(app)
     moment.init_app(app)
+    login_manager.init_app(app)
 
 
 def register_blueprints(app: Flask) -> None:
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(articles_bp, url_prefix="/articles")
-    app.register_blueprint(comment_bp, url_prefix="/comments")
+    app.register_blueprint(feedback_bp, url_prefix="/feedback")
 
 
-def register_shell_context(app: Flask) -> None:
+def register_context(app: Flask) -> None:
     @app.shell_context_processor
     def make_shell_context():
         return dict(
             db=db,
             Article=Article,
-            Comment=Comment
+            Feedback=Feedback
+        )
+
+    @app.context_processor
+    def make_template_context():
+        articles = Article.query.order_by(Article.timestamp.desc()).all()
+        feedback = Feedback.query.order_by(Feedback.timestamp.desc()).all()
+        return dict(
+            articles=articles,
+            feedback=feedback
         )

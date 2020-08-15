@@ -4,7 +4,7 @@
 {% endblock %}
 {% block styles %}
     {{ super() }}
-    <link href="/static/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
+    {{ static_file('css', 'https://cdn.staticfile.org/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css', local=False) }}
 {% endblock %}
 {% block page_content %}
     <div class="container">
@@ -40,7 +40,7 @@
         </form>
         <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
             WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE SUBMITTING.<br>
-            IT CURRENTLY CANNOT BE CHANGED IF YOU DON'T CONTACT THE
+            IT CANNOT BE CHANGED IF YOU DON'T CONTACT THE
             <a href="mailto:andyforever0108@outlook.com">ADMIN</a>.<br>
         </p>
     </div>
@@ -48,16 +48,15 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
-    {{ ckeditor.load() }}
-    <script src="/static/js/bootstrap-datepicker.min.js"></script>
-    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    {{ static_file('js', 'https://cdn.staticfile.org/ckeditor5/21.0.0/ckeditor.js', local=False) }}
+    {{ static_file('js', 'https://cdn.staticfile.org/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js', local=False)}}
     <script>
         $(document).ready(function () {
             $('#date').datepicker({
                 format: 'yyyy-mm-dd',
-                language: 'zh-CN',
+                language: 'en-US',
                 todayHighlight: 1
             });
         });
     </script>
-{% endblock %}
+{% endblock scripts %}

@@ -57,7 +57,7 @@ Remove threading (due to sth weird, the threading did not work).
 ### V3.8.0 8/4/2020
 
 1. Write more unittests
-2. Add comments page
+2. Add feedback page
 3. Add test coverage
 
 ### V3.7.1 7/30/2020

@@ -28,7 +28,7 @@ class EditForm(FlaskForm):
     submit = SubmitField("Publish", validators=[DataRequired()])
 
 
-class CommentForm(FlaskForm):
+class FeedbackForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
-    body = TextAreaField('Comment', validators=[DataRequired(), Length(1, 200)])  # noqa
+    body = TextAreaField('Feedback', validators=[DataRequired(), Length(1, 200)])  # noqa
     submit = SubmitField()

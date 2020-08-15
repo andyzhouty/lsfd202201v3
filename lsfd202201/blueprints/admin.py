@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from flask import (render_template, request, flash,
                    redirect, url_for, session, Blueprint, current_app)
-from ..models import db, Article, Comment
+from ..models import db, Article, Feedback
 from ..forms import AdminLoginForm, EditForm
 from ..utils import admin_required, check_admin_login
 
@@ -49,8 +49,7 @@ def admin():
     session['admin'] = True
     return render_template(
         'admin/admin.html',
-        name=session['admin_name'].capitalize(),
-        articles=Article.query.all()
+        name=session['admin_name'].capitalize()
     )
 
 
@@ -88,17 +87,17 @@ def article_edit_result(id):
     return render_template("result.html", url=url_for("admin.admin"))
 
 
-@admin_bp.route('/comments/')
+@admin_bp.route('/feedbacks/')
 @admin_required
-def manage_comments():
-    return render_template("admin/comments.html", comments=Comment().query.all())
+def manage_feedback():
+    return render_template("admin/feedbacks.html")
 
 
-@admin_bp.route('/comments/delete/<int:id>', methods=['POST'])
+@admin_bp.route('/feedback/delete/<int:id>', methods=['POST'])
 @admin_required
-def delete_comment(id):
-    comment = Comment().query_by_id(id)
-    comment.delete()
-    flash(f"{str(comment)} deleted.", "success")
-    current_app.logger.info(f"Comment id {id} deleted.")
-    return render_template("result.html", url=url_for("admin.manage_comments"))
+def delete_feedback(id):
+    feedback = Feedback().query_by_id(id)
+    feedback.delete()
+    flash(f"{str(feedback)} deleted.", "success")
+    current_app.logger.info(f"Feedback id {id} deleted.")
+    return render_template("result.html", url=url_for("admin.manage_feedback"))

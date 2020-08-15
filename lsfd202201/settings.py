@@ -32,6 +32,10 @@ class Base:
         ADMIN_ONE_EMAIL,
         ADMIN_TWO_EMAIL
     ]
+
+    # ('theme name': 'display name')
+    BOOTSTRAP_THEMES = {'default': 'Default', 'ubuntu': 'Ubuntu',
+                       'lite': 'Lite', 'Dark': 'Dark'}
     BOOTSTRAP_SERVE_LOCAL = True
 
 
@@ -39,7 +43,6 @@ class Production(Base):
     FLASK_CONFIG = 'production'
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL", generate_sqlite_file('data'))
-    MAIL_SUPPRESS_SEND = False
 
 
 class Development(Base):

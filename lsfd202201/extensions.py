@@ -6,6 +6,7 @@ from flask_ckeditor import CKEditor
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_moment import Moment
+from flask_login import LoginManager
 
 bootstrap = Bootstrap()
 share = Share()
@@ -15,3 +16,11 @@ ckeditor = CKEditor()
 migrate = Migrate()
 mail = Mail()
 moment = Moment()
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    from .models import Admin
+    admin = Admin.query.get(int(user_id))
+    return admin
