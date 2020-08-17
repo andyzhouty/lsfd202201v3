@@ -5,6 +5,7 @@ import requests
 from flask import redirect, session, url_for, current_app, request
 from werkzeug.security import check_password_hash
 from markdown import markdown
+from .models import Admin
 
 
 def admin_required(func):
@@ -24,11 +25,9 @@ def check_article_password(password: str) -> bool:
     return False
 
 
-def check_admin_login(password: str, name) -> bool:
-    if (check_password_hash(current_app.config['ADMIN_PASSWORD_HASH'], password) and
-            (name == 'ricezong' or name == 'andyzhou')):
-        return True
-    return False
+def check_admin_login(password: str, name: str) -> bool:
+    admin = Admin.query.filter_by(name=name).first()
+    return admin.verify_password(password)
 
 
 def get_html_from(url: str) -> str:

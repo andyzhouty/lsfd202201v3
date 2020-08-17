@@ -4,20 +4,22 @@ import os
 from flask_mail import Message, Mail
 from flask import abort
 from faker import Faker
-from lsfd202201.models import db, Article, Feedback
+from lsfd202201.models import Admin, db, Article, Feedback
 from lsfd202201 import create_app
 
 fake = Faker()
 
-class TestApp(unittest.TestCase):
+class TestClient(unittest.TestCase):
     def setUp(self) -> None:
         self.app = create_app('testing')
         self.mail = Mail(self.app)
         self.context = self.app.test_request_context()
         self.context.push()
         self.client = self.app.test_client()
-        db.drop_all()
         db.create_all()
+        admin = Admin(name='andyzhou', password='PasswordForTesting')
+        db.session.add(admin)
+        db.session.commit()
 
     def tearDown(self) -> None:
         db.drop_all()
@@ -26,8 +28,8 @@ class TestApp(unittest.TestCase):
 
     def login_as_admin(self):
         data = {
-            'name': os.getenv("ADMIN_TWO_NAME"),
-            'password': os.getenv("ADMIN_PASSWORD")
+            'name': 'andyzhou',
+            'password': 'PasswordForTesting'
         }
         response = self.client.post("/admin/", data=data)
         return response
@@ -43,7 +45,7 @@ class TestApp(unittest.TestCase):
         response = self.client.post("/articles/result/", data=data)
         return response
 
-    def create_feedback(self, body):
+    def create_feedback(self):
         data = {
             'name': fake.name(),
             'body': fake.text(100)
@@ -58,21 +60,16 @@ class TestApp(unittest.TestCase):
         self.assertTrue(self.app.config['TESTING'])
 
     def test_200(self):
-        
-        self.assertTrue(
-            self.client.get('/').status_code == 200 and
-            self.client.get('/index/').status_code == 200 and
-            self.client.get('/articles/').status_code == 200 and
-            self.client.get('/articles/new/').status_code == 200 and
-            self.client.get('/main/').status_code == 200 and
-            self.client.get('/members/').status_code == 200 and
-            self.client.get('/articles/').status_code == 200 and
-            self.client.get('/video/').status_code == 200 and
-            self.client.get('/kzkt/').status_code == 200 and
-            self.client.get('/about/').status_code == 200 and
-            self.client.get('/about/zh/').status_code == 200 and
-            self.client.get('/feedback/').status_code == 200
-        )
+        self.assertEqual(self.client.get('/').status_code, 200)
+        self.assertEqual(self.client.get('/index/').status_code, 200)
+        self.assertEqual(self.client.get('/main/').status_code, 200)
+        self.assertEqual(self.client.get('/articles/').status_code, 200)
+        self.assertEqual(self.client.get('/feedback/').status_code, 200)
+        self.assertEqual(self.client.get('/members/').status_code, 200)
+        self.assertEqual(self.client.get('/video/').status_code, 200)
+        self.assertEqual(self.client.get('/about/').status_code, 200)
+        self.assertEqual(self.client.get('/kzkt/').status_code, 200)
+
 
     def test_302(self):
         self.assertEqual(self.client.get('/admin/').status_code, 302)
@@ -190,13 +187,14 @@ class TestApp(unittest.TestCase):
 
     def test_admin_login(self):
         data = {
-            'name': os.getenv("ADMIN_TWO_NAME"),
+            'name': 'andyzhou',
             'password': 'WrongPassword'
         }
-        response = self.client.post("/admin/articles/", data=data)
+        response = self.client.post("/admin/", data=data)
         self.assertEqual(response.status_code, 302)
-        data['password'] = os.getenv("ADMIN_PASSWORD")
-        response = self.client.post("/admin/articles/", data=data)
+        data['password'] = "PasswordForTest"
+        self.login_as_admin()
+        response = self.client.post("/admin/", data=data)
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
         self.assertIn("Welcome, Administrator", received_data)
@@ -224,7 +222,7 @@ class TestApp(unittest.TestCase):
 
     def test_admin_delete_feedback(self):
         self.login_as_admin()
-        self.create_feedback("Hello, World!")
+        self.create_feedback()
         self.assertGreater(len(Feedback.query.all()), 0)
         response = self.client.post("/admin/feedback/delete/1")
         self.assertEqual(response.status_code, 200)

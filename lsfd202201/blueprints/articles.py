@@ -15,8 +15,8 @@ articles_bp = Blueprint("articles", __name__)
 
 
 @articles_bp.route('/')
-def articles():
-    page = request.args.get('page', 1, int)
+@articles_bp.route('/<int:page>')
+def articles(page: int=1):
     all_articles = Article().query.all()
     if all_articles:
         article = Article().query_by_id(page)

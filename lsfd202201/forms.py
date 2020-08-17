@@ -1,7 +1,8 @@
+from re import L
 from flask_wtf import FlaskForm
 from wtforms import (StringField, PasswordField, SubmitField,
                      DateField, TextAreaField)
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_ckeditor import CKEditorField
 
 
@@ -25,10 +26,37 @@ class AdminLoginForm(FlaskForm):
 
 class EditForm(FlaskForm):
     content = CKEditorField("Content", validators=[DataRequired()])
-    submit = SubmitField("Publish", validators=[DataRequired()])
+    submit = SubmitField("Publish")
 
 
 class FeedbackForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
     body = TextAreaField('Feedback', validators=[DataRequired(), Length(1, 200)])  # noqa
-    submit = SubmitField()
+    submit = SubmitField("Submit")
+
+
+class LoginCreatorField(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField("Login")
+
+class LoginUserField(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField("Login")
+
+
+class RegisterCreatorField(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
+    email = StringField('Email', validators=[DataRequired(), Length(1, 200), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password_again = PasswordField('Password(Again)', validators=[DataRequired(), EqualTo(password)])
+    submit = SubmitField("Register")
+
+
+class RegisterUserField(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
+    password = PasswordField("Password", validators=[DataRequired()])
+    password_again = PasswordField('Password(Again)', validators=[DataRequired(), EqualTo(password)])
+    submit = SubmitField("Register")

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block page_content %}
+    <h2>Register as ...</a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            Creator (needs special password given from the admin and an email to verify your identity)<br>
+            As a 'Creator', you can ...
+            <ol>
+                <li>Write articles for the website.</li>
+                <li>Send comments for articles.</li>
+                <li>Send feedbacks.</a>
+            </ol>
+            <a href="{{ url_for('auth.register_creator') }}">Register Now!</a>
+        </li>
+        <li class="list-group-item">
+            User (doesn't need anything)<br>
+            As a 'User', you can only view articles, send comments and feedbacks.
+            <a href="{{ url_for('auth.register_user') }}">Register Now!</a>
+        </li>
+        <li class="list-group-item">
+            Anonymous (if you didn't login, your status is anonymous)<br>
+            As a 'Anonymous' Person, you can only view articles and send feedbacks.
+        </li>
+    </ul>
+{% endblock %}

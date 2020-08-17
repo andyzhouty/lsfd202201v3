@@ -3,9 +3,9 @@ import os
 from werkzeug.security import generate_password_hash
 
 
-def generate_sqlite_file(str: str):
+def generate_sqlite_file(file_name: str):
     basedir = os.path.abspath(os.path.dirname(__file__))
-    return 'sqlite:///' + os.path.join(basedir, f'{str}.sqlite3')
+    return 'sqlite:///' + os.path.join(basedir, f'{file_name}.sqlite3')
 
 
 class Base:
@@ -35,7 +35,7 @@ class Base:
 
     # ('theme name': 'display name')
     BOOTSTRAP_THEMES = {'default': 'Default', 'ubuntu': 'Ubuntu',
-                       'lite': 'Lite', 'Dark': 'Dark'}
+                       'lite': 'Lite', 'dark': 'Dark'}
     BOOTSTRAP_SERVE_LOCAL = True
 
 
