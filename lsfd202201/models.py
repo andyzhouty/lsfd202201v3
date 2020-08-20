@@ -3,8 +3,10 @@
  A python module for database storing
 """
 from datetime import datetime
-from itertools import permutations
+from lsfd202201.extensions import login_manager
+from flask import current_app
 from flask_login import UserMixin
+from flask_login.mixins import AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
@@ -125,6 +127,14 @@ class User(db.Model, UserMixin):
     role = db.relationship('Role', back_populates='users')
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.role is None:
+            if self.email in current_app.config['ADMIN_EMAIL_LIST']:
+                self.role = Role.query.filter_by(name='Administrator').first()
+            if self.role is None:
+                self.role = Role.query.filter_by(default=True).first()
+
     def __repr__(self):
         return f"<User '{self.name}'>"
 
@@ -136,5 +146,19 @@ class User(db.Model, UserMixin):
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
-    def verify_password(self, password):
+    def verify_password(self, password) -> bool:
         return check_password_hash(self.password_hash, password)
+
+    def can(self, perm) -> bool:
+        return self.role is not None and self.role.has_permission(perm)
+
+    def is_administrator(self):
+        return self.can(Permission.ADMIN)
+
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, perm): return False
+
+    def is_administrator(self): return False
+
+login_manager.anonymous_user = AnonymousUser

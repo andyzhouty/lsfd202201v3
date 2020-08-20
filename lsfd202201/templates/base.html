@@ -39,6 +39,13 @@
                 {{ render_nav_item('feedback.feedback', 'Feedback') }}
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link">Log out</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="nav-link">Log in / Register</a>
+                    {% endif %}
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         Theme

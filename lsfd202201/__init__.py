@@ -14,6 +14,7 @@ from .blueprints.admin import admin_bp
 from .blueprints.articles import articles_bp
 from .blueprints.main import main_bp
 from .blueprints.feedback import feedback_bp
+from .auth import auth_bp
 
 
 def create_app(config_name=None) -> Flask:
@@ -64,11 +65,13 @@ def register_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
     mail.init_app(app)
     moment.init_app(app)
+    login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
 
 def register_blueprints(app: Flask) -> None:
     app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(articles_bp, url_prefix="/articles")
     app.register_blueprint(feedback_bp, url_prefix="/feedback")

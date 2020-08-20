@@ -26,12 +26,8 @@ class Base:
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     MAIL_DEFAULT_SENDER = os.getenv("DEFAULT_EMAIL_SENDER")
 
-    ADMIN_ONE_EMAIL = os.getenv('ADMIN_ONE_EMAIL')
-    ADMIN_TWO_EMAIL = os.getenv('ADMIN_TWO_EMAIL')
-    ADMIN_EMAIL_LIST = [
-        ADMIN_ONE_EMAIL,
-        ADMIN_TWO_EMAIL
-    ]
+    ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+    ADMIN_EMAIL_LIST = [ADMIN_EMAIL]
 
     # ('theme name': 'display name')
     BOOTSTRAP_THEMES = {'default': 'Default', 'ubuntu': 'Ubuntu',
