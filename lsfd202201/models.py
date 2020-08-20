@@ -3,6 +3,7 @@
  A python module for database storing
 """
 from datetime import datetime
+from itertools import permutations
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -57,6 +58,7 @@ class Perission:
     MODERATE = 8
     ADMIN = 16
 
+
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -70,15 +72,37 @@ class Role(db.Model):
         if self.permissions is None:
             self.permissions = 0
 
+    def add_permission(self, perm):
+        if not self.has_permission(perm):
+            self.permissions += perm
+
+    def remove_permission(self, perm):
+        if self.has_permission(perm):
+            self.permissions -= perm
+
+    def reset_permissions(self):
+        self.permissions = 0
+
+    def has_permission(self, perm):
+        """
+        Check if a individual permission is in a combined permission
+        """
+        return self.permissions & perm == perm
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.String(20), primary_key=True)
 
     name = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
-    role = db.relationship('Role', backpopulates='users')
-    role_id = db.COlumn(db.Integer, db.ForeignKey('roles.id'))
+    role = db.relationship('Role', back_populates='users')
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
+    @property
+    def password(self):
+        raise AttributeError('Password is not a readable property')
+
+    @password.setter
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
