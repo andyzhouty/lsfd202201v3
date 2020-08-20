@@ -19,7 +19,7 @@ def articles():
     page = request.args.get('page', 1, int)
     all_articles = Article().query.all()
     if all_articles:
-        article = Article().query_by_id(page)
+        article = Article.query_by_id(page)
         pagination = Article.query.order_by(
             Article.timestamp.desc()).paginate(page, 1)
         return render_template('articles/articles.html',

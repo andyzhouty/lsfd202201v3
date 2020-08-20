@@ -59,7 +59,7 @@ def delete_article(id):
     """
     A view function for administrators to delete an articles.
     """
-    article = Article().query_by_id(id)
+    article = Article.query_by_id(id)
     article.delete()
     flash(f"Article id {id} deleted", "success")
     current_app.logger.info(f"{str(article)} deleted.")
@@ -70,7 +70,7 @@ def delete_article(id):
 @admin_required
 def edit_article(id):
     form = EditForm()
-    content = Article().query_by_id(id).content
+    content = Article.query_by_id(id).content
     return render_template("admin/edit.html", id=id, form=form, old_content=content)
 
 
@@ -79,7 +79,7 @@ def edit_article(id):
 def article_edit_result(id):
     article_content = request.form['ckeditor']
     id = id
-    article = Article().query_by_id(id)
+    article = Article.query_by_id(id)
     article.content = article_content
     db.session.add(article)
     db.session.commit()
@@ -96,7 +96,7 @@ def manage_feedback():
 @admin_bp.route('/feedback/delete/<int:id>', methods=['POST'])
 @admin_required
 def delete_feedback(id):
-    feedback = Feedback().query_by_id(id)
+    feedback = Feedback.query_by_id(id)
     feedback.delete()
     flash(f"{str(feedback)} deleted.", "success")
     current_app.logger.info(f"Feedback id {id} deleted.")

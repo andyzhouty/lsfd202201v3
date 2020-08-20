@@ -25,8 +25,9 @@ class Article(db.Model):
     def __repr__(self) -> str:
         return f'<Article {self.title}>'
 
-    def query_by_id(self, id: int) -> db.Model:
-        return self.query.filter_by(id=id).first()
+    @staticmethod
+    def query_by_id(id: int) -> db.Model:
+        return Article.query.filter_by(id=id).first()
 
     def delete(self):
         if self in db.session:
@@ -44,6 +45,7 @@ class Feedback(db.Model):
     def __repr__(self):
         return f'<Feedback {self.body[:10]}...>'
 
+    @staticmethod
     def query_by_id(self, id: int) -> db.Model:
         return self.query.filter_by(id=id).first()
 
@@ -51,7 +53,7 @@ class Feedback(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-class Perission:
+class Permission:
     FOLLOW = 1
     COMMENT = 2
     WRITE = 4

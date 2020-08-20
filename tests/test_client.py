@@ -120,10 +120,10 @@ class TestApp(unittest.TestCase):
         self.assertEqual(str(article), "<Article Test>")
         db.session.add(article)
         db.session.commit()
-        self.assertIsNotNone(Article().query_by_id(1))
+        self.assertIsNotNone(Article.query_by_id(1))
         self.assertEqual(self.client.get('/articles/').status_code, 200)
         article.delete()
-        self.assertIsNone(Article().query_by_id(1))
+        self.assertIsNone(Article.query_by_id(1))
 
     def test_post_article(self):
         data = {
@@ -219,7 +219,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         received_data = response.get_data(as_text=True)
         self.assertIn("Edit Succeeded!", received_data)
-        article = Article().query_by_id(1)
+        article = Article.query_by_id(1)
         self.assertEqual(article.content, fake_text)
 
     def test_admin_delete_feedback(self):
