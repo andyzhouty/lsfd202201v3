@@ -61,16 +61,10 @@ def register_commands(app: Flask): # noqa
     @app.cli.command()
     @click.option('--articles', default=10, help='Generates fake articles')
     @click.option('--feedback', default=10, help='Generates fake feedbacks')
-    @click.option('--admin', default=1, help='Generates fake admins')
-    @click.option('--creator', default=5, help='Generates fake creators')
-    @click.option('--user', default=10, help='Generates fake users')
-    def forge(articles, feedback, admin, creator, user):
+    def forge(articles, feedback):
         """Generates fake data"""
         from . import fakes as f
         db.drop_all()
         db.create_all()
         f.generate_fake_articles(articles)
         f.generate_fake_feedback(feedback)
-        f.generate_fake_admins(admin)
-        f.generate_fake_creators(creator)
-        f.generate_fake_users(user)
