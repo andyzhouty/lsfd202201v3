@@ -4,7 +4,7 @@ import unittest
 import logging
 import click
 from flask import Flask
-from .models import db, Admin, generate_password_hash
+from .models import db
 
 COVERAGE = None
 if os.getenv('FLASK_COVERAGE', False):
@@ -44,19 +44,19 @@ def register_commands(app: Flask): # noqa
             db.drop_all()
         db.create_all()
 
-    @app.cli.command()
-    @click.option('--name', prompt=True)
-    @click.option('--password', prompt=True, hide_input=True)
-    def create_admin(name, password):
-        if Admin.query.count() < 2:
-            admin = Admin(
-                name=name,
-                password_hash=generate_password_hash(password)
-            )
-            db.session.add(admin)
-            db.commit()
-        else:
-            print("Exceeded the max number of admins: 2")
+    # @app.cli.command()
+    # @click.option('--name', prompt=True)
+    # @click.option('--password', prompt=True, hide_input=True)
+    # def create_admin(name, password):
+    #     if Admin.query.count() < 2:
+    #         admin = Admin(
+    #             name=name,
+    #             password_hash=generate_password_hash(password)
+    #         )
+    #         db.session.add(admin)
+    #         db.commit()
+    #     else:
+    #         print("Exceeded the max number of admins: 2")
 
     @app.cli.command()
     @click.option('--articles', default=10, help='Generates fake articles')

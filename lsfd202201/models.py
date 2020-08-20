@@ -50,33 +50,25 @@ class Feedback(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+class Perission:
+    FOLLOW = 1
+    COMMENT = 2
+    WRITE = 4
+    MODERATE = 8
+    ADMIN = 16
 
-class Admin(db.Model, UserMixin):
+class Role(db.Model):
+    __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
-    password_hash = db.Column(db.String(128))
+    name = db.Column(db.String(64), unique=True)
+    default = db.Column(db.Boolean, default=False, index=True)
+    permissions = db.Column(db.Integer)
+    users = db.relationship('User', back_populates='role')
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def validate_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-
-class Creator(db.Model, UserMixin):
-    id = db.Column(db.String(20), primary_key=True)
-
-    name = db.Column(db.String(20), unique=True, index=True)
-    email = db.Column(db.String(200), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
-    member_since = db.Column(db.DateTime, default=datetime.utcnow)
-    confirmed = db.Column(db.Boolean, default=False)
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def validate_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    def __init__(self, **kwargs):
+        super(Role, self).__init__(**kwargs)
+        if self.permissions is None:
+            self.permissions = 0
 
 
 class User(db.Model, UserMixin):
@@ -84,9 +76,11 @@ class User(db.Model, UserMixin):
 
     name = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    role = db.relationship('Role', backpopulates='users')
+    role_id = db.COlumn(db.Integer, db.ForeignKey('roles.id'))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
-    def validate_password(self, password):
+    def verify_password(self, password):
         return check_password_hash(self.password_hash, password)

@@ -6,7 +6,7 @@ from flask.logging import default_handler
 from .extensions import (
     bootstrap, ckeditor, share, db, csrf, migrate, mail, moment, login_manager
 )
-from .models import Article, Feedback
+from .models import Article, Feedback, Role, Perission, User
 from .settings import config
 from .errors import register_error_handlers
 from .commands import register_commands
@@ -79,8 +79,8 @@ def register_context(app: Flask) -> None:
     def make_shell_context():
         return dict(
             db=db,
-            Article=Article,
-            Feedback=Feedback
+            Article=Article, Feedback=Feedback,
+            Perission=Perission, Role=Role, User=User
         )
 
     @app.context_processor
