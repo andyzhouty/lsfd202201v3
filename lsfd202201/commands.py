@@ -4,7 +4,7 @@ import unittest
 import logging
 import click
 from flask import Flask
-from .models import db
+from .models import User, Role
 
 COVERAGE = None
 if os.getenv('FLASK_COVERAGE', False):
@@ -13,7 +13,7 @@ if os.getenv('FLASK_COVERAGE', False):
     COVERAGE.start()
 
 
-def register_commands(app: Flask): # noqa
+def register_commands(app: Flask, db): # noqa
     @app.cli.command()
     @click.option('--coverage/--no-coverage', default=False, help='Run tests with coverage')
     def test(coverage: bool) -> None:
@@ -36,27 +36,26 @@ def register_commands(app: Flask): # noqa
             COVERAGE.erase()
 
     @app.cli.command()
-    @click.option('--drop/--no-drop', default=False, help='Delete data.')
+    @click.option('--drop/--no-drop', default=False, help='Delete data.', prompt=True)
     def init_db(drop: bool) -> None:
         """Init database on a new development machine."""
         if drop:
-            print("Your data will be deleted.")
-            db.drop_all()
-        db.create_all()
+            click.echo("Your data is deleted.")
+            db.drop_all(app=app)
+        db.create_all(app=app)
 
-    # @app.cli.command()
-    # @click.option('--name', prompt=True)
-    # @click.option('--password', prompt=True, hide_input=True)
-    # def create_admin(name, password):
-    #     if Admin.query.count() < 2:
-    #         admin = Admin(
-    #             name=name,
-    #             password_hash=generate_password_hash(password)
-    #         )
-    #         db.session.add(admin)
-    #         db.commit()
-    #     else:
-    #         print("Exceeded the max number of admins: 2")
+    @app.cli.command()
+    @click.option('--name', prompt=True)
+    @click.option('--email', prompt=True)
+    @click.option('--password', prompt=True, hide_input=True)
+    def create_admin(name, email, password):
+        if User.query.filter_by(email=email).count() == 0:
+            admin = User(name=name, email=email)
+            admin.set_password(password)
+            db.session.add(admin)
+            db.session.commit()
+        else:
+            click.echo("Exceeded the max number of admins: 1")
 
     @app.cli.command()
     @click.option('--articles', default=10, help='Generates fake articles')

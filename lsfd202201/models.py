@@ -120,12 +120,12 @@ class Role(db.Model):
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.String(20), primary_key=True)
-
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255))
     name = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
-    role = db.relationship('Role', back_populates='users')
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    role = db.relationship('Role', back_populates='users')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -138,11 +138,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"<User '{self.name}'>"
 
-    @property
-    def password(self):
-        raise AttributeError('Password is not a readable property')
-
-    @password.setter
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

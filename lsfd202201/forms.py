@@ -39,8 +39,8 @@ class FeedbackForm(FlaskForm):
 class RegisterationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(2, 64)])
     email = StringField('Email', validators=[DataRequired(), Length(2, 64), Email()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(2, 128)])
-    password_again = PasswordField('Password (Again)', validators=[DataRequired(), EqualTo(password)])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password_again = PasswordField('Password (Again)', validators=[DataRequired(), EqualTo('password', "Passwords must match")])
     submit = SubmitField('Register')
 
     def validate_email(self, field):

@@ -1,3 +1,4 @@
+import os
 from flask_bootstrap import Bootstrap
 from flask_share import Share
 from flask_wtf import CSRFProtect
@@ -21,6 +22,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(user_id):
-    from .models import Admin
-    admin = Admin.query.get(int(user_id))
+    from .models import User
+    admin = User.query.get(user_id)
+    print('Here # load_user')
     return admin

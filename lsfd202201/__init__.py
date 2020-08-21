@@ -25,7 +25,7 @@ def create_app(config_name=None) -> Flask:
     register_logger(app)
     register_extensions(app)
     register_blueprints(app)
-    register_commands(app)
+    register_commands(app, db)
     register_error_handlers(app)
     register_context(app)
     return app

@@ -1,42 +1,62 @@
-{% extends 'main/main.html' %}
+{% extends 'base.html' %}
 {% from 'bootstrap/pagination.html' import render_pagination %}
+{% extends 'base.html' %}
 {% block title %}
-    Articles
-{% endblock title %}
-{% block focus %}Necessary Info{% endblock focus%}
-{% block news_list %}
-    <ul>
-        <li>
-            This page is made in Python Flask + HTML, you can create your
-            own article <a href="{{ url_for('articles.new') }}">HERE</a>.
-        </li>
-        <li>
-            You will need to get the upload password from
-            <a href="mailto:andyforever0108@outlook.com">Andy Zhou</a> or
-            <a href="mailto:riceforever0208@outlook.com">Rice Zong</a>.
-        </li>
-        <li>
-            If you uploaded a junk article,
-            it might be deleted by the two admins(mentioned above).
-        </li>
-    </ul>
+    Starred Articles
 {% endblock %}
-{% block article_title %}
-    {{ this_article.title }}
-{% endblock article_title %}
+{% block styles %}
+    {{ super() }}
+    {{ static_file('css', 'css/main_mobile.css' ) }}
+    {{ static_file('css', 'css/main_desktop.css') }}
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 left-column">
+                <div class="focus-title">
+                    <h3 class="focus">
+                        Necessary Info
+                    </h3>
+                </div>
+                <div id="left-focus">
+                    <hr>
+                    <ul>
+                        <li>
+                            You must sign in to add your own articles.
+                        </li>
+                        <li>
+                            Though you can create your own articles in this website,<br>
+                            but only the starred articles can be shown here.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="idea">
+                        <h2 style="float:left;font-size:2.2em;">
+                            {{ this_article.title }}
+                        </h2><br>
+                        <div style="float:right">
+                            <h4>
+                                {{ this_article.date }}
+                            </h4>
+                            <h4>
+                                {{ this_article.author }}
+                            </h4>
+                        </div>
+                </div>
+                <div class="main-passage">
+                    <p class="main-passage">
+                        {% block article_content %}
+                            {{ content | safe }}
+                        {% endblock article_content %}
 
-{% block date %}
-    {{ this_article.date }}
-{% endblock date %}
-
-{% block author %}
-    by {{ this_article.author }}
-{% endblock author %}
-
-{% block article_content %}
-    {{ content | safe }}
-{% endblock article_content %}
-
-{% block pagination %}
-    {{ render_pagination(pagination) }}
-{% endblock pagination %}
+                    </p>
+                </div>
+                {% block pagination %}
+                    {{ render_pagination(pagination) }}
+                {% endblock pagination %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
