@@ -21,6 +21,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(user_id):
-    from .models import Admin
-    admin = Admin.query.get(int(user_id))
+    from .models import User
+
+    admin = User.query.get(int(user_id))
     return admin

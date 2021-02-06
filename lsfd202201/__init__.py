@@ -4,7 +4,15 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask.logging import default_handler
 from .extensions import (
-    bootstrap, ckeditor, share, db, csrf, migrate, mail, moment, login_manager
+    bootstrap,
+    ckeditor,
+    share,
+    db,
+    csrf,
+    migrate,
+    mail,
+    moment,
+    login_manager,
 )
 from .models import Article, Feedback
 from .settings import config
@@ -18,8 +26,8 @@ from .blueprints.feedback import feedback_bp
 
 def create_app(config_name=None) -> Flask:
     if config_name is None:
-        config_name = os.getenv('FLASK_CONFIG', 'development')
-    app = Flask('lsfd202201')
+        config_name = os.getenv("FLASK_CONFIG", "development")
+    app = Flask("lsfd202201")
     register_config(app, config_name)
     register_logger(app)
     register_extensions(app)
@@ -39,13 +47,12 @@ def register_config(app: Flask, config_name: str):
 def register_logger(app: Flask):
     app.logger.setLevel(logging.INFO)
 
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s "
-                                  "%(message)s")
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s " "%(message)s"
+    )
     if app.debug:
         file_handler = RotatingFileHandler(
-            filename="logs/lsfd202201.log",
-            maxBytes=10 * 1024 * 1024,
-            backupCount=10
+            filename="logs/lsfd202201.log", maxBytes=10 * 1024 * 1024, backupCount=10
         )
         file_handler.setFormatter(formatter)
         file_handler.setLevel(logging.INFO)
@@ -77,17 +84,10 @@ def register_blueprints(app: Flask) -> None:
 def register_context(app: Flask) -> None:
     @app.shell_context_processor
     def make_shell_context():
-        return dict(
-            db=db,
-            Article=Article,
-            Feedback=Feedback
-        )
+        return dict(db=db, Article=Article, Feedback=Feedback)
 
     @app.context_processor
     def make_template_context():
         articles = Article.query.order_by(Article.timestamp.desc()).all()
         feedback = Feedback.query.order_by(Feedback.timestamp.desc()).all()
-        return dict(
-            articles=articles,
-            feedback=feedback
-        )
+        return dict(articles=articles, feedback=feedback)

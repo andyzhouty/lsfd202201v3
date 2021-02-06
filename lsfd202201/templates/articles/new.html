@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
 {% block title %}
     Create Article
 {% endblock %}
@@ -9,35 +10,7 @@
 {% block page_content %}
     <div class="container">
         <h1 class="display-4">New Article</h1>
-        <form method="POST" action="{{ url_for('articles.result') }}" role="form">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.name.label }}<br>
-                {{ form.name(class='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label }}<br>
-                {{ form.password(class='form-control') }}
-            </div>
-            <div class="form-group">
-                <label>
-                    Date(yyyy-mm-dd)
-                </label>
-                <br>
-                <label for="date">
-                    <input type="text" name="date" id="date" class="form-control">
-                </label>
-            </div>
-            <div class="form-group">
-                {{ form.title.label }}<br>
-                {{ form.title(class='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.content.label }}<br>
-                {{ form.content(class='form-control') }}
-            </div>
-            {{ form.submit(class="btn btn-default btn-light") }}
-        </form>
+        {{ render_form(form) }}
         <p style="font-weight: bold; font-size: 20px; max-width: 30%; min-width:20%">
             WARNING: YOU MUST CHECK YOUR ARTICLE BEFORE SUBMITTING.<br>
             IT CANNOT BE CHANGED IF YOU DON'T CONTACT THE

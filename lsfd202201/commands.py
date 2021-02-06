@@ -4,42 +4,42 @@ import unittest
 import logging
 import click
 from flask import Flask
-from .models import db, Admin, generate_password_hash
+from .models import db, User, generate_password_hash
 
 COVERAGE = None
-if os.getenv('FLASK_COVERAGE', False):
+if os.getenv("FLASK_COVERAGE", False):
     import coverage
-    COVERAGE = coverage.coverage(
-        branch=True, source='lsfd202201', omit=['*/test_*.py']
-    )
+
+    COVERAGE = coverage.coverage(branch=True, source="lsfd202201", omit=["*/test_*.py"])
     COVERAGE.start()
 
 
-def register_commands(app: Flask): # noqa
+def register_commands(app: Flask):  # noqa
     @app.cli.command()
-    @click.option('--coverage/--no-coverage', default=False, help='Run tests with coverage')
+    @click.option(
+        "--coverage/--no-coverage", default=False, help="Run tests with coverage"
+    )
     def test(coverage: bool) -> None:
         """Run the unit tests."""
         if os.getenv("FLASK_COVERAGE", False) and coverage:
-            os.environ['FLASK_COVERAGE'] = '1'
+            os.environ["FLASK_COVERAGE"] = "1"
             os.execvp(sys.executable, [sys.executable] + sys.argv)
         logging.disable(logging.CRITICAL)  # disable log
-        tests = unittest.TestLoader().discover('tests')
+        tests = unittest.TestLoader().discover("tests")
         unittest.TextTestRunner(verbosity=2).run(tests)
         if COVERAGE and coverage:
             COVERAGE.stop()
             COVERAGE.save()
-            print('Coverage Summary: ')
+            print("Coverage Summary: ")
             COVERAGE.report()
             basedir = os.path.abspath(os.path.abspath(__file__))
-            covdir = os.path.join(basedir, 'htmlcov')
+            covdir = os.path.join(basedir, "htmlcov")
             COVERAGE.html_report(directory=covdir)
-            print(f'HTML Version: file://{covdir}/index.html')
+            print(f"HTML Version: file://{covdir}/index.html")
             COVERAGE.erase()
 
-
     @app.cli.command()
-    @click.option('--drop/--no-drop', default=False, help='Delete data.')
+    @click.option("--drop/--no-drop", default=False, help="Delete data.")
     def init_db(drop: bool) -> None:
         """Init database on a new development machine."""
         if drop:
@@ -48,28 +48,26 @@ def register_commands(app: Flask): # noqa
         db.create_all()
 
     @app.cli.command()
-    @click.option('--name', prompt=True)
-    @click.option('--password', prompt=True, hide_input=True)
+    @click.option("--name", prompt=True)
+    @click.option("--password", prompt=True, hide_input=True)
     def create_admin(name, password):
         """Creates an admin"""
-        if Admin.query.count() < 2:
-            admin = Admin(
-                name=name,
-                password_hash=generate_password_hash(password)
-            )
+        if User.query.count() < 2:
+            admin = User(name=name, password_hash=generate_password_hash(password))
             db.session.add(admin)
             db.session.commit()
         else:
             print("Exceeded the max number of admins: 2")
 
     @app.cli.command()
-    @click.option('--articles', default=10, help='Generates fake articles')
-    @click.option('--feedback', default=10, help='Generates fake feedbacks')
-    @click.option('--creator', default=5, help='Generates fake creators')
-    @click.option('--user', default=10, help='Generates fake users')
+    @click.option("--articles", default=10, help="Generates fake articles")
+    @click.option("--feedback", default=10, help="Generates fake feedbacks")
+    @click.option("--creator", default=5, help="Generates fake creators")
+    @click.option("--user", default=10, help="Generates fake users")
     def forge(articles, feedback, creator, user):
         """Generates fake data"""
         from . import fakes as f
+
         db.drop_all()
         db.create_all()
         f.generate_fake_articles(articles)

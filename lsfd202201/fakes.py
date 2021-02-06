@@ -4,7 +4,7 @@ Generates fake data for development use.
 from faker import Faker
 from werkzeug.security import generate_password_hash
 import click
-from .models import db, Article, Feedback, Admin, Creator, User
+from .models import db, Article, Feedback, User, Creator, User
 
 fake = Faker()
 
@@ -17,7 +17,7 @@ def generate_fake_articles(count: int) -> None:
             author=fake.name(),
             date=fake.date_time_this_year().strftime("%Y-%m-%d"),
             content=fake.text(200),
-            timestamp=fake.date_time_this_year()
+            timestamp=fake.date_time_this_year(),
         )
         db.session.add(article)
     db.session.commit()
@@ -30,7 +30,7 @@ def generate_fake_feedback(count: int) -> None:
         feedback = Feedback(
             author=fake.name(),
             body=fake.sentence(),
-            timestamp=fake.date_time_this_year()
+            timestamp=fake.date_time_this_year(),
         )
         db.session.add(feedback)
     db.session.commit()
@@ -43,7 +43,7 @@ def generate_fake_creators(count: int) -> None:
             name=fake.name(),
             email=fake.email(),
             member_since=fake.date_time_this_year(),
-            password_hash=generate_password_hash(fake.password())
+            password_hash=generate_password_hash(fake.password()),
         )
         db.session.add(creator)
     db.session.commit()
@@ -53,8 +53,7 @@ def generate_fake_creators(count: int) -> None:
 def generate_fake_users(count: int) -> None:
     for i in range(count):
         user = User(
-            name=fake.name(),
-            password_hash=generate_password_hash(fake.sentence())
+            name=fake.name(), password_hash=generate_password_hash(fake.password())
         )
         db.session.add(user)
     db.session.commit()

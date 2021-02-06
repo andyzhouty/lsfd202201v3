@@ -9,7 +9,8 @@ class Article(db.Model):
     """
     A model for articles
     """
-    __tablename__ = 'articles'
+
+    __tablename__ = "articles"
     # initialize columns
     title = db.Column(db.String(64), index=True)
     author = db.Column(db.String(64))
@@ -19,10 +20,11 @@ class Article(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.now, index=True)
 
     def __repr__(self) -> str:
-        return f'<Article {self.title}>'
+        return f"<Article {self.title}>"
 
-    def query_by_id(self, id: int) -> db.Model:
-        return self.query.filter_by(id=id).first()
+    @staticmethod
+    def query_by_id(id: int) -> db.Model:
+        return Article.query.get(id)
 
     def delete(self):
         if self in db.session:
@@ -31,17 +33,18 @@ class Article(db.Model):
 
 
 class Feedback(db.Model):
-    __tablename__ = 'feedback'
+    __tablename__ = "feedback"
     id = db.Column(db.Integer(), primary_key=True)
     body = db.Column(db.String(200))
     author = db.Column(db.String(20))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
     def __repr__(self):
-        return f'<Feedback {self.body[:10]}...>'
+        return f"<Feedback {self.body[:10]}...>"
 
-    def query_by_id(self, id: int) -> db.Model:
-        return self.query.filter_by(id=id).first()
+    @staticmethod
+    def query_by_id(id: int) -> db.Model:
+        return Feedback.query.get(id)
 
     def delete(self):
         db.session.delete(self)
@@ -57,12 +60,12 @@ class Permission:
 
 
 class Role(db.Model):
-    __tablename__ = 'roles'
+    __tablename__ = "roles"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     default = db.Column(db.Boolean, default=False, index=True)
     permissions = db.Column(db.Integer)
-    users = db.relationship('User', backref='role', lazy='dynamic')
+    users = db.relationship("User", back_populates="role")
 
     def __init__(self, **kwargs):
         super(Role, self).__init__(**kwargs)
@@ -74,13 +77,10 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
+    role = db.relationship("Role", back_populates="users")
 
-    @property
-    def password(self):
-        raise AttributeError('password is not a readable attribute')
-    
-    @password.setter
-    def password(self, password):
+    def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def validate_password(self, password):
